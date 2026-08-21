@@ -34,65 +34,56 @@ O projeto não é material oficial do SENAI, não representa a instituição e n
 
 ---
 
-## Sobre o autor
-
-```ts
-const carlosAlexandre = {
-  nome: "Carlos Alexandre Duarte Pereira",
-  localizacao: "Campinas - SP, Brasil",
-  foco: "Backend Developer em formação",
-  formacao: [
-    "Análise e Desenvolvimento de Sistemas",
-    "Desenvolvedor Backend - SENAI Dr. Celso Charuri"
-  ],
-  estudando: [
-    "JavaScript",
-    "TypeScript",
-    "Node.js",
-    "APIs REST",
-    "PostgreSQL",
-    "Arquitetura de Software"
-  ],
-  objetivo: "Conquistar a primeira oportunidade como Desenvolvedor Backend Jr"
-};
-```
-
-Este projeto nasceu da minha própria rotina de estudos: eu queria um ambiente onde pudesse revisar lógica, praticar JavaScript e acompanhar minha evolução de forma clara. Ao organizar esse caminho, percebi que ele também poderia ajudar outras pessoas que estão começando ou reforçando a base para Backend.
+## Quem está construindo
 
 <div align="center">
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/carlos-duarte-0b4591206)
-[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:carloska24@gmail.com)
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/carloska24)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1200&color=2563EB&center=true&vCenter=true&width=900&lines=Carlos+Alexandre+Duarte+Pereira;Backend+Developer+em+formacao;Transformando+rotina+de+estudos+em+curso+aberto;JavaScript+%E2%86%92+Node.js+%E2%86%92+APIs+%E2%86%92+Backend)](https://git.io/typing-svg)
+
+</div>
+
+| Campo | Minha trilha |
+|---|---|
+| Nome | **Carlos Alexandre Duarte Pereira** |
+| Base | Análise e Desenvolvimento de Sistemas |
+| Formação atual | Desenvolvedor Backend na **Escola SENAI "Dr. Celso Charuri"** |
+| Direção | Backend Developer Jr |
+| Stack em evolução | JavaScript · TypeScript · Node.js · APIs REST · PostgreSQL · Arquitetura |
+| Por que este Campus existe? | Para transformar estudo diário em material organizado, praticável e útil para outras pessoas |
+
+> Este projeto nasceu no meio da prática: eu queria um lugar para estudar com constância, revisar lógica sem me perder e enxergar minha evolução módulo por módulo. Em vez de deixar isso fechado no meu computador, organizei como um campus aberto para quem também quer aprender Backend começando por JavaScript.
+
+<div align="center">
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Carlos_Duarte-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/carlos-duarte-0b4591206)
+[![Gmail](https://img.shields.io/badge/Gmail-carloska24%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:carloska24@gmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-carloska24-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/carloska24)
 
 </div>
 
 ---
 
-## Mini jornada do Campus
+## Modo campanha
 
-O curso funciona como uma pequena campanha de evolução: cada módulo fortalece uma habilidade antes de liberar a próxima etapa.
+O Campus foi pensado como uma jornada jogável de aprendizagem: cada módulo entrega uma habilidade, libera uma nova fase e aproxima o aluno do Backend com Node.js.
 
 ```mermaid
 flowchart LR
-    START([Início]) --> M01[M01 Fundamentos]
-    M01 --> M02[M02 Decisões]
-    M02 --> M03[M03 While]
-    M03 --> M04[M04 For]
-    M04 --> M05[M05 Contador e acumulador]
-    M05 --> M06[M06 Laços aninhados]
-    M06 --> M07[M07 Funções]
-    M07 --> M08[M08 Arrays]
-    M08 --> M09[M09 Objetos]
-    M09 --> API[Próxima fase: Backend com Node.js]
+    P0["Spawn: lógica básica"] --> P1["M01-M02<br/>Variáveis e decisões"]
+    P1 --> P2["M03-M06<br/>Laços e padrões"]
+    P2 --> P3["M07<br/>Funções"]
+    P3 --> P4["M08-M09<br/>Arrays e objetos"]
+    P4 --> P5["M10-M12<br/>Dados e JS moderno"]
+    P5 --> BOSS["Boss fight:<br/>APIs Backend"]
 ```
 
-| Fase | Missão | Resultado esperado |
+| Fase | Habilidade desbloqueada | Checkpoint |
 |---|---|---|
-| Base | Entender variáveis, decisões e laços | Ler código sem decorar |
-| Funções | Separar entrada, processamento e saída | Criar funções reutilizáveis |
-| Coleções | Trabalhar com arrays e objetos | Modelar dados do mundo real |
-| Backend | Conectar JavaScript com Node.js e APIs | Construir serviços web |
+| Tutorial | Variáveis, operadores e decisões | Ler o fluxo antes de executar |
+| Repetição | `while`, `for`, contador e acumulador | Separar a caixinha que percorre da que soma |
+| Funções | Entrada, processamento, saída e retorno | Criar blocos reutilizáveis |
+| Dados | Arrays, objetos, strings e datas | Modelar informações de um sistema real |
+| Backend | Node.js, HTTP, APIs e banco de dados | Transformar lógica em serviço web |
 
 ---
 
