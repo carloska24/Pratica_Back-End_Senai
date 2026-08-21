@@ -693,7 +693,7 @@ export function getLessonContent(module: CourseLibraryModule, item: CourseItem):
     cards,
     mental: mentalFor(module),
     warning: warningFor(module),
-    codeLabel: item.code ? `${item.fileName ?? "JavaScript"} · versão migrada e comentada` : "JavaScript · exemplo conceitual comentado",
+    codeLabel: item.code ? `${item.fileName ?? "JavaScript"} · código comentado` : "JavaScript · exemplo conceitual comentado",
     code: exampleCode(module, item),
   };
 }

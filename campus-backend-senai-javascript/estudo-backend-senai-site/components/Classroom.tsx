@@ -103,39 +103,37 @@ export default function Classroom() {
     };
   }, []);
 
+  const publishProgressChange = () => {
+    window.dispatchEvent(new Event("campus-progress-changed"));
+  };
+
   const toggleStudied = (id: number) => {
-    setStudied(prev => {
-      const next = prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id];
-      localStorage.setItem("campus-function-examples", JSON.stringify(next));
-      window.dispatchEvent(new Event("campus-progress-changed"));
-      return next;
-    });
+    const next = studied.includes(id) ? studied.filter(x => x !== id) : [...studied, id];
+    setStudied(next);
+    localStorage.setItem("campus-function-examples", JSON.stringify(next));
+    publishProgressChange();
   };
 
   const toggleLibraryStudied = (id: string) => {
-    setLibraryStudied(prev => {
-      const next = prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id];
-      localStorage.setItem("campus-course-library", JSON.stringify(next));
-      window.dispatchEvent(new Event("campus-progress-changed"));
-      return next;
-    });
+    const next = libraryStudied.includes(id) ? libraryStudied.filter(x => x !== id) : [...libraryStudied, id];
+    setLibraryStudied(next);
+    localStorage.setItem("campus-course-library", JSON.stringify(next));
+    publishProgressChange();
   };
 
   const resetModule = (moduleId: string) => {
     const ids = courseLibrary.find(m => m.id === moduleId)?.items.map(i => i.id) ?? [];
-    setLibraryStudied(prev => {
-      const next = prev.filter(id => !ids.includes(id));
-      localStorage.setItem("campus-course-library", JSON.stringify(next));
-      window.dispatchEvent(new Event("campus-progress-changed"));
-      return next;
-    });
+    const next = libraryStudied.filter(id => !ids.includes(id));
+    setLibraryStudied(next);
+    localStorage.setItem("campus-course-library", JSON.stringify(next));
+    publishProgressChange();
     setItemIndex(0);
   };
 
   const resetAllLibrary = () => {
     setLibraryStudied([]);
     localStorage.setItem("campus-course-library", JSON.stringify([]));
-    window.dispatchEvent(new Event("campus-progress-changed"));
+    publishProgressChange();
   };
 
   const example = functionExamples[exampleIndex];
@@ -156,6 +154,21 @@ export default function Classroom() {
     setItemIndex(0);
   };
 
+  const setActiveLesson = (moduleIdx: number, itemIdx: number) => {
+    const module = courseLibrary[moduleIdx];
+    const item = module.items[itemIdx];
+    setActiveLessonModuleIndex(moduleIdx);
+    setActiveLessonItemIndex(itemIdx);
+    localStorage.setItem(LAST_LESSON_KEY, JSON.stringify({ moduleId: module.id, itemId: item.id }));
+  };
+
+  const chooseLibraryItem = (index: number) => {
+    setItemIndex(index);
+    if (selectedModule.items[index]?.kind === "aula") {
+      setActiveLesson(moduleIndex, index);
+    }
+  };
+
   const openSelectedAsLesson = (moduleIdx = moduleIndex, preferredItemIdx?: number) => {
     const module = courseLibrary[moduleIdx];
     if (module.id === "M08" && !m07Mastered) return;
@@ -165,10 +178,8 @@ export default function Classroom() {
     if (module.id === "M12" && !m11Mastered) return;
     const lessonIndexes = module.items.map((item, index) => item.kind === "aula" ? index : -1).filter(index => index >= 0);
     const defaultLessonIndex = module.status === "disponivel" ? (lessonIndexes[0] ?? 0) : (lessonIndexes.at(-1) ?? 0);
-    setActiveLessonModuleIndex(moduleIdx);
-    setActiveLessonItemIndex(preferredItemIdx ?? defaultLessonIndex);
     const openedItemIndex = preferredItemIdx ?? defaultLessonIndex;
-    localStorage.setItem(LAST_LESSON_KEY, JSON.stringify({ moduleId: module.id, itemId: module.items[openedItemIndex].id }));
+    setActiveLesson(moduleIdx, openedItemIndex);
     setMode("aula");
   };
 
@@ -202,7 +213,7 @@ export default function Classroom() {
           <LessonDetail module={activeLessonModule} item={activeLessonItem} context={activeLessonItem.id === "M07-A07" && !m07Mastered ? "current" : (activeLessonModule.id === "M08" && m08Mastered) || (activeLessonModule.id === "M09" && m09Mastered) || (activeLessonModule.id === "M10" && m10Mastered) || (activeLessonModule.id === "M11" && m11Mastered) || (activeLessonModule.id === "M12" && m12Mastered) ? "review" : activeLessonModule.status === "disponivel" ? "next" : "review"} lessonNumber={activeLessonItem.id === "M07-A07" ? "Aula 07" : activeLessonItem.id} />
         </> : mode === "biblioteca" ? <>
           <div className="library-header">
-            <div><span className="eyebrow">ACERVO DO CURSO · REVISÃO LIVRE</span><h1>Seu histórico de estudo continua acessível.</h1><p>Abra qualquer módulo concluído, reveja a explicação, consulte a versão migrada e comentada em JavaScript e marque uma nova rodada de revisão sem apagar o histórico acadêmico.</p></div>
+            <div><span className="eyebrow">ACERVO DO CURSO · REVISÃO LIVRE</span><h1>Seu histórico de estudo continua acessível.</h1><p>Abra qualquer módulo, reveja a explicação, consulte o código comentado em JavaScript e marque uma nova rodada de revisão sem apagar seu progresso.</p></div>
             <button className="btn btn-soft" onClick={resetAllLibrary}><RotateCcw size={16}/> Limpar revisões</button>
           </div>
 
@@ -220,11 +231,11 @@ export default function Classroom() {
 
           <div className="library-toolbar">
             <div><span className="eyebrow">{selectedModule.id} · {moduleStatusLabel(selectedModule)}</span><h2>{selectedModule.title}</h2><p>{selectedModule.items.length} itens catalogados · {moduleDone} revisados nesta rodada.</p></div>
-            <div className="library-toolbar-actions"><button className="btn btn-primary" onClick={() => openSelectedAsLesson()}><BookOpenCheck size={16}/> {isModuleMastered(selectedModule.id) ? "Revisar aula-chave" : selectedModule.status === "disponivel" ? "Abrir primeira aula" : "Aula atual do módulo"}</button><button className="btn btn-soft" onClick={() => resetModule(selectedModule.id)}><RotateCcw size={16}/> Reestudar módulo</button></div>
+            <div className="library-toolbar-actions"><button className="btn btn-primary" onClick={() => openSelectedAsLesson(moduleIndex, selectedItem.kind === "aula" ? itemIndex : undefined)}><BookOpenCheck size={16}/> {isModuleMastered(selectedModule.id) ? "Revisar aula-chave" : selectedModule.status === "disponivel" ? "Abrir primeira aula" : "Aula atual do módulo"}</button><button className="btn btn-soft" onClick={() => resetModule(selectedModule.id)}><RotateCcw size={16}/> Reestudar módulo</button></div>
           </div>
 
           <div className="library-course-navigator">
-            {selectedModule.items.map((item, i) => <button key={item.id} className={`${i === itemIndex ? "active" : ""} ${libraryStudied.includes(item.id) ? "done" : ""}`} onClick={() => setItemIndex(i)}>
+            {selectedModule.items.map((item, i) => <button key={item.id} className={`${i === itemIndex ? "active" : ""} ${libraryStudied.includes(item.id) ? "done" : ""}`} onClick={() => chooseLibraryItem(i)}>
               <span className={`kind kind-${item.kind}`}>{item.kind}</span>
               <strong>{item.title}</strong>
               <small>{item.summary}</small>

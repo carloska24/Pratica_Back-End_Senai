@@ -338,7 +338,7 @@ function Dashboard({ setView }: { setView: (v: View) => void }) {
         <div className="hero-copy">
           <div>
             <h1>JavaScript como linguagem principal.<br/>Lógica sólida para chegar ao Backend.</h1>
-            <p>Todo o histórico foi migrado para JavaScript: aulas, exercícios, desafios, revisão guiada e uma trilha que avança dos fundamentos até Node.js, APIs e banco de dados.</p>
+            <p>Um curso paralelo de estudos para reforçar lógica, praticar JavaScript e avançar dos fundamentos até Node.js, APIs e banco de dados.</p>
           </div>
           <div className="hero-side">
             <div className="language-seal"><b>JS</b><span>JavaScript<br/>Backend Track</span></div>
@@ -863,7 +863,7 @@ export default function Home() {
   return (
     <main className="app-shell">
       <aside className="sidebar">
-        <div className="brand"><div className="brand-mark">JS</div><div><strong>Campus Backend</strong><span>Preparatório para o SENAI</span></div></div>
+        <div className="brand"><div className="brand-mark">JS</div><div><strong>Campus Backend</strong><span>Curso aberto de JavaScript Backend</span></div></div>
         <nav aria-label="Navegação principal">{nav.map(item => { const Icon = item.icon; return <button key={item.id} aria-label={item.label} title={item.label} className={view===item.id?"active":""} onClick={()=>setView(item.id)}><Icon size={19} strokeWidth={1.9}/><span>{item.label}</span>{item.id==="aula"&&<i/>}</button>})}</nav>
         <div className="sidebar-card"><Flame/><div><span>Foco desta etapa</span><strong>{progress.m12Mastered ? "M13 · Módulos ES" : progress.m11Mastered ? "M12 · JavaScript moderno" : progress.m10Mastered ? "M11 · Arrays modernos" : progress.m09Mastered ? "M10 · Strings" : progress.m08Mastered ? "M09 · Objetos" : progress.m07Mastered ? "M08 · Arrays" : "M07 · Funções"}</strong></div></div>
         <div className="sidebar-footer"><div className="avatar">CP</div><div><strong>Carlos Pereira</strong><span>Fundamentos II</span></div></div>

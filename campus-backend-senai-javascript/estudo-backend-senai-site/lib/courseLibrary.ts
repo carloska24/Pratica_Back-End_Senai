@@ -30,7 +30,7 @@ export const courseLibrary: CourseLibraryModule[] = [
       {
         id: "M01-E01", kind: "exercicio", title: "Exercicio01 · Dados pessoais",
         fileName: "Exercicio01.js",
-        summary: "Migrar o primeiro exercício de variáveis para JavaScript, guardando nome, idade, altura e situação de trabalho.",
+        summary: "Praticar variáveis em JavaScript, guardando nome, idade, altura e situação de trabalho.",
         concepts: ["const", "string", "number", "boolean", "console.log"],
         code: `// Exercicio01.js
 // Objetivo: criar caixinhas para diferentes tipos de informação.
@@ -467,7 +467,7 @@ console.log("Soma dos números ímpares:", somaImpares);`
         fileName: "DesafioExtra03.js",
         summary: "Revisão extra para usar ao mesmo tempo uma caixinha que conta e outra que soma.",
         concepts: ["while", "if", "contador de ocorrências", "acumulador"],
-        note: "Extra acrescentado para revisão após a migração para JavaScript.",
+        note: "Extra acrescentado para reforçar contador, acumulador e múltiplos em JavaScript.",
         code: `// DesafioExtra03.js
 // Objetivo: contar e somar múltiplos de 3 entre 1 e 30.
 

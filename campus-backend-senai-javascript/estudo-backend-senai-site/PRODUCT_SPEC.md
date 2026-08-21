@@ -2,7 +2,7 @@
 
 ## Missão
 
-Oferecer a Carlos Pereira um curso preparatório independente, ministrado pelo Codex, para fortalecer sua base antes e durante o aprofundamento no SENAI. O campus deve permitir que o aluno responda três perguntas em qualquer tela: **onde estou, o que já aprendi e qual é o próximo passo**.
+Oferecer a Carlos Pereira um curso preparatório independente para fortalecer sua base antes e durante o aprofundamento no SENAI. O campus também deve servir como trilha aberta para outras pessoas que queiram aprender JavaScript com foco em Backend. A experiência deve permitir que o aluno responda três perguntas em qualquer tela: **onde estou, o que já aprendi e qual é o próximo passo**.
 
 O projeto não representa, não substitui e não afirma ser material oficial do SENAI.
 
@@ -10,7 +10,7 @@ O projeto não representa, não substitui e não afirma ser material oficial do 
 
 - Linguagem pedagógica principal: JavaScript.
 - Direção profissional: Backend com Node.js.
-- Fundamentos estudados anteriormente permanecem no histórico como conhecimento lógico migrado.
+- Fundamentos estudados permanecem no histórico como conhecimento lógico reaproveitável.
 
 ## Princípios de experiência
 

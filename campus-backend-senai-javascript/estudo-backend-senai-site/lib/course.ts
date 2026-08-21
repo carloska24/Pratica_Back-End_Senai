@@ -18,7 +18,7 @@ export const completedModules: CourseModule[] = [
     hours: "7h",
     xp: 700,
     topics: ["console.log", "let e const", "tipos de dados", "operadores", "atribuição"],
-    note: "Conteúdo já estudado em lógica e agora migrado para a sintaxe correta de JavaScript."
+    note: "Base inicial da trilha: variáveis, valores, operadores e leitura de saída no console."
   },
   {
     id: "M02",
@@ -28,7 +28,7 @@ export const completedModules: CourseModule[] = [
     hours: "8h",
     xp: 900,
     topics: ["if", "if / else", "else if", "switch", "comparações", "operador módulo (%)"],
-    note: "Switch consolidado com planos, calculadora e menu bancário, agora reescritos em JavaScript."
+    note: "Decisões consolidadas com planos, calculadora, menu bancário e leitura clara de caminhos."
   },
   {
     id: "M03",
@@ -78,7 +78,7 @@ export const completedModules: CourseModule[] = [
     hours: "10h",
     xp: 980,
     topics: ["function", "parâmetros", "argumentos", "return", "função chamando função", "escopo", "contrato de entrada"],
-    note: "Módulo atual. A lógica estudada em métodos foi migrada para funções JavaScript, sem public/static/void/main."
+    note: "Módulo atual. Funções JavaScript com parâmetros, retorno, composição e contrato de entrada."
   }
 ];
 
@@ -95,7 +95,7 @@ export const plannedModules: CourseModule[] = [
   { id: "M17", title: "Express.js", status: "planejado", progress: 0, hours: "14h", xp: 1800, topics: ["servidor", "rotas", "req/res", "middleware", "Router", "erros"] },
   { id: "M18", title: "Arquitetura de API", status: "planejado", progress: 0, hours: "14h", xp: 1850, topics: ["controllers", "services", "repositories", "DTOs", "validação", "configuração"] },
   { id: "M19", title: "Banco de dados SQL", status: "planejado", progress: 0, hours: "14h", xp: 1800, topics: ["PostgreSQL", "CRUD", "SELECT", "JOIN", "constraints", "transações"] },
-  { id: "M20", title: "Persistência no Node", status: "planejado", progress: 0, hours: "12h", xp: 1700, topics: ["driver PostgreSQL", "queries parametrizadas", "migrations", "ORM como etapa posterior"] },
+  { id: "M20", title: "Persistência no Node", status: "planejado", progress: 0, hours: "12h", xp: 1700, topics: ["driver PostgreSQL", "queries parametrizadas", "versionamento de schema", "ORM como etapa posterior"] },
   { id: "M21", title: "Testes, segurança e autenticação", status: "planejado", progress: 0, hours: "16h", xp: 2200, topics: ["testes", "JWT", "hash de senha", "autorização", "validação", "boas práticas"] },
   { id: "M22", title: "Docker + Projeto Backend final", status: "planejado", progress: 0, hours: "30h", xp: 5000, topics: ["Docker", "API", "banco", "testes", "segurança", "deploy", "documentação"] }
 ];

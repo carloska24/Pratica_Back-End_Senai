@@ -24,14 +24,14 @@ lib/
 ### Responsabilidades
 
 - `course.ts`: grade, progresso e trilha planejada.
-- `courseLibrary.ts`: aulas, exercícios, desafios e códigos migrados.
+- `courseLibrary.ts`: aulas, exercícios, desafios e códigos JavaScript.
 - `lessonContent.ts`: camada pedagógica detalhada usada tanto pela aula atual quanto pelo histórico.
 - `functionExamples.ts`: 20 exemplos guiados de funções JavaScript.
 - `LessonDetail.tsx`: um único componente visual para aula atual e conteúdo reestudado.
 - `Classroom.tsx`: navegação entre aula, biblioteca e exemplos.
 - `page.tsx`: shell da aplicação, dashboard, currículo, laboratório, arena e desempenho.
 
-## Decisões corretas da migração
+## Decisões corretas da trilha JavaScript
 
 1. JavaScript virou a linguagem pedagógica principal.
 2. A trilha futura foi refeita para Backend com Node.js, HTTP, Express e banco de dados.

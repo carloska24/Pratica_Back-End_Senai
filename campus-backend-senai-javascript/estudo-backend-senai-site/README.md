@@ -4,9 +4,9 @@
 
 ### Curso preparatório em JavaScript para Backend
 
-Projeto de estudos criado como um campus preparatório para apoiar a formação rumo ao curso de **Desenvolvedor Backend** da **Escola SENAI "Dr. Celso Charuri"**.
+Projeto de estudos criado como um campus preparatório independente para fortalecer lógica, JavaScript e fundamentos de Backend durante a formação rumo ao curso de **Desenvolvedor Backend** da **Escola SENAI "Dr. Celso Charuri"**.
 
-Este repositório organiza aulas, revisões, exercícios, laboratório e acompanhamento de progresso em uma experiência única de aprendizagem.
+Este repositório organiza aulas, revisões, exercícios em JavaScript, laboratório e acompanhamento de progresso em uma experiência única de aprendizagem, aberta para outras pessoas que também queiram estudar.
 
 ![Next.js](https://img.shields.io/badge/Next.js-15-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=0B1020)
@@ -30,7 +30,7 @@ O objetivo é ajudar o aluno a responder, em qualquer momento:
 | O que já aprendi? | Biblioteca de revisão, conquistas e desempenho |
 | Qual é o próximo passo? | Aula atual, laboratório, arena e desbloqueio por domínio |
 
-O projeto não é material oficial do SENAI, não representa a instituição e não substitui as aulas oficiais. Ele é um projeto pessoal de preparação e reforço, inspirado nas necessidades de estudo para chegar mais forte ao curso de **Desenvolvedor Backend** da **Escola SENAI "Dr. Celso Charuri"**.
+O projeto não é material oficial do SENAI, não representa a instituição e não substitui as aulas oficiais. Ele é um curso paralelo de preparação e aprofundamento, feito para ganhar mais conhecimento, organizar a prática e disponibilizar uma trilha para outras pessoas que queiram aprender JavaScript com foco em Backend.
 
 ---
 
@@ -40,7 +40,7 @@ O projeto não é material oficial do SENAI, não representa a instituição e n
 |---|---|
 | Sala de aula | Aula atual, biblioteca de curso estudado e exemplos guiados |
 | Grade curricular | Módulos concluídos, em andamento, liberados e planejados |
-| Biblioteca de revisão | Histórico acessível para reestudar sem apagar progresso acadêmico |
+| Biblioteca de revisão | Histórico acessível para reestudar sem apagar progresso |
 | Laboratório | Monaco Editor com execução JavaScript em Web Worker local |
 | Arena de desafios | Exercícios de lógica com progresso local |
 | Progresso | Dados persistidos no navegador com saneamento de contadores |
@@ -71,7 +71,7 @@ A estrutura de cada aula prioriza modelo mental antes da sintaxe:
 
 ## Currículo
 
-A trilha atual preserva o histórico já estudado e organiza a evolução para Backend:
+A trilha atual organiza a evolução de fundamentos de lógica até recursos modernos de JavaScript:
 
 | Módulo | Tema | Estado pedagógico |
 |---|---|---|
@@ -92,21 +92,15 @@ Próximas etapas planejadas: módulos ES, assincronismo, Node.js, HTTP/REST, Exp
 
 ---
 
-## Migração para JavaScript
+## Exercícios JavaScript
 
-Esta versão não fez apenas uma troca superficial de Java para JavaScript. A lógica estudada foi preservada, mas o material foi reescrito para a linguagem usada na preparação Backend.
+Além da experiência visual do portal, o projeto mantém uma pasta própria com exercícios feitos em JavaScript para estudo direto no editor de código.
 
-| Antes | Agora |
+| Pasta | Conteúdo |
 |---|---|
-| `System.out.println` | `console.log` |
-| `int`, `double`, `String` | valores JavaScript com `let` e `const` |
-| `public static ...` | funções JavaScript |
-| `main()` obrigatório | fluxo direto de script e funções |
-| igualdade genérica | `===` e `!==` |
-| arquivos `.java` | arquivos `.js` |
-| comentários Java | comentários `//` explicando responsabilidade |
+| `exercicios-javascript/` | 69 arquivos `.js` organizados por módulo, do M01 ao M12 |
 
-O acervo físico possui **69 arquivos JavaScript** organizados em `exercicios-migrados/`, do M01 ao M12.
+Os arquivos seguem a mesma trilha exibida no Campus e foram organizados para facilitar revisão, prática individual e consulta por quem estiver acompanhando o curso.
 
 ---
 
@@ -171,7 +165,7 @@ flowchart TB
 | `components/Classroom.tsx` | Navegação entre aula atual, biblioteca e exemplos guiados |
 | `components/LessonDetail.tsx` | Componente visual único para aula atual e revisões |
 | `lib/course.ts` | Grade, progresso e trilha planejada |
-| `lib/courseLibrary.ts` | Aulas, exercícios, desafios e códigos migrados |
+| `lib/courseLibrary.ts` | Aulas, exercícios, desafios e códigos JavaScript |
 | `lib/lessonContent.ts` | Conteúdo pedagógico detalhado |
 | `lib/functionExamples.ts` | 20 exemplos guiados de funções JavaScript |
 | `lib/progress.ts` | Leitura saneada do progresso local |
@@ -191,7 +185,7 @@ estudo-backend-senai-site/
 │   ├── LessonDetail.tsx
 │   ├── PracticeArena.tsx
 │   └── CodeViewer.tsx
-├── exercicios-migrados/
+├── exercicios-javascript/
 │   ├── M01/
 │   ├── M02/
 │   ├── ...
@@ -328,13 +322,13 @@ O projeto ainda não possui uma suite automatizada completa de testes unitários
 
 Este projeto existe para organizar uma rotina real de estudos em Backend JavaScript.
 
-Ele foi criado para apoiar a preparação de Carlos Pereira para o curso de **Desenvolvedor Backend** da **Escola SENAI "Dr. Celso Charuri"**, mantendo o histórico de aprendizagem, reforçando lógica e construindo uma ponte entre fundamentos e prática profissional com Node.js.
+Ele foi criado porque estou fazendo este curso à parte para ganhar mais conhecimento, reforçar lógica e construir uma ponte entre fundamentos e prática profissional com Node.js. A ideia é que o portal também possa ajudar outras pessoas que queiram aprender com a mesma trilha.
 
 ---
 
 <div align="center">
 
 **Campus Backend**<br/>
-Curso preparatório pessoal para estudar JavaScript, lógica e fundamentos de Backend com consistência.
+Curso preparatório aberto para estudar JavaScript, lógica e fundamentos de Backend com consistência.
 
 </div>
