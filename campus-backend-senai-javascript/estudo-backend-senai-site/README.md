@@ -4,7 +4,7 @@
 
 ### Curso preparatório em JavaScript para Backend
 
-Projeto de estudos criado como um campus preparatório independente para fortalecer lógica, JavaScript e fundamentos de Backend durante a formação rumo ao curso de **Desenvolvedor Backend** da **Escola SENAI "Dr. Celso Charuri"**.
+Projeto de estudos criado por **Carlos Alexandre Duarte Pereira** como um campus preparatório independente para fortalecer lógica, JavaScript e fundamentos de Backend durante a formação rumo ao curso de **Desenvolvedor Backend** da **Escola SENAI "Dr. Celso Charuri"**.
 
 Este repositório organiza aulas, revisões, exercícios em JavaScript, laboratório e acompanhamento de progresso em uma experiência única de aprendizagem, aberta para outras pessoas que também queiram estudar.
 
@@ -31,6 +31,68 @@ O objetivo é ajudar o aluno a responder, em qualquer momento:
 | Qual é o próximo passo? | Aula atual, laboratório, arena e desbloqueio por domínio |
 
 O projeto não é material oficial do SENAI, não representa a instituição e não substitui as aulas oficiais. Ele é um curso paralelo de preparação e aprofundamento, feito para ganhar mais conhecimento, organizar a prática e disponibilizar uma trilha para outras pessoas que queiram aprender JavaScript com foco em Backend.
+
+---
+
+## Sobre o autor
+
+```ts
+const carlosAlexandre = {
+  nome: "Carlos Alexandre Duarte Pereira",
+  localizacao: "Campinas - SP, Brasil",
+  foco: "Backend Developer em formação",
+  formacao: [
+    "Análise e Desenvolvimento de Sistemas",
+    "Desenvolvedor Backend - SENAI Dr. Celso Charuri"
+  ],
+  estudando: [
+    "JavaScript",
+    "TypeScript",
+    "Node.js",
+    "APIs REST",
+    "PostgreSQL",
+    "Arquitetura de Software"
+  ],
+  objetivo: "Conquistar a primeira oportunidade como Desenvolvedor Backend Jr"
+};
+```
+
+Este projeto nasceu da minha própria rotina de estudos: eu queria um ambiente onde pudesse revisar lógica, praticar JavaScript e acompanhar minha evolução de forma clara. Ao organizar esse caminho, percebi que ele também poderia ajudar outras pessoas que estão começando ou reforçando a base para Backend.
+
+<div align="center">
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/carlos-duarte-0b4591206)
+[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:carloska24@gmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/carloska24)
+
+</div>
+
+---
+
+## Mini jornada do Campus
+
+O curso funciona como uma pequena campanha de evolução: cada módulo fortalece uma habilidade antes de liberar a próxima etapa.
+
+```mermaid
+flowchart LR
+    START([Início]) --> M01[M01 Fundamentos]
+    M01 --> M02[M02 Decisões]
+    M02 --> M03[M03 While]
+    M03 --> M04[M04 For]
+    M04 --> M05[M05 Contador e acumulador]
+    M05 --> M06[M06 Laços aninhados]
+    M06 --> M07[M07 Funções]
+    M07 --> M08[M08 Arrays]
+    M08 --> M09[M09 Objetos]
+    M09 --> API[Próxima fase: Backend com Node.js]
+```
+
+| Fase | Missão | Resultado esperado |
+|---|---|---|
+| Base | Entender variáveis, decisões e laços | Ler código sem decorar |
+| Funções | Separar entrada, processamento e saída | Criar funções reutilizáveis |
+| Coleções | Trabalhar com arrays e objetos | Modelar dados do mundo real |
+| Backend | Conectar JavaScript com Node.js e APIs | Construir serviços web |
 
 ---
 
