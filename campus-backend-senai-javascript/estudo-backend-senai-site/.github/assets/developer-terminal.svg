@@ -1,22 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="560" viewBox="0 0 1080 560" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="520" viewBox="0 0 1080 520" role="img" aria-labelledby="title desc">
   <title id="title">Developer Terminal de Carlos Alexandre Duarte Pereira</title>
-  <desc id="desc">Painel visual em estilo terminal mostrando Carlos Alexandre como Backend Developer em formação, sua missão atual, stack em evolução e status learning, building e documenting.</desc>
+  <desc id="desc">Identidade visual em duas colunas: painel de avatar técnico e terminal whoami com formação, missão, stack e status de estudo Backend.</desc>
   <defs>
-    <linearGradient id="page" x1="0" x2="1" y1="0" y2="1">
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
       <stop offset="0%" stop-color="#f8fafc"/>
       <stop offset="100%" stop-color="#dbeafe"/>
     </linearGradient>
-    <linearGradient id="terminal" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0%" stop-color="#07111f"/>
-      <stop offset="58%" stop-color="#0f172a"/>
+    <linearGradient id="panel" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#080f1d"/>
       <stop offset="100%" stop-color="#111827"/>
     </linearGradient>
-    <linearGradient id="accent" x1="0" x2="1">
+    <linearGradient id="avatarGlow" x1="0" x2="1" y1="0" y2="1">
       <stop offset="0%" stop-color="#38bdf8"/>
       <stop offset="100%" stop-color="#22c55e"/>
     </linearGradient>
-    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="150%">
-      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0f172a" flood-opacity=".18"/>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#0f172a" flood-opacity=".16"/>
     </filter>
     <style>
       .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
@@ -24,111 +23,99 @@
     </style>
   </defs>
 
-  <rect width="1080" height="560" rx="32" fill="url(#page)"/>
-  <path d="M76 470C203 409 315 428 426 455C555 487 649 474 756 430C858 388 945 390 1008 440" fill="none" stroke="#bfdbfe" stroke-width="24" stroke-linecap="round" opacity=".55"/>
+  <rect width="1080" height="520" rx="28" fill="url(#bg)"/>
+  <text x="540" y="48" text-anchor="middle" class="mono" font-size="20" font-weight="800" fill="#1f2937">carlos@campus-backend ~ $ whoami</text>
 
-  <g filter="url(#softShadow)">
-    <rect x="70" y="54" width="940" height="452" rx="24" fill="url(#terminal)" stroke="#334155"/>
-    <rect x="70" y="54" width="940" height="56" rx="24" fill="#111827"/>
-    <path d="M70 86h940" stroke="#1e293b"/>
-    <circle cx="101" cy="82" r="7" fill="#ef4444"/>
-    <circle cx="126" cy="82" r="7" fill="#f59e0b"/>
-    <circle cx="151" cy="82" r="7" fill="#22c55e"/>
-    <text x="184" y="88" class="mono" font-size="17" fill="#cbd5e1">CAMPUS BACKEND / DEVELOPER IDENTITY</text>
+  <g filter="url(#shadow)">
+    <rect x="66" y="74" width="402" height="372" rx="16" fill="url(#panel)" stroke="#334155"/>
+    <rect x="66" y="74" width="402" height="48" rx="16" fill="#111827"/>
+    <path d="M66 122h402" stroke="#1f2937"/>
+    <circle cx="94" cy="98" r="7" fill="#ef4444"/>
+    <circle cx="118" cy="98" r="7" fill="#f59e0b"/>
+    <circle cx="142" cy="98" r="7" fill="#22c55e"/>
+    <text x="267" y="103" text-anchor="middle" class="mono" font-size="13" fill="#94a3b8">developer-signal.svg</text>
 
-    <g transform="translate(842 72)">
+    <g transform="translate(128 152)">
+      <circle cx="140" cy="72" r="50" fill="#0f172a" stroke="#38bdf8" stroke-width="3"/>
+      <path d="M101 78c16-62 82-68 107-21-31-9-46 19-75 12-11-3-20 1-32 9Z" fill="#e2e8f0" opacity=".88"/>
+      <circle cx="122" cy="71" r="5" fill="#38bdf8"/>
+      <circle cx="158" cy="71" r="5" fill="#38bdf8"/>
+      <path d="M124 96c12 9 29 9 42 0" fill="none" stroke="#22c55e" stroke-width="4" stroke-linecap="round"/>
+      <path d="M64 234c9-56 42-93 76-93s68 37 77 93" fill="#0f172a" stroke="url(#avatarGlow)" stroke-width="4"/>
+      <path d="M101 151l39 53 39-53" fill="none" stroke="#38bdf8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="78" y="216" width="124" height="34" rx="10" fill="#facc15" stroke="#ca8a04" stroke-width="3"/>
+      <text x="117" y="239" class="mono" font-size="18" font-weight="900" fill="#111827">JS</text>
+      <rect x="40" y="264" width="92" height="31" rx="8" fill="#38bdf8" opacity=".95"/>
+      <text x="62" y="285" class="mono" font-size="13" font-weight="800" fill="#082f49">API</text>
+      <rect x="148" y="264" width="92" height="31" rx="8" fill="#22c55e" opacity=".95"/>
+      <text x="165" y="285" class="mono" font-size="13" font-weight="800" fill="#052e16">NODE</text>
+      <animateTransform attributeName="transform" type="translate" values="128 152;128 147;128 152" dur="4s" repeatCount="indefinite"/>
+    </g>
+
+    <text x="267" y="409" text-anchor="middle" class="mono" font-size="15" fill="#cbd5e1">learning + building + documenting</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="492" y="74" width="522" height="372" rx="16" fill="url(#panel)" stroke="#334155"/>
+    <rect x="492" y="74" width="522" height="48" rx="16" fill="#111827"/>
+    <path d="M492 122h522" stroke="#1f2937"/>
+    <circle cx="520" cy="98" r="7" fill="#ef4444"/>
+    <circle cx="544" cy="98" r="7" fill="#f59e0b"/>
+    <circle cx="568" cy="98" r="7" fill="#22c55e"/>
+    <text x="753" y="103" text-anchor="middle" class="mono" font-size="13" fill="#94a3b8">identity-terminal</text>
+    <g transform="translate(930 88)">
       <circle cx="0" cy="10" r="6" fill="#22c55e">
         <animate attributeName="opacity" values="1;.35;1" dur="1.8s" repeatCount="indefinite"/>
       </circle>
-      <text x="16" y="16" class="mono" font-size="14" font-weight="700" fill="#bbf7d0">ONLINE</text>
+      <text x="16" y="15" class="mono" font-size="12" font-weight="800" fill="#bbf7d0">ONLINE</text>
     </g>
 
-    <g transform="translate(106 140)">
-      <text x="0" y="0" class="mono" font-size="18" fill="#22c55e">carlos@campus-backend</text>
-      <text x="238" y="0" class="mono" font-size="18" fill="#94a3b8">:~$</text>
-      <text x="284" y="0" class="mono" font-size="18" fill="#e2e8f0">whoami</text>
-      <rect x="360" y="-18" width="10" height="24" fill="#38bdf8">
-        <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite"/>
+    <g transform="translate(532 152)">
+      <text x="0" y="0" class="mono" font-size="16" fill="#38bdf8">carlos@github</text>
+      <text x="126" y="0" class="mono" font-size="16" fill="#94a3b8">~ $</text>
+      <text x="170" y="0" class="mono" font-size="16" font-weight="800" fill="#e2e8f0">whoami</text>
+      <rect x="238" y="-16" width="9" height="22" fill="#38bdf8">
+        <animate attributeName="opacity" values="1;0;1" dur="1.15s" repeatCount="indefinite"/>
       </rect>
 
-      <text x="0" y="48" class="sans" font-size="30" font-weight="800" fill="#f8fafc">Carlos Alexandre Duarte Pereira</text>
-      <text x="0" y="82" class="mono" font-size="17" fill="#93c5fd">Backend Developer em formação</text>
-      <text x="0" y="114" class="sans" font-size="15" fill="#cbd5e1">Construindo um campus aberto para estudar, praticar, documentar e compartilhar Backend com JavaScript.</text>
+      <text x="0" y="46" class="mono" font-size="13" font-weight="800" fill="#22c55e">Name:</text>
+      <text x="104" y="46" class="sans" font-size="17" font-weight="800" fill="#f8fafc">Carlos Alexandre Duarte Pereira</text>
 
-      <g transform="translate(0 154)">
-        <rect width="405" height="86" rx="16" fill="#0b1220" stroke="#1e3a8a"/>
-        <text x="22" y="30" class="mono" font-size="13" font-weight="700" fill="#60a5fa">FOUNDATION</text>
-        <text x="22" y="58" class="sans" font-size="18" font-weight="700" fill="#f8fafc">Análise e Desenvolvimento de Sistemas</text>
+      <text x="0" y="82" class="mono" font-size="13" font-weight="800" fill="#22c55e">Role:</text>
+      <text x="104" y="82" class="sans" font-size="15" fill="#e2e8f0">Backend Developer em formação</text>
+
+      <text x="0" y="118" class="mono" font-size="13" font-weight="800" fill="#22c55e">Foundation:</text>
+      <text x="104" y="118" class="sans" font-size="15" fill="#e2e8f0">Análise e Desenvolvimento de Sistemas</text>
+
+      <text x="0" y="154" class="mono" font-size="13" font-weight="800" fill="#22c55e">Mission:</text>
+      <text x="104" y="154" class="sans" font-size="15" fill="#e2e8f0">Desenvolvimento Backend - SENAI</text>
+
+      <text x="0" y="196" class="mono" font-size="13" font-weight="800" fill="#22c55e">Learning path:</text>
+      <g transform="translate(124 185)">
+        <circle cx="0" cy="7" r="6" fill="#facc15">
+          <animate attributeName="r" values="6;9;6" dur="2.2s" repeatCount="indefinite"/>
+        </circle>
+        <text x="18" y="12" class="mono" font-size="13" fill="#fde68a">JavaScript</text>
+        <path d="M7 25h298" stroke="#334155" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="72" cy="25" r="5" fill="#38bdf8"/>
+        <circle cx="132" cy="25" r="5" fill="#22c55e"/>
+        <circle cx="192" cy="25" r="5" fill="#a78bfa"/>
+        <circle cx="252" cy="25" r="5" fill="#60a5fa"/>
+        <circle cx="305" cy="25" r="5" fill="#fb7185"/>
+        <text x="18" y="52" class="mono" font-size="12" fill="#94a3b8">TS -> Node.js -> REST -> PostgreSQL -> Architecture</text>
       </g>
 
-      <g transform="translate(0 258)">
-        <rect width="405" height="94" rx="16" fill="#0b1220" stroke="#166534"/>
-        <text x="22" y="30" class="mono" font-size="13" font-weight="700" fill="#86efac">CURRENT MISSION</text>
-        <text x="22" y="58" class="sans" font-size="18" font-weight="700" fill="#f8fafc">Desenvolvimento Backend</text>
-        <text x="22" y="80" class="sans" font-size="14" fill="#cbd5e1">Escola SENAI "Dr. Celso Charuri"</text>
-      </g>
-    </g>
-
-    <g transform="translate(578 142)">
-      <text x="0" y="0" class="mono" font-size="17" fill="#22c55e">$ learning-path --backend</text>
-      <text x="0" y="38" class="sans" font-size="15" fill="#cbd5e1">Evolução atual sem porcentagens fictícias: cada etapa é prática, revisão e construção.</text>
-
-      <g transform="translate(26 74)">
-        <line x1="22" y1="18" x2="22" y2="224" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
-
-        <g transform="translate(0 0)">
-          <circle cx="22" cy="18" r="10" fill="#facc15" stroke="#fef3c7" stroke-width="3">
-            <animate attributeName="r" values="10;13;10" dur="2s" repeatCount="indefinite"/>
-          </circle>
-          <text x="54" y="24" class="mono" font-size="17" font-weight="700" fill="#fde68a">JavaScript</text>
-          <text x="212" y="24" class="mono" font-size="13" fill="#94a3b8">YOU ARE HERE</text>
-        </g>
-
-        <g transform="translate(0 42)" opacity=".95">
-          <circle cx="22" cy="18" r="8" fill="#38bdf8"/>
-          <text x="54" y="24" class="mono" font-size="16" fill="#bae6fd">TypeScript</text>
-        </g>
-
-        <g transform="translate(0 84)" opacity=".88">
-          <circle cx="22" cy="18" r="8" fill="#22c55e"/>
-          <text x="54" y="24" class="mono" font-size="16" fill="#bbf7d0">Node.js</text>
-        </g>
-
-        <g transform="translate(0 126)" opacity=".8">
-          <circle cx="22" cy="18" r="8" fill="#a78bfa"/>
-          <text x="54" y="24" class="mono" font-size="16" fill="#ddd6fe">REST APIs</text>
-        </g>
-
-        <g transform="translate(0 168)" opacity=".72">
-          <circle cx="22" cy="18" r="8" fill="#60a5fa"/>
-          <text x="54" y="24" class="mono" font-size="16" fill="#bfdbfe">PostgreSQL</text>
-        </g>
-
-        <g transform="translate(0 210)" opacity=".66">
-          <circle cx="22" cy="18" r="8" fill="#fb7185"/>
-          <text x="54" y="24" class="mono" font-size="16" fill="#fecdd3">Arquitetura Backend</text>
-        </g>
-      </g>
-
-      <g transform="translate(0 346)">
-        <text x="0" y="0" class="mono" font-size="15" fill="#94a3b8">STATUS</text>
-        <g transform="translate(0 22)">
-          <rect width="116" height="34" rx="17" fill="#052e16" stroke="#16a34a"/>
-          <circle cx="21" cy="17" r="5" fill="#22c55e">
-            <animate attributeName="opacity" values="1;.35;1" dur="2.2s" repeatCount="indefinite"/>
-          </circle>
-          <text x="36" y="22" class="mono" font-size="13" font-weight="700" fill="#bbf7d0">LEARNING</text>
-        </g>
-        <g transform="translate(132 22)">
-          <rect width="112" height="34" rx="17" fill="#082f49" stroke="#0284c7"/>
-          <circle cx="21" cy="17" r="5" fill="#38bdf8"/>
-          <text x="36" y="22" class="mono" font-size="13" font-weight="700" fill="#bae6fd">BUILDING</text>
-        </g>
-        <g transform="translate(260 22)">
-          <rect width="148" height="34" rx="17" fill="#312e81" stroke="#818cf8"/>
-          <circle cx="21" cy="17" r="5" fill="#a5b4fc"/>
-          <text x="36" y="22" class="mono" font-size="13" font-weight="700" fill="#ddd6fe">DOCUMENTING</text>
-        </g>
+      <text x="0" y="282" class="mono" font-size="13" font-weight="800" fill="#22c55e">Status:</text>
+      <g transform="translate(104 260)">
+        <rect width="104" height="30" rx="15" fill="#052e16" stroke="#16a34a"/>
+        <circle cx="18" cy="15" r="5" fill="#22c55e"/>
+        <text x="33" y="20" class="mono" font-size="12" font-weight="800" fill="#bbf7d0">LEARNING</text>
+        <rect x="116" width="104" height="30" rx="15" fill="#082f49" stroke="#0284c7"/>
+        <circle cx="134" cy="15" r="5" fill="#38bdf8"/>
+        <text x="149" y="20" class="mono" font-size="12" font-weight="800" fill="#bae6fd">BUILDING</text>
+        <rect x="232" width="132" height="30" rx="15" fill="#312e81" stroke="#818cf8"/>
+        <circle cx="250" cy="15" r="5" fill="#a5b4fc"/>
+        <text x="265" y="20" class="mono" font-size="12" font-weight="800" fill="#ddd6fe">DOCUMENTING</text>
       </g>
     </g>
   </g>
