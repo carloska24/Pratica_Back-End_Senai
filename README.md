@@ -47,7 +47,7 @@ Você precisa ter **Node.js**, **npm** e **Git** instalados.
 
 ```bash
 git clone https://github.com/carloska24/Pratica_Back-End_Senai.git
-cd Pratica_Back-End_Senai/campus-backend-senai-javascript
+cd Pratica_Back-End_Senai
 npm install
 npm run dev
 ```

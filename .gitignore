@@ -1,44 +1,29 @@
-### IntelliJ IDEA ###
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
-.kotlin
-
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-
-### VS Code ###
-.vscode/
-
-### Mac OS ###
-.DS_Store
-
-### Node.js / Next.js ###
+# Dependencies
 node_modules/
+
+# Next.js build output
 .next/
 out/
-coverage/
-*.log
-.env
-.env.*
-!.env.example
 
-### Local tools ###
+# Local environment files
+.env
+.env.local
+.env.*.local
+
+# Test and tooling output
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+
+# Editor and operating system files
 .idea/
-*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
