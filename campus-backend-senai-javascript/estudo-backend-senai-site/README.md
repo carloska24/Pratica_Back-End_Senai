@@ -1,38 +1,131 @@
 <div align="center">
 
-# Campus Backend
+<img src="./.github/assets/campus-banner.svg" alt="Campus Backend: JavaScript como base e Backend como direção." width="100%" />
 
-### Curso preparatório em JavaScript para Backend
+<br/>
 
-Projeto de estudos criado por **Carlos Alexandre Duarte Pereira** como um campus preparatório independente para fortalecer lógica, JavaScript e fundamentos de Backend durante a formação rumo ao curso de **Desenvolvedor Backend** da **Escola SENAI "Dr. Celso Charuri"**.
+![Status](https://img.shields.io/badge/status-em_desenvolvimento-22c55e?style=flat-square)
+![Foco](https://img.shields.io/badge/foco-JavaScript-f7df1e?style=flat-square&logo=javascript&logoColor=111111)
+![Direção](https://img.shields.io/badge/direção-Backend_com_Node.js-38bdf8?style=flat-square&logo=nodedotjs&logoColor=white)
+![Progresso](https://img.shields.io/badge/progresso-local-6366f1?style=flat-square)
 
-Este repositório organiza aulas, revisões, exercícios em JavaScript, laboratório e acompanhamento de progresso em uma experiência única de aprendizagem, aberta para outras pessoas que também queiram estudar.
+**Um campus preparatório independente para fortalecer lógica, praticar JavaScript e construir a base necessária para Backend.**
 
-![Next.js](https://img.shields.io/badge/Next.js-15-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
-![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=0B1020)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-Curso_Foco-F7DF1E?style=for-the-badge&logo=javascript&logoColor=111111)
-![Monaco Editor](https://img.shields.io/badge/Monaco_Editor-Laboratorio-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)
+Criado por **Carlos Alexandre Duarte Pereira** durante sua formação para o curso de **Desenvolvedor Backend** da **Escola SENAI "Dr. Celso Charuri"** e aberto para outras pessoas que também queiram aprender.
+
+[Ver o Campus](#o-campus-em-ação) · [Começar agora](#comece-a-estudar) · [Explorar a trilha](#modo-campanha) · [Conhecer o autor](#quem-está-construindo)
 
 </div>
 
----
+> [!IMPORTANT]
+> Este é um projeto pessoal e independente de preparação e aprofundamento. Não é material oficial, não representa a Escola SENAI "Dr. Celso Charuri" e não substitui suas aulas ou formações.
 
-## Sobre o projeto
+## O Campus em ação
 
-O **Campus Backend** é uma plataforma local de estudos criada para transformar a preparação em Backend JavaScript em uma experiência organizada, visual e progressiva.
+<img src="./.github/assets/campus-overview.png" alt="Dashboard do Campus Backend com progresso, módulo atual, marcos de conhecimento e atalhos de estudo." width="100%" />
 
-O objetivo é ajudar o aluno a responder, em qualquer momento:
+O Campus transforma uma rotina de estudos em um ambiente único, no qual o aluno sempre consegue responder:
 
-| Pergunta | Como o Campus responde |
+| Onde estou? | O que já aprendi? | Qual é o próximo passo? |
+|---|---|---|
+| Dashboard, grade e módulo atual | Biblioteca, conquistas e desempenho | Aula, laboratório, arena e checkpoint |
+
+### O que você encontra
+
+| Experiência | Para que serve |
 |---|---|
-| Onde estou? | Dashboard, trilha curricular e foco atual do módulo |
-| O que já aprendi? | Biblioteca de revisão, conquistas e desempenho |
-| Qual é o próximo passo? | Aula atual, laboratório, arena e desbloqueio por domínio |
+| **Sala de aula** | Estudar a aula atual e reabrir conteúdos concluídos sem perder o histórico |
+| **Grade curricular** | Visualizar módulos concluídos, em andamento, liberados e planejados |
+| **Laboratório** | Escrever e executar JavaScript em um Monaco Editor com Web Worker local |
+| **Arena de desafios** | Treinar lógica com exercícios e feedback de progresso |
+| **Biblioteca de revisão** | Marcar uma nova rodada de estudo sem apagar o conhecimento conquistado |
+| **Conquistas e desempenho** | Enxergar marcos de domínio e habilidades praticadas |
 
-O projeto não é material oficial do SENAI, não representa a instituição e não substitui as aulas oficiais. Ele é um curso paralelo de preparação e aprofundamento, feito para ganhar mais conhecimento, organizar a prática e disponibilizar uma trilha para outras pessoas que queiram aprender JavaScript com foco em Backend.
+## Comece a estudar
 
----
+Você precisa ter **Node.js**, **npm** e **Git** instalados.
+
+```bash
+git clone https://github.com/carloska24/Pratica_Back-End_Senai.git
+cd Pratica_Back-End_Senai/campus-backend-senai-javascript/estudo-backend-senai-site
+npm install
+npm run dev
+```
+
+Abra [http://localhost:3000](http://localhost:3000) no navegador. Todo o progresso atual fica salvo localmente no próprio navegador.
+
+<details>
+<summary><strong>Comandos disponíveis</strong></summary>
+
+| Comando | Resultado |
+|---|---|
+| `npm run dev` | Inicia o Campus em modo de desenvolvimento |
+| `npm run build` | Valida e gera o build de produção |
+| `npm run start` | Executa localmente o build já gerado |
+
+</details>
+
+## Modo campanha
+
+O aprendizado foi organizado como uma campanha: cada fase entrega uma habilidade reutilizável e prepara a próxima missão.
+
+<img src="./.github/assets/learning-roadmap.svg" alt="Mapa da campanha: fundamentos, repetição, funções, dados, JavaScript moderno, Node.js e APIs." width="100%" />
+
+### Currículo em resumo
+
+| Fase | Módulos | Habilidade construída |
+|---|---:|---|
+| Fundamentos | M01–M02 | Variáveis, operadores e decisões |
+| Controle de fluxo | M03–M06 | `while`, `for`, contadores, acumuladores e laços aninhados |
+| Foco atual | M07 | Funções, parâmetros, retorno e composição |
+| Estruturas de dados | M08–M12 | Arrays, objetos, strings, datas e JavaScript moderno |
+| Expansão Backend | Próximos módulos | Assincronismo, Node.js, HTTP, APIs, banco de dados e testes |
+
+<details>
+<summary><strong>Ver os módulos M01–M12</strong></summary>
+
+| Módulo | Tema | Evidência de aprendizagem |
+|---|---|---|
+| M01 | Fundamentos JavaScript | Exercícios e desafio de base |
+| M02 | Estruturas de decisão | Condições e fluxo de escolha |
+| M03 | Laços com `while` | Repetição controlada |
+| M04 | Laços com `for` | Contagem e padrões |
+| M05 | Repetição avançada | Contador e acumulador |
+| M06 | Laços aninhados | Construção de padrões em duas dimensões |
+| M07 | Funções | Missão funcional com casos de teste |
+| M08 | Arrays | Busca, índices e mutação |
+| M09 | Objetos JavaScript | Modelagem de informações |
+| M10 | Strings, Math e Date | Tratamento de dados |
+| M11 | Arrays modernos | `forEach`, `map`, `filter` e `reduce` |
+| M12 | JavaScript moderno | Arrow functions, destructuring, spread e REST |
+
+</details>
+
+## Como uma aula funciona
+
+Antes de apresentar sintaxe, cada aula constrói um modelo mental do problema.
+
+```text
+objetivo → pré-requisitos → história do programa → execução passo a passo
+         → conceitos → código comentado → leitura mental → checkpoint
+```
+
+Esse método busca ensinar o aluno a prever o comportamento do código, explicar suas decisões e só então avançar.
+
+## Exercícios JavaScript
+
+A pasta [`exercicios-javascript/`](./exercicios-javascript/) contém **69 arquivos `.js`**, organizados do M01 ao M12 para prática direta no editor.
+
+```text
+exercicios-javascript/
+├── M01/  fundamentos e primeiros desafios
+├── M02/  decisões
+├── M03–M06/  repetição e padrões
+├── M07/  funções
+└── M08–M12/  arrays, objetos, dados e JavaScript moderno
+```
+
+Os exercícios acompanham a mesma sequência do portal e podem ser usados para revisão, prática individual ou consulta.
 
 ## Quem está construindo
 
@@ -42,337 +135,102 @@ O projeto não é material oficial do SENAI, não representa a instituição e n
 
 </div>
 
-> Este projeto nasceu no meio da prática: eu queria um lugar para estudar com constância, revisar lógica sem me perder e enxergar minha evolução módulo por módulo. Em vez de deixar isso fechado no meu computador, organizei como um campus aberto para quem também quer aprender Backend começando por JavaScript.
+> Este projeto nasceu no meio da prática. Eu queria estudar com constância, revisar lógica sem me perder e enxergar minha evolução módulo por módulo. Em vez de deixar esse material fechado no meu computador, organizei um campus para quem também quer construir uma base sólida em JavaScript antes de avançar para Backend.
 
 <div align="center">
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Carlos_Duarte-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/carlos-duarte-0b4591206)
-[![Gmail](https://img.shields.io/badge/Gmail-carloska24%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:carloska24@gmail.com)
-[![GitHub](https://img.shields.io/badge/GitHub-carloska24-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/carloska24)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Carlos_Duarte-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/carlos-duarte-0b4591206)
+[![Gmail](https://img.shields.io/badge/Gmail-carloska24%40gmail.com-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:carloska24@gmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-carloska24-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/carloska24)
 
 </div>
 
----
+## Por dentro do projeto
 
-## Modo campanha
+| Camada | Tecnologias e responsabilidades |
+|---|---|
+| Interface | Next.js 15, React 19, TypeScript, Framer Motion e Lucide |
+| Conteúdo | Currículo, aulas, exemplos guiados e exercícios JavaScript |
+| Laboratório | Monaco Editor, Web Worker, timeout e captura de console |
+| Progresso | `localStorage` com saneamento de identificadores e contadores |
 
-O Campus foi pensado como uma jornada jogável de aprendizagem: cada módulo entrega uma habilidade, libera uma nova fase e aproxima o aluno do Backend com Node.js.
+<div align="center">
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" width="45" alt="Next.js" />
+&nbsp;&nbsp;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="45" alt="React" />
+&nbsp;&nbsp;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="45" alt="TypeScript" />
+&nbsp;&nbsp;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="45" alt="JavaScript" />
+&nbsp;&nbsp;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="45" alt="Node.js" />
+
+</div>
+
+<details>
+<summary><strong>Arquitetura atual</strong></summary>
 
 ```mermaid
 flowchart LR
-    P0["Spawn: lógica básica"] --> P1["M01-M02<br/>Variáveis e decisões"]
-    P1 --> P2["M03-M06<br/>Laços e padrões"]
-    P2 --> P3["M07<br/>Funções"]
-    P3 --> P4["M08-M09<br/>Arrays e objetos"]
-    P4 --> P5["M10-M12<br/>Dados e JS moderno"]
-    P5 --> BOSS["Boss fight:<br/>APIs Backend"]
-```
-
-| Fase | Habilidade desbloqueada | Checkpoint |
-|---|---|---|
-| Tutorial | Variáveis, operadores e decisões | Ler o fluxo antes de executar |
-| Repetição | `while`, `for`, contador e acumulador | Separar a caixinha que percorre da que soma |
-| Funções | Entrada, processamento, saída e retorno | Criar blocos reutilizáveis |
-| Dados | Arrays, objetos, strings e datas | Modelar informações de um sistema real |
-| Backend | Node.js, HTTP, APIs e banco de dados | Transformar lógica em serviço web |
-
----
-
-## Principais recursos
-
-| Área | Implementação |
-|---|---|
-| Sala de aula | Aula atual, biblioteca de curso estudado e exemplos guiados |
-| Grade curricular | Módulos concluídos, em andamento, liberados e planejados |
-| Biblioteca de revisão | Histórico acessível para reestudar sem apagar progresso |
-| Laboratório | Monaco Editor com execução JavaScript em Web Worker local |
-| Arena de desafios | Exercícios de lógica com progresso local |
-| Progresso | Dados persistidos no navegador com saneamento de contadores |
-| Conquistas | Badges de domínio por módulo e marcos de aprendizagem |
-| Desempenho | Mapa visual de habilidades estudadas |
-
----
-
-## Proposta pedagógica
-
-O Campus foi desenhado para estudar **JavaScript como linguagem principal**, com direção profissional em **Backend com Node.js**.
-
-A estrutura de cada aula prioriza modelo mental antes da sintaxe:
-
-| Etapa | Finalidade |
-|---|---|
-| Objetivo | Deixar claro o que será aprendido |
-| Pré-requisitos | Conectar o tema com conhecimentos anteriores |
-| História do programa | Ler o código como fluxo de acontecimentos |
-| Passo a passo | Acompanhar o computador executando |
-| Conceitos centrais | Nomear as ideias importantes |
-| Código comentado | Mostrar JavaScript com intenção clara |
-| Leitura mental | Treinar previsão antes de executar |
-| Erros comuns | Antecipar confusões frequentes |
-| Checkpoint | Confirmar compreensão antes de avançar |
-
----
-
-## Currículo
-
-A trilha atual organiza a evolução de fundamentos de lógica até recursos modernos de JavaScript:
-
-| Módulo | Tema | Estado pedagógico |
-|---|---|---|
-| M01 | Fundamentos JavaScript | Histórico revisável |
-| M02 | Estruturas de decisão | Histórico revisável |
-| M03 | Laços de repetição com `while` | Histórico revisável |
-| M04 | Laços de repetição com `for` | Histórico revisável |
-| M05 | Repetição avançada | Contador e acumulador |
-| M06 | Laços aninhados | Revisão livre |
-| M07 | Funções | Missão final com 4 casos de teste |
-| M08 | Arrays | Missão final com 6 casos de teste |
-| M09 | Objetos JavaScript | Missão final com 6 casos de teste |
-| M10 | Strings, Math e Date | Missão final com 6 casos de teste |
-| M11 | Arrays modernos | Missão final com 8 casos de teste |
-| M12 | JavaScript moderno | Missão final com 8 casos de teste |
-
-Próximas etapas planejadas: módulos ES, assincronismo, Node.js, HTTP/REST, Express, arquitetura de API, PostgreSQL, persistência, autenticação, testes, Docker e projeto final.
-
----
-
-## Exercícios JavaScript
-
-Além da experiência visual do portal, o projeto mantém uma pasta própria com exercícios feitos em JavaScript para estudo direto no editor de código.
-
-| Pasta | Conteúdo |
-|---|---|
-| `exercicios-javascript/` | 69 arquivos `.js` organizados por módulo, do M01 ao M12 |
-
-Os arquivos seguem a mesma trilha exibida no Campus e foram organizados para facilitar revisão, prática individual e consulta por quem estiver acompanhando o curso.
-
----
-
-## Interface e experiência
-
-O Campus usa uma interface de estudo persistente, com navegação por áreas em vez de uma página única.
-
-| Tela | Papel na experiência |
-|---|---|
-| Visão geral | Resumo do progresso, foco atual e atalhos |
-| Grade curricular | Mapa completo da formação |
-| Sala de aula | Aula atual, acervo revisável e exemplos |
-| Laboratório | Editor e runner local de JavaScript |
-| Arena | Prática gamificada de lógica |
-| Conquistas | Marcos de domínio e revisão |
-| Desempenho | Leitura visual das habilidades |
-
-A interface usa componentes densos, painéis de estudo, indicadores de progresso, abas, botões com ícones e animações discretas para manter a experiência fluida.
-
----
-
-## Laboratório
-
-O Laboratório utiliza o **Monaco Editor** para escrever e executar JavaScript localmente.
-
-Fluxo atual:
-
-1. O aluno escreve ou carrega um arquivo `.js`, `.mjs` ou `.txt`.
-2. O código é executado em um **Web Worker** do navegador.
-3. A execução tem timeout de 1,5 segundo.
-4. APIs de rede são desativadas.
-5. O console é capturado.
-6. Missões finais validam casos de teste específicos.
-7. Aprovações registram domínio do módulo no progresso local.
-
-Importante: o código do aluno não é executado dentro do processo do Next.js. Para uma versão de produção com Backend real, a evolução prevista é um runner Node.js isolado, com limites explícitos de CPU, memória, tempo e acesso à rede.
-
----
-
-## Arquitetura
-
-```mermaid
-flowchart TB
-    USER[Aluno] --> UI[Next.js App Router]
-    UI --> SHELL[app/page.tsx]
-    SHELL --> CLASSROOM[Classroom]
-    SHELL --> LAB[Laboratório]
-    SHELL --> ARENA[Arena]
-    CLASSROOM --> LESSON[LessonDetail]
-    CLASSROOM --> LIBRARY[courseLibrary.ts]
-    LESSON --> CONTENT[lessonContent.ts]
+    ALUNO[Aluno] --> UI[Next.js App Router]
+    UI --> AULA[Sala de aula]
+    UI --> LAB[Laboratório]
+    UI --> ARENA[Arena]
+    AULA --> CONTEUDO[Curso e lições]
     LAB --> MONACO[Monaco Editor]
-    LAB --> WORKER[Web Worker local]
-    SHELL --> PROGRESS[localStorage + progress.ts]
+    MONACO --> WORKER[Web Worker local]
+    UI --> PROGRESSO[localStorage saneado]
 ```
 
-### Responsabilidades principais
+O código escrito pelo aluno é executado no navegador, dentro de um Web Worker com timeout e rede desativada. Ele não é executado no processo do Next.js.
 
-| Arquivo | Responsabilidade |
-|---|---|
-| `app/page.tsx` | Shell da aplicação, dashboard, currículo, laboratório, arena e desempenho |
-| `components/Classroom.tsx` | Navegação entre aula atual, biblioteca e exemplos guiados |
-| `components/LessonDetail.tsx` | Componente visual único para aula atual e revisões |
-| `lib/course.ts` | Grade, progresso e trilha planejada |
-| `lib/courseLibrary.ts` | Aulas, exercícios, desafios e códigos JavaScript |
-| `lib/lessonContent.ts` | Conteúdo pedagógico detalhado |
-| `lib/functionExamples.ts` | 20 exemplos guiados de funções JavaScript |
-| `lib/progress.ts` | Leitura saneada do progresso local |
+</details>
 
----
-
-## Estrutura do projeto
+<details>
+<summary><strong>Estrutura principal de pastas</strong></summary>
 
 ```text
 estudo-backend-senai-site/
-├── app/
-│   ├── globals.css
-│   ├── layout.tsx
-│   └── page.tsx
-├── components/
-│   ├── Classroom.tsx
-│   ├── LessonDetail.tsx
-│   ├── PracticeArena.tsx
-│   └── CodeViewer.tsx
-├── exercicios-javascript/
-│   ├── M01/
-│   ├── M02/
-│   ├── ...
-│   └── M12/
-├── lib/
-│   ├── course.ts
-│   ├── courseLibrary.ts
-│   ├── functionExamples.ts
-│   ├── lessonContent.ts
-│   └── progress.ts
-├── public/
-├── package.json
-└── README.md
+├── app/                    shell e estilos globais
+├── components/             sala, laboratório e experiências interativas
+├── exercicios-javascript/  prática organizada por módulo
+├── lib/                    currículo, aulas, exemplos e progresso
+├── .github/assets/         imagens do README
+├── PRODUCT_SPEC.md         princípios de produto e aprendizagem
+└── ARCHITECTURE_AUDIT.md   decisões e evolução técnica
 ```
 
----
+</details>
 
-## Tecnologias
+### Documentação complementar
+
+- [`PRODUCT_SPEC.md`](./PRODUCT_SPEC.md): missão, princípios pedagógicos e evolução do produto.
+- [`ARCHITECTURE_AUDIT.md`](./ARCHITECTURE_AUDIT.md): responsabilidades técnicas, segurança e próximos passos.
+- [`UX_RESEARCH_NOTES.md`](./UX_RESEARCH_NOTES.md): observações que orientam a experiência de estudo.
+
+## Estado atual
+
+O Campus já possui conteúdo navegável, progresso local, exercícios, revisões, exemplos guiados, laboratório e missões com validações específicas. O build de produção é validado com `npm run build`.
+
+Ainda estão planejados:
+
+- autenticação e sincronização do progresso;
+- Backend real e banco de dados;
+- runner Node.js isolado para código não confiável;
+- rotas dedicadas para módulos e aulas;
+- cobertura automatizada unitária e E2E;
+- publicação do portal para acesso público.
+
+## Aprender junto
+
+O Campus está sendo construído primeiro como uma ferramenta real de estudo e, ao mesmo tempo, como uma trilha que outras pessoas possam acompanhar. Sugestões sobre aulas, exercícios, clareza do conteúdo e experiência do portal são bem-vindas por meio das [issues do repositório](https://github.com/carloska24/Pratica_Back-End_Senai/issues).
 
 <div align="center">
 
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" width="54" alt="Next.js" />
-&nbsp;&nbsp;
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="54" alt="React" />
-&nbsp;&nbsp;
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="54" alt="TypeScript" />
-&nbsp;&nbsp;
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="54" alt="JavaScript" />
-&nbsp;&nbsp;
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="54" alt="Node.js" />
-
-</div>
-
-### Interface
-
-- Next.js 15
-- React 19
-- TypeScript
-- Framer Motion
-- Lucide React
-
-### Laboratório
-
-- Monaco Editor
-- Web Worker local
-- JavaScript executado no navegador com timeout
-
-### Conteúdo estudado
-
-- JavaScript
-- Lógica de programação
-- Fundamentos para Backend
-- Preparação para Node.js e APIs
-
 ---
-
-## Progresso local
-
-O navegador armazena localmente:
-
-- itens revisados da biblioteca;
-- exemplos guiados concluídos;
-- desafios resolvidos na Arena;
-- tentativas do Laboratório;
-- módulos dominados;
-- última aula aberta.
-
-Os dados são saneados antes de serem exibidos. Duplicatas, identificadores inválidos e progresso fora de ordem não aumentam os contadores.
-
----
-
-## Como executar
-
-### Pré-requisitos
-
-- Node.js instalado
-- npm instalado
-
-### 1. Entrar na pasta do projeto
-
-```bash
-cd campus-backend-senai-javascript/estudo-backend-senai-site
-```
-
-### 2. Instalar dependências
-
-```bash
-npm install
-```
-
-### 3. Rodar em desenvolvimento
-
-```bash
-npm run dev
-```
-
-Acesse:
-
-```text
-http://localhost:3000
-```
-
-### 4. Gerar build de produção
-
-```bash
-npm run build
-```
-
----
-
-## Validação atual
-
-O build de produção foi validado com:
-
-```bash
-npm run build
-```
-
-O projeto ainda não possui uma suite automatizada completa de testes unitários ou E2E. As missões do Laboratório possuem validações locais específicas para os módulos já estruturados.
-
----
-
-## Limites conhecidos
-
-- O progresso é local ao navegador.
-- Ainda não há autenticação ou banco de dados.
-- A navegação principal acontece por estado local, não por rotas dedicadas para cada aula.
-- O runner atual é adequado para estudo local, mas não substitui um executor isolado de produção.
-- Testes unitários e E2E do próprio Campus ainda são uma evolução futura.
-
----
-
-## Contexto educacional
-
-Este projeto existe para organizar uma rotina real de estudos em Backend JavaScript.
-
-Ele foi criado porque estou fazendo este curso à parte para ganhar mais conhecimento, reforçar lógica e construir uma ponte entre fundamentos e prática profissional com Node.js. A ideia é que o portal também possa ajudar outras pessoas que queiram aprender com a mesma trilha.
-
----
-
-<div align="center">
 
 **Campus Backend**<br/>
-Curso preparatório aberto para estudar JavaScript, lógica e fundamentos de Backend com consistência.
+Estudar com intenção. Praticar com constância. Compartilhar o caminho.
 
 </div>
