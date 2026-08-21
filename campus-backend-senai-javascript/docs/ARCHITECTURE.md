@@ -7,7 +7,7 @@ O Campus é uma aplicação educacional em Next.js que reúne conteúdo, prátic
 ## Estrutura
 
 ```text
-estudo-backend-senai-site/
+campus-backend-senai-javascript/
 ├── src/
 │   ├── app/                  entrada do Next.js e estilos globais
 │   ├── components/

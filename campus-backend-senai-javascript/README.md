@@ -47,7 +47,7 @@ Você precisa ter **Node.js**, **npm** e **Git** instalados.
 
 ```bash
 git clone https://github.com/carloska24/Pratica_Back-End_Senai.git
-cd Pratica_Back-End_Senai/campus-backend-senai-javascript/estudo-backend-senai-site
+cd Pratica_Back-End_Senai/campus-backend-senai-javascript
 npm install
 npm run dev
 ```
@@ -191,7 +191,7 @@ O código escrito pelo aluno é executado no navegador, dentro de um Web Worker 
 <summary><strong>Estrutura principal de pastas</strong></summary>
 
 ```text
-estudo-backend-senai-site/
+campus-backend-senai-javascript/
 ├── src/
 │   ├── app/                rotas, shell e estilos globais
 │   ├── components/         sala, laboratórios e arena de prática
