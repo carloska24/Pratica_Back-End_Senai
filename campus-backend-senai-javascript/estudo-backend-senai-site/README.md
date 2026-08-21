@@ -38,18 +38,9 @@ O projeto não é material oficial do SENAI, não representa a instituição e n
 
 <div align="center">
 
-<img src="./public/readme/js-block-builder.svg" alt="Carlos construindo o Campus Backend com blocos JavaScript" width="920" />
+<img src="./.github/assets/developer-terminal.svg" alt="Developer Terminal de Carlos Alexandre Duarte Pereira: Backend Developer em formação, missão atual em Desenvolvimento Backend, stack em evolução com JavaScript, TypeScript, Node.js, APIs REST, PostgreSQL e Arquitetura Backend, status learning, building e documenting." width="100%" />
 
 </div>
-
-| Campo | Minha trilha |
-|---|---|
-| Nome | **Carlos Alexandre Duarte Pereira** |
-| Base | Análise e Desenvolvimento de Sistemas |
-| Formação atual | Desenvolvedor Backend na **Escola SENAI "Dr. Celso Charuri"** |
-| Direção | Backend Developer Jr |
-| Stack em evolução | JavaScript · TypeScript · Node.js · APIs REST · PostgreSQL · Arquitetura |
-| Por que este Campus existe? | Para transformar estudo diário em material organizado, praticável e útil para outras pessoas |
 
 > Este projeto nasceu no meio da prática: eu queria um lugar para estudar com constância, revisar lógica sem me perder e enxergar minha evolução módulo por módulo. Em vez de deixar isso fechado no meu computador, organizei como um campus aberto para quem também quer aprender Backend começando por JavaScript.
 
