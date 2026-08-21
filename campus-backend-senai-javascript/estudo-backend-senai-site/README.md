@@ -38,7 +38,7 @@ O projeto não é material oficial do SENAI, não representa a instituição e n
 
 <div align="center">
 
-<img src="./.github/assets/developer-terminal.svg" alt="Developer Terminal de Carlos Alexandre Duarte Pereira: Backend Developer em formação, missão atual em Desenvolvimento Backend, stack em evolução com JavaScript, TypeScript, Node.js, APIs REST, PostgreSQL e Arquitetura Backend, status learning, building e documenting." width="100%" />
+<img src="./.github/assets/developer-terminal.svg" alt="Knowledge Factory de Carlos Alexandre: um estudante carrega JavaScript para uma linha de montagem que transforma estudo e prática em conhecimento Backend compartilhado em um campus aberto." width="100%" />
 
 </div>
 
