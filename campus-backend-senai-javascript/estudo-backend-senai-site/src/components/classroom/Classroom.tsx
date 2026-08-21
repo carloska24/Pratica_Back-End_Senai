@@ -18,10 +18,10 @@ import {
   Sparkles,
   Target,
 } from "lucide-react";
-import { functionExamples } from "@/lib/functionExamples";
-import { courseLibrary, type CourseLibraryModule } from "@/lib/courseLibrary";
-import LessonDetail from "@/components/LessonDetail";
-import CodeViewer from "@/components/CodeViewer";
+import { functionExamples } from "@/content/functionExamples";
+import { courseLibrary, type CourseLibraryModule } from "@/content/courseLibrary";
+import LessonDetail from "./LessonDetail";
+import CodeViewer from "./CodeViewer";
 import { readMasteredModules, readUniqueIntegers, readUniqueStrings } from "@/lib/progress";
 
 const courseItemIds = new Set(courseLibrary.flatMap(module => module.items.map(item => item.id)));

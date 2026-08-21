@@ -1,4 +1,3 @@
-// Origem: Programa2.java
 // Ideia central: receber um valor, decidir e devolver um boolean.
 
 function verificarMaioridade(idade) {

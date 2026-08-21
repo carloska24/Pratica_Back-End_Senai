@@ -1,4 +1,3 @@
-// Origem: MostrarMensagem.java
 // Ideia central: definir uma acao e chama-la quando necessario.
 
 function mostrarMensagem() {

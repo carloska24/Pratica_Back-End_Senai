@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./.github/assets/campus-banner.svg" alt="Campus Backend: JavaScript como base e Backend como direção." width="100%" />
+<img src="./docs/assets/campus-banner.svg" alt="Campus Backend: JavaScript como base e Backend como direção." width="100%" />
 
 <br/>
 
@@ -22,7 +22,7 @@ Criado por **Carlos Alexandre Duarte Pereira** durante sua formação para o cur
 
 ## O Campus em ação
 
-<img src="./.github/assets/campus-overview.png" alt="Dashboard do Campus Backend com progresso, módulo atual, marcos de conhecimento e atalhos de estudo." width="100%" />
+<img src="./docs/assets/campus-overview.png" alt="Dashboard do Campus Backend com progresso, módulo atual, marcos de conhecimento e atalhos de estudo." width="100%" />
 
 O Campus transforma uma rotina de estudos em um ambiente único, no qual o aluno sempre consegue responder:
 
@@ -69,7 +69,7 @@ Abra [http://localhost:3000](http://localhost:3000) no navegador. Todo o progres
 
 O aprendizado foi organizado como uma campanha: cada fase entrega uma habilidade reutilizável e prepara a próxima missão.
 
-<img src="./.github/assets/learning-roadmap.svg" alt="Mapa da campanha: fundamentos, repetição, funções, dados, JavaScript moderno, Node.js e APIs." width="100%" />
+<img src="./docs/assets/learning-roadmap.svg" alt="Mapa da campanha: fundamentos, repetição, funções, dados, JavaScript moderno, Node.js e APIs." width="100%" />
 
 ### Currículo em resumo
 
@@ -114,10 +114,10 @@ Esse método busca ensinar o aluno a prever o comportamento do código, explicar
 
 ## Exercícios JavaScript
 
-A pasta [`exercicios-javascript/`](./exercicios-javascript/) contém **69 arquivos `.js`**, organizados do M01 ao M12 para prática direta no editor.
+A pasta [`course/exercicios-javascript/`](./course/exercicios-javascript/) contém **69 arquivos `.js`**, organizados do M01 ao M12 para prática direta no editor.
 
 ```text
-exercicios-javascript/
+course/exercicios-javascript/
 ├── M01/  fundamentos e primeiros desafios
 ├── M02/  decisões
 ├── M03–M06/  repetição e padrões
@@ -131,7 +131,7 @@ Os exercícios acompanham a mesma sequência do portal e podem ser usados para r
 
 <div align="center">
 
-<img src="./.github/assets/developer-terminal.svg" alt="Knowledge Factory de Carlos Alexandre: um estudante carrega JavaScript para uma linha de montagem que transforma estudo e prática em conhecimento Backend compartilhado em um campus aberto." width="100%" />
+<img src="./docs/assets/developer-terminal.svg" alt="Knowledge Factory de Carlos Alexandre: um estudante carrega JavaScript para uma linha de montagem que transforma estudo e prática em conhecimento Backend compartilhado em um campus aberto." width="100%" />
 
 </div>
 
@@ -192,22 +192,29 @@ O código escrito pelo aluno é executado no navegador, dentro de um Web Worker 
 
 ```text
 estudo-backend-senai-site/
-├── app/                    shell e estilos globais
-├── components/             sala, laboratório e experiências interativas
-├── exercicios-javascript/  prática organizada por módulo
-├── lib/                    currículo, aulas, exemplos e progresso
-├── .github/assets/         imagens do README
-├── PRODUCT_SPEC.md         princípios de produto e aprendizagem
-└── ARCHITECTURE_AUDIT.md   decisões e evolução técnica
+├── src/
+│   ├── app/                rotas, shell e estilos globais
+│   ├── components/         sala, laboratórios e arena de prática
+│   ├── content/            currículo, aulas e exemplos guiados
+│   └── lib/                persistência e utilitários
+├── course/
+│   └── exercicios-javascript/  prática organizada por módulo
+├── docs/
+│   ├── assets/             imagens do README
+│   ├── ARCHITECTURE.md     decisões e evolução técnica
+│   ├── PRODUCT.md          princípios de produto e aprendizagem
+│   └── UX_RESEARCH.md      pesquisa e decisões de experiência
+├── package.json
+└── README.md
 ```
 
 </details>
 
 ### Documentação complementar
 
-- [`PRODUCT_SPEC.md`](./PRODUCT_SPEC.md): missão, princípios pedagógicos e evolução do produto.
-- [`ARCHITECTURE_AUDIT.md`](./ARCHITECTURE_AUDIT.md): responsabilidades técnicas, segurança e próximos passos.
-- [`UX_RESEARCH_NOTES.md`](./UX_RESEARCH_NOTES.md): observações que orientam a experiência de estudo.
+- [`docs/PRODUCT.md`](./docs/PRODUCT.md): missão, princípios pedagógicos e evolução do produto.
+- [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md): responsabilidades técnicas, segurança e próximos passos.
+- [`docs/UX_RESEARCH.md`](./docs/UX_RESEARCH.md): observações que orientam a experiência de estudo.
 
 ## Estado atual
 

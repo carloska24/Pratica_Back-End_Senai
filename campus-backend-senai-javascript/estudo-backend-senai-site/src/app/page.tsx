@@ -32,10 +32,10 @@ import {
   LibraryBig,
   BookMarked
 } from "lucide-react";
-import { completedModules, plannedModules, currentLesson, CourseModule } from "@/lib/course";
-import Classroom from "@/components/Classroom";
-import PracticeArena from "@/components/PracticeArena";
-import { courseLibrary } from "@/lib/courseLibrary";
+import { completedModules, plannedModules, currentLesson, CourseModule } from "@/content/course";
+import Classroom from "@/components/classroom/Classroom";
+import PracticeArena from "@/components/practice/PracticeArena";
+import { courseLibrary } from "@/content/courseLibrary";
 import { readArrayLength, readMasteredModules, readSequentialIntegers, readUniqueIntegers, readUniqueStrings } from "@/lib/progress";
 
 type View = "dashboard" | "trilha" | "aula" | "laboratorio" | "arena" | "conquistas" | "perfil";

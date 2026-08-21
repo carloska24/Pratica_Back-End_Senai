@@ -735,7 +735,7 @@ for (let linha = 1; linha <= 3; linha++) {
         fileName: "Exercicio03.js",
         summary: "Três níveis de repetição formam, para cada linha, os desenhos *, ** e ***.",
         concepts: ["for aninhado", "linha", "coluna", "acumulador"],
-        note: "Migração direta do Exercicio03.java, preservando a intenção do exercício original.",
+        note: "Exercício de consolidação que combina três níveis de repetição em um único padrão.",
         code: `// Exercicio03.js
 // Objetivo: formar blocos de estrelas usando repetições aninhadas.
 
