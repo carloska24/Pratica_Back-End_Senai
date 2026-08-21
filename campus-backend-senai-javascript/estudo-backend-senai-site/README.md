@@ -38,7 +38,7 @@ O projeto não é material oficial do SENAI, não representa a instituição e n
 
 <div align="center">
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1200&color=2563EB&center=true&vCenter=true&width=900&lines=Carlos+Alexandre+Duarte+Pereira;Backend+Developer+em+formacao;Transformando+rotina+de+estudos+em+curso+aberto;JavaScript+%E2%86%92+Node.js+%E2%86%92+APIs+%E2%86%92+Backend)](https://git.io/typing-svg)
+<img src="./public/readme/js-block-builder.svg" alt="Carlos construindo o Campus Backend com blocos JavaScript" width="920" />
 
 </div>
 
