@@ -1,130 +1,340 @@
-# Campus Backend · Preparatório para o SENAI
+<div align="center">
 
-Curso preparatório independente, ministrado pelo Codex para Carlos Pereira, com o objetivo de fortalecer lógica de programação e Backend JavaScript antes e durante seu aprofundamento no SENAI. Não é um produto oficial nem material institucional do SENAI.
+# Campus Backend
 
-O Campus organiza essa formação em uma experiência acadêmica persistente: grade curricular, sala de aula, biblioteca de revisão, exemplos guiados, laboratório, arena e acompanhamento de evolução.
+### Curso preparatório em JavaScript para Backend
 
-## Migração 6.0 — JavaScript como linguagem principal
+Projeto de estudos criado como um campus preparatório para apoiar a formação rumo ao curso de **Desenvolvedor Backend** da **Escola SENAI "Dr. Celso Charuri"**.
 
-Esta versão foi reconstruída pedagogicamente. Não foi feita uma simples troca de palavras de Java para JavaScript.
+Este repositório organiza aulas, revisões, exercícios, laboratório e acompanhamento de progresso em uma experiência única de aprendizagem.
 
-O histórico conceitual foi preservado, mas os códigos foram reescritos para a linguagem que será usada nas aulas:
+![Next.js](https://img.shields.io/badge/Next.js-15-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=0B1020)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-Curso_Foco-F7DF1E?style=for-the-badge&logo=javascript&logoColor=111111)
+![Monaco Editor](https://img.shields.io/badge/Monaco_Editor-Laboratorio-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)
 
-- `System.out.println` → `console.log`
-- tipos explícitos como `int`, `double`, `String` → valores JavaScript + `let`/`const`
-- métodos `public static ...` → funções JavaScript
-- `main()` deixou de ser tratado como ponto obrigatório do programa
-- igualdade usada nos exercícios → `===` / `!==`
-- arquivos `.java` → arquivos `.js`
-- Laboratório Monaco configurado para JavaScript
-- códigos comentados com `//` para explicar a responsabilidade de cada trecho
+</div>
+
+---
+
+## Sobre o projeto
+
+O **Campus Backend** é uma plataforma local de estudos criada para transformar a preparação em Backend JavaScript em uma experiência organizada, visual e progressiva.
+
+O objetivo é ajudar o aluno a responder, em qualquer momento:
+
+| Pergunta | Como o Campus responde |
+|---|---|
+| Onde estou? | Dashboard, trilha curricular e foco atual do módulo |
+| O que já aprendi? | Biblioteca de revisão, conquistas e desempenho |
+| Qual é o próximo passo? | Aula atual, laboratório, arena e desbloqueio por domínio |
+
+O projeto não é material oficial do SENAI, não representa a instituição e não substitui as aulas oficiais. Ele é um projeto pessoal de preparação e reforço, inspirado nas necessidades de estudo para chegar mais forte ao curso de **Desenvolvedor Backend** da **Escola SENAI "Dr. Celso Charuri"**.
+
+---
+
+## Principais recursos
+
+| Área | Implementação |
+|---|---|
+| Sala de aula | Aula atual, biblioteca de curso estudado e exemplos guiados |
+| Grade curricular | Módulos concluídos, em andamento, liberados e planejados |
+| Biblioteca de revisão | Histórico acessível para reestudar sem apagar progresso acadêmico |
+| Laboratório | Monaco Editor com execução JavaScript em Web Worker local |
+| Arena de desafios | Exercícios de lógica com progresso local |
+| Progresso | Dados persistidos no navegador com saneamento de contadores |
+| Conquistas | Badges de domínio por módulo e marcos de aprendizagem |
+| Desempenho | Mapa visual de habilidades estudadas |
+
+---
+
+## Proposta pedagógica
+
+O Campus foi desenhado para estudar **JavaScript como linguagem principal**, com direção profissional em **Backend com Node.js**.
+
+A estrutura de cada aula prioriza modelo mental antes da sintaxe:
+
+| Etapa | Finalidade |
+|---|---|
+| Objetivo | Deixar claro o que será aprendido |
+| Pré-requisitos | Conectar o tema com conhecimentos anteriores |
+| História do programa | Ler o código como fluxo de acontecimentos |
+| Passo a passo | Acompanhar o computador executando |
+| Conceitos centrais | Nomear as ideias importantes |
+| Código comentado | Mostrar JavaScript com intenção clara |
+| Leitura mental | Treinar previsão antes de executar |
+| Erros comuns | Antecipar confusões frequentes |
+| Checkpoint | Confirmar compreensão antes de avançar |
+
+---
 
 ## Currículo
 
-A trilha mantém os módulos já estudados como progresso real:
+A trilha atual preserva o histórico já estudado e organiza a evolução para Backend:
 
-1. Fundamentos JavaScript
-2. Estruturas de decisão
-3. while
-4. for
-5. Repetição avançada — contador e acumulador
-6. Laços aninhados
-7. Funções — domínio comprovado após a missão final atingir 4/4
-8. Arrays — quatro aulas visuais, três exercícios e missão final com 6 casos de teste
-9. Objetos JavaScript — quatro aulas visuais, três exercícios, desafio integrador e missão final com 6 casos de teste
-10. Strings, Math e Date — quatro oficinas visuais, três exercícios, registro de auditoria e missão final com 6 casos de teste
-11. Arrays modernos — cinco mapas de execução, quatro exercícios, pipeline de catálogo e missão final com 8 casos de teste
-12. JavaScript moderno — cinco aulas comparativas, quatro exercícios, desafio de resposta segura e missão final com 8 casos de teste
+| Módulo | Tema | Estado pedagógico |
+|---|---|---|
+| M01 | Fundamentos JavaScript | Histórico revisável |
+| M02 | Estruturas de decisão | Histórico revisável |
+| M03 | Laços de repetição com `while` | Histórico revisável |
+| M04 | Laços de repetição com `for` | Histórico revisável |
+| M05 | Repetição avançada | Contador e acumulador |
+| M06 | Laços aninhados | Revisão livre |
+| M07 | Funções | Missão final com 4 casos de teste |
+| M08 | Arrays | Missão final com 6 casos de teste |
+| M09 | Objetos JavaScript | Missão final com 6 casos de teste |
+| M10 | Strings, Math e Date | Missão final com 6 casos de teste |
+| M11 | Arrays modernos | Missão final com 8 casos de teste |
+| M12 | JavaScript moderno | Missão final com 8 casos de teste |
 
-A formação será retomada no M13 com módulos ES e seguirá para assincronismo, Node.js, HTTP/REST, Express, arquitetura de API, PostgreSQL, persistência, autenticação, testes, Docker e projeto final.
+Próximas etapas planejadas: módulos ES, assincronismo, Node.js, HTTP/REST, Express, arquitetura de API, PostgreSQL, persistência, autenticação, testes, Docker e projeto final.
 
-## Sala de Aula
+---
 
-Todo módulo histórico usa a mesma estrutura pedagógica da aula atual:
+## Migração para JavaScript
 
-- objetivo
-- pré-requisitos
-- programa inteiro como uma história
-- passo a passo do computador
-- quatro conceitos centrais
-- código JavaScript comentado
-- leitura mental
-- alertas de confusão
-- opção de marcar revisão e reestudar o módulo
+Esta versão não fez apenas uma troca superficial de Java para JavaScript. A lógica estudada foi preservada, mas o material foi reescrito para a linguagem usada na preparação Backend.
 
-## Exercícios
+| Antes | Agora |
+|---|---|
+| `System.out.println` | `console.log` |
+| `int`, `double`, `String` | valores JavaScript com `let` e `const` |
+| `public static ...` | funções JavaScript |
+| `main()` obrigatório | fluxo direto de script e funções |
+| igualdade genérica | `===` e `!==` |
+| arquivos `.java` | arquivos `.js` |
+| comentários Java | comentários `//` explicando responsabilidade |
 
-A numeração foi normalizada por módulo. Exemplos:
+O acervo físico possui **69 arquivos JavaScript** organizados em `exercicios-migrados/`, do M01 ao M12.
 
-- `Exercicio01.js`
-- `Exercicio02.js`
-- `Exercicio03.js`
-- `Desafio01.js`
-- `DesafioExtra01.js`
+---
 
-Os exercícios antigos foram migrados preservando a lógica estudada, mas usando a sintaxe correta de JavaScript.
+## Interface e experiência
 
-## 20 exemplos guiados de Funções
+O Campus usa uma interface de estudo persistente, com navegação por áreas em vez de uma página única.
 
-`lib/functionExamples.ts` contém uma sequência progressiva que vai de função simples até um pequeno fluxo de negócio com várias funções. Cada exemplo possui:
+| Tela | Papel na experiência |
+|---|---|
+| Visão geral | Resumo do progresso, foco atual e atalhos |
+| Grade curricular | Mapa completo da formação |
+| Sala de aula | Aula atual, acervo revisável e exemplos |
+| Laboratório | Editor e runner local de JavaScript |
+| Arena | Prática gamificada de lógica |
+| Conquistas | Marcos de domínio e revisão |
+| Desempenho | Leitura visual das habilidades |
 
-- entrada
-- processamento
-- saída
-- objetivo pedagógico
-- por que o conceito importa
-- analogia visual
-- história de execução
-- rastreamento das caixinhas
-- código comentado com `//`
-- erros que confundem
-- checkpoint mental
+A interface usa componentes densos, painéis de estudo, indicadores de progresso, abas, botões com ícones e animações discretas para manter a experiência fluida.
+
+---
 
 ## Laboratório
 
-O Monaco Editor aceita `.js` / `.mjs` e usa sintaxe JavaScript.
+O Laboratório utiliza o **Monaco Editor** para escrever e executar JavaScript localmente.
 
-A versão atual oferece duas camadas locais:
+Fluxo atual:
 
-- análise estrutural de funções, variáveis, estruturas lógicas, saída e sintaxe Java misturada;
-- execução dentro de um Web Worker sem acesso ao DOM, com APIs de rede desativadas e interrupção após 1,5 segundo.
+1. O aluno escreve ou carrega um arquivo `.js`, `.mjs` ou `.txt`.
+2. O código é executado em um **Web Worker** do navegador.
+3. A execução tem timeout de 1,5 segundo.
+4. APIs de rede são desativadas.
+5. O console é capturado.
+6. Missões finais validam casos de teste específicos.
+7. Aprovações registram domínio do módulo no progresso local.
 
-A missão final do M07 possui quatro casos de teste funcionais. A missão do M08 possui seis casos para busca, média, array vazio, inclusão e bloqueio de código duplicado. A missão do M09 possui seis casos para totalização de itens, pedido vazio, leitura de propriedades aninhadas, criação de resumo, inclusão e bloqueio de item duplicado. A missão do M10 possui seis casos para normalização de texto, arredondamento monetário, formatação e conversão de datas para UTC. A missão do M11 possui oito casos para confirmar o uso e o comportamento de filter, map, find, every e reduce. A missão do M12 possui oito casos para arrow function, destructuring, spread, rest, parâmetro padrão, optional chaining e nullish coalescing. Os demais arquivos podem ser executados e ter o console capturado, mas ainda não possuem correção semântica específica. Para produção e exercícios de Backend, a evolução continua sendo um runner Node.js isolado fora do processo web, com limites explícitos de CPU e memória.
+Importante: o código do aluno não é executado dentro do processo do Next.js. Para uma versão de produção com Backend real, a evolução prevista é um runner Node.js isolado, com limites explícitos de CPU, memória, tempo e acesso à rede.
 
-Uma aprovação registra localmente a tentativa e o domínio do módulo: M07 em 4/4 libera Arrays; M08 em 6/6 libera Objetos; M09 em 6/6 libera Strings, Math e Date; M10 em 6/6 libera Arrays modernos; M11 em 8/8 libera JavaScript moderno; M12 em 8/8 registra a conclusão desta fase e aponta o M13 como próxima retomada. Reprovações ficam no histórico, mas não avançam o módulo.
+---
 
-O acervo físico possui 69 arquivos JavaScript organizados por módulo em `exercicios-migrados`.
+## Arquitetura
 
-## Progresso e revisão
+```mermaid
+flowchart TB
+    USER[Aluno] --> UI[Next.js App Router]
+    UI --> SHELL[app/page.tsx]
+    SHELL --> CLASSROOM[Classroom]
+    SHELL --> LAB[Laboratório]
+    SHELL --> ARENA[Arena]
+    CLASSROOM --> LESSON[LessonDetail]
+    CLASSROOM --> LIBRARY[courseLibrary.ts]
+    LESSON --> CONTENT[lessonContent.ts]
+    LAB --> MONACO[Monaco Editor]
+    LAB --> WORKER[Web Worker local]
+    SHELL --> PROGRESS[localStorage + progress.ts]
+```
 
-O navegador mantém separadamente os itens revisados, exemplos guiados, desafios da Arena, tentativas no Laboratório, módulos dominados e a última aula aberta. Ao recarregar, a Sala retoma o último conteúdo válido e desbloqueado.
+### Responsabilidades principais
 
-Os dados locais são saneados antes do uso: duplicatas e identificadores inválidos não aumentam contadores, desafios precisam formar uma sequência desde o primeiro e um módulo fora de ordem não pode pular pré-requisitos. O percentual geral considera também módulos parcialmente estudados; o contador de módulos concluídos considera somente domínios fechados.
+| Arquivo | Responsabilidade |
+|---|---|
+| `app/page.tsx` | Shell da aplicação, dashboard, currículo, laboratório, arena e desempenho |
+| `components/Classroom.tsx` | Navegação entre aula atual, biblioteca e exemplos guiados |
+| `components/LessonDetail.tsx` | Componente visual único para aula atual e revisões |
+| `lib/course.ts` | Grade, progresso e trilha planejada |
+| `lib/courseLibrary.ts` | Aulas, exercícios, desafios e códigos migrados |
+| `lib/lessonContent.ts` | Conteúdo pedagógico detalhado |
+| `lib/functionExamples.ts` | 20 exemplos guiados de funções JavaScript |
+| `lib/progress.ts` | Leitura saneada do progresso local |
 
-## Stack do Campus
+---
+
+## Estrutura do projeto
+
+```text
+estudo-backend-senai-site/
+├── app/
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/
+│   ├── Classroom.tsx
+│   ├── LessonDetail.tsx
+│   ├── PracticeArena.tsx
+│   └── CodeViewer.tsx
+├── exercicios-migrados/
+│   ├── M01/
+│   ├── M02/
+│   ├── ...
+│   └── M12/
+├── lib/
+│   ├── course.ts
+│   ├── courseLibrary.ts
+│   ├── functionExamples.ts
+│   ├── lessonContent.ts
+│   └── progress.ts
+├── public/
+├── package.json
+└── README.md
+```
+
+---
+
+## Tecnologias
+
+<div align="center">
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" width="54" alt="Next.js" />
+&nbsp;&nbsp;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="54" alt="React" />
+&nbsp;&nbsp;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="54" alt="TypeScript" />
+&nbsp;&nbsp;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="54" alt="JavaScript" />
+&nbsp;&nbsp;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="54" alt="Node.js" />
+
+</div>
+
+### Interface
 
 - Next.js 15
 - React 19
 - TypeScript
-- Monaco Editor
 - Framer Motion
-- Lucide Icons
+- Lucide React
 
-A stack do site é independente da linguagem estudada. O Campus usa React/Next/TypeScript para a interface; o conteúdo pedagógico principal é JavaScript para Backend.
+### Laboratório
 
-## Executar
+- Monaco Editor
+- Web Worker local
+- JavaScript executado no navegador com timeout
+
+### Conteúdo estudado
+
+- JavaScript
+- Lógica de programação
+- Fundamentos para Backend
+- Preparação para Node.js e APIs
+
+---
+
+## Progresso local
+
+O navegador armazena localmente:
+
+- itens revisados da biblioteca;
+- exemplos guiados concluídos;
+- desafios resolvidos na Arena;
+- tentativas do Laboratório;
+- módulos dominados;
+- última aula aberta.
+
+Os dados são saneados antes de serem exibidos. Duplicatas, identificadores inválidos e progresso fora de ordem não aumentam os contadores.
+
+---
+
+## Como executar
+
+### Pré-requisitos
+
+- Node.js instalado
+- npm instalado
+
+### 1. Entrar na pasta do projeto
+
+```bash
+cd campus-backend-senai-javascript/estudo-backend-senai-site
+```
+
+### 2. Instalar dependências
 
 ```bash
 npm install
+```
+
+### 3. Rodar em desenvolvimento
+
+```bash
 npm run dev
 ```
 
-Abra `http://localhost:3000`.
+Acesse:
+
+```text
+http://localhost:3000
+```
+
+### 4. Gerar build de produção
+
+```bash
+npm run build
+```
+
+---
 
 ## Validação atual
 
-O projeto possui dependências instaladas e o build de produção foi validado com `npm run build`. Os exercícios separados também são executados com Node.js durante as revisões da trilha.
+O build de produção foi validado com:
 
-## Pasta de exercícios migrados
+```bash
+npm run build
+```
 
-Além da biblioteca interna do Campus, a pasta `exercicios-migrados/` contém 63 arquivos `.js` separados por módulo para abrir diretamente no VS Code/Node.js. Os arquivos usam a mesma numeração exibida no Campus e preservam os comentários didáticos.
+O projeto ainda não possui uma suite automatizada completa de testes unitários ou E2E. As missões do Laboratório possuem validações locais específicas para os módulos já estruturados.
+
+---
+
+## Limites conhecidos
+
+- O progresso é local ao navegador.
+- Ainda não há autenticação ou banco de dados.
+- A navegação principal acontece por estado local, não por rotas dedicadas para cada aula.
+- O runner atual é adequado para estudo local, mas não substitui um executor isolado de produção.
+- Testes unitários e E2E do próprio Campus ainda são uma evolução futura.
+
+---
+
+## Contexto educacional
+
+Este projeto existe para organizar uma rotina real de estudos em Backend JavaScript.
+
+Ele foi criado para apoiar a preparação de Carlos Pereira para o curso de **Desenvolvedor Backend** da **Escola SENAI "Dr. Celso Charuri"**, mantendo o histórico de aprendizagem, reforçando lógica e construindo uma ponte entre fundamentos e prática profissional com Node.js.
+
+---
+
+<div align="center">
+
+**Campus Backend**<br/>
+Curso preparatório pessoal para estudar JavaScript, lógica e fundamentos de Backend com consistência.
+
+</div>
