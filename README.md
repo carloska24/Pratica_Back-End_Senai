@@ -1,17 +1,10 @@
 ﻿<div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=Campus%20Backend&fontSize=60&fontColor=fff&animation=twinkling&fontAlignY=35&desc=JavaScript%20como%20base.%20Backend%20como%20destino.&descAlignY=60&descColor=fff" width="100%" />
+<img src="./docs/assets/campus-banner.svg" alt="Campus Backend — JavaScript como base. Backend como destino." width="100%" />
 
 </div>
 
 <div align="center">
-
-<!-- Status e Versão -->
-![Status](https://img.shields.io/badge/🚀_Status-Em_Desenvolvimento-22c55e?style=for-the-badge&labelColor=0d1117)
-![Versão](https://img.shields.io/badge/Versão-1.0.0-6366f1?style=for-the-badge&labelColor=0d1117)
-![Licença](https://img.shields.io/badge/Licença-MIT-f59e0b?style=for-the-badge&labelColor=0d1117)
-
-<br/>
 
 <!-- Stack Principal -->
 ![Next.js](https://img.shields.io/badge/Next.js_15-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
@@ -23,17 +16,14 @@
 <br/>
 
 <!-- Métricas do Projeto -->
-![Módulos](https://img.shields.io/badge/📚_Módulos-12_concluídos-38bdf8?style=flat-square&labelColor=0d1117)
-![Exercícios](https://img.shields.io/badge/⚡_Exercícios-69_arquivos_.js-f472b6?style=flat-square&labelColor=0d1117)
-![Progresso](https://img.shields.io/badge/🎯_Trilha-M07_em_andamento-a78bfa?style=flat-square&labelColor=0d1117)
+![Módulos](https://img.shields.io/badge/📚_Módulos-12_concluídos-238636?style=flat-square&labelColor=0d1117)
+![Exercícios](https://img.shields.io/badge/⚡_Exercícios-69_arquivos_.js-388bfd?style=flat-square&labelColor=0d1117)
+![Foco](https://img.shields.io/badge/🎯_Foco_atual-M07_Funções-d4a017?style=flat-square&labelColor=0d1117)
+![Build](https://img.shields.io/badge/Build-passing-238636?style=flat-square&logo=github-actions&labelColor=0d1117)
 
 <br/>
 
-**[🏕️ Explorar o Campus](#-o-campus-em-ação) · [⚡ Começar Agora](#-início-rápido) · [🗺️ Ver a Trilha](#-trilha-de-aprendizado) · [👨‍💻 Conhecer o Autor](#-sobre-o-autor)**
-
-<br/>
-
-> *"Não aprendi Backend lendo sobre ele. Aprendi construindo um ambiente onde aprender fosse difícil de parar."*
+**[🎓 O Campus](#-o-campus-em-ação) · [⚡ Começar](#-início-rápido) · [🗺️ Trilha](#-trilha-de-aprendizado) · [🏗️ Arquitetura](#-arquitetura-técnica) · [👨‍💻 Autor](#-sobre-o-autor)**
 
 </div>
 
@@ -43,28 +33,28 @@
 
 <table>
 <tr>
-<td width="60%">
+<td width="58%">
 
-O **Campus Backend** não é mais um repositório de exercícios soltos num arquivo `.js`.
+O **Campus Backend** não é mais um repositório de exercícios soltos.
 
-É uma **plataforma educacional interativa** — construída do zero com Next.js 15, Monaco Editor e Web Workers — criada durante a formação para o curso de **Desenvolvedor Backend** da **Escola SENAI "Dr. Celso Charuri"** pelo estudante **Carlos Alexandre Duarte Pereira**.
+É uma **plataforma educacional interativa** — construída com Next.js 15, Monaco Editor e Web Workers — criada durante a formação no curso de **Desenvolvedor Backend** da **Escola SENAI "Dr. Celso Charuri"** por **Carlos Alexandre Duarte Pereira**.
 
-A proposta é simples: transformar a rotina de estudos em algo que você **queira abrir todo dia**.
+A proposta: transformar a rotina de estudos em algo que você **queira abrir todo dia**.
 
 </td>
-<td width="40%" align="center">
+<td width="42%" align="center">
 
 ```
-┌─────────────────────────────┐
-│        CAMPUS BACKEND       │
-├─────────────────────────────┤
-│  📚  Sala de Aula           │
-│  🧪  Laboratório Monaco     │
-│  ⚔️  Arena de Desafios      │
-│  🏆  Sistema de Progresso   │
-│  📋  Grade Curricular       │
-│  📖  Biblioteca de Revisão  │
-└─────────────────────────────┘
+┌──────────────────────────────┐
+│       CAMPUS BACKEND         │
+├──────────────────────────────┤
+│  🖥️  Sala de Aula            │
+│  🧪  Laboratório Monaco      │
+│  ⚔️  Arena de Desafios       │
+│  🏆  Sistema de Progresso    │
+│  📋  Grade Curricular        │
+│  📖  Biblioteca de Revisão   │
+└──────────────────────────────┘
 ```
 
 </td>
@@ -72,7 +62,7 @@ A proposta é simples: transformar a rotina de estudos em algo que você **queir
 </table>
 
 > [!IMPORTANT]
-> Este é um projeto **pessoal e independente**. Não representa a Escola SENAI "Dr. Celso Charuri" e não substitui suas aulas ou formações oficiais.
+> Projeto **pessoal e independente**. Não representa a Escola SENAI "Dr. Celso Charuri" e não substitui suas aulas ou formações oficiais.
 
 ---
 
@@ -118,32 +108,30 @@ O Campus foi desenhado para que o aluno **sempre saiba** onde está, o que conqu
 > Você precisa ter **[Node.js](https://nodejs.org/)**, **npm** e **[Git](https://git-scm.com/)** instalados.
 
 ```bash
-# 1. Clone o repositório
+# Clone o repositório
 git clone https://github.com/carloska24/Pratica_Back-End_Senai.git
 
-# 2. Entre na pasta do projeto
+# Entre na pasta
 cd Pratica_Back-End_Senai
 
-# 3. Instale as dependências
+# Instale as dependências
 npm install
 
-# 4. Inicie o Campus em modo de desenvolvimento
+# Inicie em modo de desenvolvimento
 npm run dev
 ```
 
-🌐 Abra **[http://localhost:3000](http://localhost:3000)** no seu navegador.
-
-> Todo o progresso é salvo automaticamente no **localStorage** do próprio navegador — sem cadastro, sem servidor.
+🌐 Acesse **[http://localhost:3000](http://localhost:3000)** — todo progresso é salvo no **localStorage**, sem cadastro.
 
 <details>
-<summary><strong>📋 Todos os comandos disponíveis</strong></summary>
+<summary><strong>📋 Comandos disponíveis</strong></summary>
 <br/>
 
 | Comando | O que faz |
 |:---|:---|
-| `npm run dev` | Inicia o Campus em modo de desenvolvimento com hot-reload |
+| `npm run dev` | Inicia em modo de desenvolvimento com hot-reload |
 | `npm run build` | Valida e gera o build de produção |
-| `npm run start` | Executa localmente o build já gerado |
+| `npm run start` | Executa localmente o build gerado |
 
 </details>
 
@@ -151,18 +139,9 @@ npm run dev
 
 ## 🗺️ Trilha de Aprendizado
 
-O currículo foi estruturado como uma **campanha progressiva**: cada fase entrega uma habilidade real e abre a porta para a próxima.
+O currículo foi estruturado como uma **campanha progressiva** — cada fase entrega uma habilidade real e abre a porta para a próxima.
 
-<div align="center">
-<img src="./docs/assets/learning-roadmap.svg" alt="Mapa de aprendizado do Campus Backend" width="100%" />
-</div>
-
-<br/>
-
-```
-FUNDAMENTOS ──► CONTROLE DE FLUXO ──► FUNÇÕES ──► DADOS ──► JS MODERNO ──► BACKEND
-   M01-M02            M03-M06           M07       M08-M10     M11-M12       Próximos
-```
+<img src="./docs/assets/learning-roadmap.svg" alt="Mapa de aprendizado — Campus Backend" width="100%" />
 
 <br/>
 
@@ -181,7 +160,7 @@ FUNDAMENTOS ──► CONTROLE DE FLUXO ──► FUNÇÕES ──► DADOS ─�
 </div>
 
 <details>
-<summary><strong>📖 Ver detalhes de todos os módulos (M01–M12)</strong></summary>
+<summary><strong>📖 Ver todos os módulos (M01–M12)</strong></summary>
 <br/>
 
 | # | Módulo | Tema | Evidência de Aprendizagem |
@@ -203,13 +182,13 @@ FUNDAMENTOS ──► CONTROLE DE FLUXO ──► FUNÇÕES ──► DADOS ─�
 
 ---
 
-## 🧠 Como uma Aula Funciona
+## 🧠 Método de Aprendizado
 
 Antes de mostrar sintaxe, cada aula **constrói um modelo mental do problema**:
 
 ```
- objetivo → pré-requisitos → história do programa → execução passo a passo
-          → conceitos → código comentado → leitura mental → checkpoint
+objetivo → pré-requisitos → história do programa → execução passo a passo
+         → conceitos → código comentado → leitura mental → checkpoint
 ```
 
 > O método busca ensinar o aluno a **prever o comportamento do código**, **explicar suas decisões** e só então avançar. Sem atalhos. Com intenção.
@@ -218,7 +197,11 @@ Antes de mostrar sintaxe, cada aula **constrói um modelo mental do problema**:
 
 ## 📁 Exercícios JavaScript
 
-A pasta [`course/exercicios-javascript/`](./course/exercicios-javascript/) contém **69 arquivos `.js`**, organizados do M01 ao M12 para prática direta no editor de sua preferência.
+A pasta [`course/exercicios-javascript/`](./course/exercicios-javascript/) contém **69 arquivos `.js`**, organizados do M01 ao M12 para prática direta no editor de sua preferência — sem precisar rodar a plataforma.
+
+<details>
+<summary><strong>📂 Ver estrutura de pastas dos exercícios</strong></summary>
+<br/>
 
 ```
 course/
@@ -237,14 +220,14 @@ course/
     └── M12/   → javascript moderno
 ```
 
-Os exercícios acompanham a mesma sequência do portal e podem ser usados para **revisão, prática individual ou consulta** sem precisar rodar a plataforma.
+</details>
 
 ---
 
 ## 🏗️ Arquitetura Técnica
 
 <details>
-<summary><strong>🔍 Ver stack e diagrama completo</strong></summary>
+<summary><strong>🔍 Ver stack, diagrama e estrutura de pastas</strong></summary>
 
 <br/>
 
@@ -252,15 +235,15 @@ Os exercícios acompanham a mesma sequência do portal e podem ser usados para *
 
 <div align="center">
 
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" width="50" alt="Next.js" title="Next.js 15" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" width="48" alt="Next.js" title="Next.js 15" />
 &nbsp;&nbsp;
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="50" alt="React" title="React 19" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="48" alt="React" title="React 19" />
 &nbsp;&nbsp;
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="50" alt="TypeScript" title="TypeScript 5" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="48" alt="TypeScript" title="TypeScript 5" />
 &nbsp;&nbsp;
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="50" alt="JavaScript" title="JavaScript ES2024" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="48" alt="JavaScript" title="JavaScript ES2024" />
 &nbsp;&nbsp;
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="50" alt="Node.js" title="Node.js" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="48" alt="Node.js" title="Node.js" />
 
 </div>
 
@@ -285,12 +268,10 @@ flowchart LR
     AULA --> CONTEUDO[("Currículo em TypeScript")]
     LAB --> MONACO["Monaco Editor"]
     MONACO --> WORKER["Web Worker ⚡ Isolado"]
-    UI --> LOCAL[("localStorage 💾 Progresso")]
+    UI --> LOCAL[("localStorage 💾")]
 ```
 
-### Segurança do Laboratório
-
-> O código escrito pelo aluno roda **exclusivamente no browser**, dentro de um **Web Worker** com timeout e acesso à rede desativados. Ele nunca entra no processo do Next.js.
+> **Segurança do Lab:** O código do aluno roda **exclusivamente no browser**, em Web Worker isolado com timeout e rede desativada. Nunca entra no processo do Next.js.
 
 ### Estrutura de Pastas
 
@@ -307,7 +288,7 @@ campus-backend-senai-javascript/
 ├── course/
 │   └── exercicios-javascript/  → prática organizada por módulo
 ├── docs/
-│   ├── assets/             → imagens do README e documentação
+│   ├── assets/             → SVGs e imagens do README
 │   ├── ARCHITECTURE.md     → decisões e evolução técnica
 │   ├── PRODUCT.md          → princípios de produto e aprendizagem
 │   └── UX_RESEARCH.md      → pesquisa e decisões de experiência
@@ -320,8 +301,6 @@ campus-backend-senai-javascript/
 ---
 
 ## 🚧 Roadmap
-
-O Campus está evoluindo. Aqui está o que já foi feito e o que vem por aí:
 
 <div align="center">
 
@@ -344,7 +323,7 @@ O Campus está evoluindo. Aqui está o que já foi feito e o que vem por aí:
 
 ---
 
-## 📄 Documentação Complementar
+## 📄 Documentação
 
 | Documento | Conteúdo |
 |:---|:---|
@@ -356,37 +335,28 @@ O Campus está evoluindo. Aqui está o que já foi feito e o que vem por aí:
 
 ## 🤝 Contribuindo
 
-Sugestões sobre aulas, exercícios, clareza do conteúdo ou experiência do portal são muito bem-vindas.
+Sugestões sobre aulas, exercícios, conteúdo ou experiência do portal são bem-vindas.
 
 ```bash
-# 1. Faça um fork do projeto
-# 2. Crie uma branch para sua feature
+# Fork → branch → commit → pull request
 git checkout -b feature/minha-sugestao
-
-# 3. Commit suas mudanças
 git commit -m "feat: adiciona exercício de closures no M07"
-
-# 4. Push para sua branch
 git push origin feature/minha-sugestao
-
-# 5. Abra um Pull Request 🎉
 ```
 
-Ou abra diretamente uma [**issue**](https://github.com/carloska24/Pratica_Back-End_Senai/issues) descrevendo sua ideia.
+Ou abra uma [**issue**](https://github.com/carloska24/Pratica_Back-End_Senai/issues) descrevendo sua ideia.
 
 ---
 
 ## 👨‍💻 Sobre o Autor
 
-<div align="center">
-<img src="./docs/assets/developer-terminal.svg" alt="Carlos Alexandre — Knowledge Factory" width="100%" />
-</div>
+<img src="./docs/assets/developer-terminal.svg" alt="Carlos Alexandre — Developer Profile" width="100%" />
 
 <br/>
 
 <div align="center">
 
-> *"Este projeto nasceu no meio da prática. Eu queria estudar com constância, revisar lógica sem me perder e enxergar minha evolução módulo por módulo. Em vez de deixar esse material fechado no meu computador, organizei um campus para quem também quer construir uma base sólida em JavaScript antes de avançar para Backend."*
+> *"Este projeto nasceu no meio da prática. Eu queria estudar com constância, revisar lógica sem me perder e enxergar minha evolução módulo por módulo. Em vez de deixar esse material fechado, organizei um campus para quem também quer construir uma base sólida em JavaScript antes de avançar para Backend."*
 >
 > — **Carlos Alexandre Duarte Pereira**
 
@@ -402,12 +372,12 @@ Ou abra diretamente uma [**issue**](https://github.com/carloska24/Pratica_Back-E
 
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=120&section=footer" width="100%" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0d1117,161b22,1f6feb&height=100&section=footer" width="100%" />
 
-**Campus Backend** · Criado com 💜 por [Carlos Alexandre](https://github.com/carloska24)
+**Campus Backend** · Criado com 💙 por [Carlos Alexandre](https://github.com/carloska24)
 
-*Estudar com intenção. Praticar com constância. Compartilhar o caminho.*
+*study → build → document → share*
 
-![Visitors](https://visitor-badge.laobi.icu/badge?page_id=carloska24.Pratica_Back-End_Senai&style=flat-square&color=6366f1)
+![Visitors](https://visitor-badge.laobi.icu/badge?page_id=carloska24.Pratica_Back-End_Senai&style=flat-square&color=1f6feb)
 
 </div>

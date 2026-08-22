@@ -1,61 +1,155 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="330" viewBox="0 0 1160 330" role="img" aria-labelledby="title desc">
-  <title id="title">Mapa da campanha do Campus Backend</title>
-  <desc id="desc">Trilha de fundamentos e decisões, repetição e padrões, funções, dados e JavaScript moderno até Node.js e APIs.</desc>
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 340" width="1200" height="340" role="img" aria-label="Trilha de aprendizado — Campus Backend">
   <defs>
-    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0" stop-color="#08111f"/>
-      <stop offset="1" stop-color="#111827"/>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
     </linearGradient>
+    <linearGradient id="lineCompleted" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1f6feb"/>
+      <stop offset="100%" style="stop-color:#388bfd"/>
+    </linearGradient>
+    <linearGradient id="linePending" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#30363d"/>
+      <stop offset="100%" style="stop-color:#21262d"/>
+    </linearGradient>
+    <linearGradient id="currentGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#d4a017"/>
+      <stop offset="100%" style="stop-color:#f7df1e"/>
+    </linearGradient>
+    <filter id="goldGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="blueGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+    <pattern id="dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.7" fill="#21262d" opacity="0.9"/>
+    </pattern>
     <style>
-      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
-      .sans { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      @keyframes pulse { 0%,100%{opacity:1;r:36} 50%{opacity:0.7;r:40} }
+      @keyframes flow { 0%{stroke-dashoffset:40} 100%{stroke-dashoffset:0} }
+      @keyframes shimmer { 0%,100%{opacity:0.6} 50%{opacity:1} }
+      @keyframes checkPop { 0%{transform:scale(0)} 60%{transform:scale(1.3)} 100%{transform:scale(1)} }
+      .mono { font-family: 'SF Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; }
+      .pulse-ring { animation: pulse 2.5s ease-in-out infinite; }
+      .flow-line { animation: flow 1.8s linear infinite; }
+      .shimmer { animation: shimmer 2.2s ease-in-out infinite; }
     </style>
   </defs>
-  <rect width="1160" height="330" rx="22" fill="url(#bg)"/>
-  <text x="42" y="45" class="mono" font-size="13" font-weight="800" fill="#38bdf8">CAMPAIGN MAP / JAVASCRIPT BACKEND</text>
-  <text x="42" y="77" class="sans" font-size="24" font-weight="900" fill="#f8fafc">Cada módulo transforma conceito em habilidade.</text>
-  <text x="42" y="102" class="sans" font-size="14" fill="#94a3b8">O avanço acontece por domínio e prática, não apenas por cliques.</text>
 
-  <path d="M100 198H1052" stroke="#334155" stroke-width="6" stroke-linecap="round"/>
-  <path d="M100 198H576" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" stroke-dasharray="12 10">
-    <animate attributeName="stroke-dashoffset" values="44;0" dur="2.4s" repeatCount="indefinite"/>
-  </path>
+  <!-- Background -->
+  <rect width="1200" height="340" fill="url(#bg)"/>
+  <rect width="1200" height="340" fill="url(#dots)" opacity="0.6"/>
 
-  <g transform="translate(100 198)">
-    <circle r="25" fill="#1d4ed8" stroke="#93c5fd" stroke-width="3"/>
-    <text y="5" text-anchor="middle" class="mono" font-size="12" font-weight="900" fill="#eff6ff">01</text>
-    <text y="52" text-anchor="middle" class="mono" font-size="12" font-weight="800" fill="#7dd3fc">M01–M02</text>
-    <text y="75" text-anchor="middle" class="sans" font-size="14" font-weight="700" fill="#e2e8f0">Fundamentos</text>
-    <text y="94" text-anchor="middle" class="sans" font-size="12" fill="#94a3b8">e decisões</text>
+  <!-- Ambient glows -->
+  <ellipse cx="100" cy="200" rx="120" ry="80" fill="#1f6feb" opacity="0.04"/>
+  <ellipse cx="600" cy="200" rx="140" ry="90" fill="#f7df1e" opacity="0.04"/>
+  <ellipse cx="1100" cy="200" rx="120" ry="80" fill="#388bfd" opacity="0.04"/>
+
+  <!-- Header -->
+  <text x="52" y="50" class="mono" font-size="11" font-weight="700" fill="#1f6feb" letter-spacing="2">CAMPAIGN MAP · JAVASCRIPT BACKEND</text>
+  <text x="52" y="82" class="sans" font-size="22" font-weight="700" fill="#e6edf3">Cada módulo transforma conceito em habilidade.</text>
+  <text x="52" y="104" class="sans" font-size="13" fill="#8b949e">O avanço acontece por domínio e prática — não apenas por cliques.</text>
+
+  <!-- === TRACK LINE === -->
+  <!-- Base line (all) -->
+  <line x1="100" y1="200" x2="1100" y2="200" stroke="#21262d" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Completed segment (animated glow) -->
+  <line x1="100" y1="200" x2="580" y2="200" stroke="url(#lineCompleted)" stroke-width="4" stroke-linecap="round"/>
+  <!-- Animated flow dots on completed -->
+  <line x1="100" y1="200" x2="580" y2="200" stroke="#79c0ff" stroke-width="4" stroke-linecap="round" stroke-dasharray="12 20" opacity="0.5" class="flow-line"/>
+
+  <!-- Pending segment dashes -->
+  <line x1="580" y1="200" x2="1100" y2="200" stroke="#30363d" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 12"/>
+
+  <!-- === NODE 1: Fundamentos (DONE) === -->
+  <g transform="translate(100,200)">
+    <!-- Outer ring -->
+    <circle r="30" fill="#0d1117" stroke="#1f6feb" stroke-width="2.5"/>
+    <!-- Icon: checkmark bg -->
+    <circle r="20" fill="#1a2d4a"/>
+    <!-- Check icon -->
+    <path d="M-9 0 L-3 6 L9 -7" stroke="#3fb950" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <!-- Labels below -->
+    <text y="52" text-anchor="middle" class="mono" font-size="10" fill="#388bfd" font-weight="700">M01–M02</text>
+    <text y="70" text-anchor="middle" class="sans" font-size="14" font-weight="700" fill="#e6edf3">Fundamentos</text>
+    <text y="88" text-anchor="middle" class="mono" font-size="11" fill="#8b949e">var · if · operadores</text>
+    <!-- Status -->
+    <text y="-44" text-anchor="middle" class="mono" font-size="9" fill="#3fb950" font-weight="700">✓ CONCLUÍDO</text>
   </g>
-  <g transform="translate(326 198)">
-    <circle r="25" fill="#0369a1" stroke="#7dd3fc" stroke-width="3"/>
-    <text y="5" text-anchor="middle" class="mono" font-size="12" font-weight="900" fill="#eff6ff">02</text>
-    <text y="52" text-anchor="middle" class="mono" font-size="12" font-weight="800" fill="#7dd3fc">M03–M06</text>
-    <text y="75" text-anchor="middle" class="sans" font-size="14" font-weight="700" fill="#e2e8f0">Repetição</text>
-    <text y="94" text-anchor="middle" class="sans" font-size="12" fill="#94a3b8">e padrões</text>
+
+  <!-- === NODE 2: Controle (DONE) === -->
+  <g transform="translate(340,200)">
+    <circle r="30" fill="#0d1117" stroke="#1f6feb" stroke-width="2.5"/>
+    <circle r="20" fill="#1a2d4a"/>
+    <path d="M-9 0 L-3 6 L9 -7" stroke="#3fb950" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <text y="52" text-anchor="middle" class="mono" font-size="10" fill="#388bfd" font-weight="700">M03–M06</text>
+    <text y="70" text-anchor="middle" class="sans" font-size="14" font-weight="700" fill="#e6edf3">Controle</text>
+    <text y="88" text-anchor="middle" class="mono" font-size="11" fill="#8b949e">while · for · loops</text>
+    <text y="-44" text-anchor="middle" class="mono" font-size="9" fill="#3fb950" font-weight="700">✓ CONCLUÍDO</text>
   </g>
-  <g transform="translate(552 198)">
-    <circle r="34" fill="#f7df1e" stroke="#fde68a" stroke-width="4">
-      <animate attributeName="r" values="31;35;31" dur="2.2s" repeatCount="indefinite"/>
-    </circle>
-    <text y="5" text-anchor="middle" class="mono" font-size="13" font-weight="900" fill="#111827">M07</text>
-    <rect x="-36" y="-63" width="72" height="23" rx="5" fill="#422006"/>
-    <text y="-47" text-anchor="middle" class="mono" font-size="10" font-weight="900" fill="#fde68a">FOCO ATUAL</text>
-    <text y="57" text-anchor="middle" class="mono" font-size="12" font-weight="800" fill="#fde047">FUNÇÕES</text>
-    <text y="80" text-anchor="middle" class="sans" font-size="12" fill="#94a3b8">entrada → retorno</text>
+
+  <!-- === NODE 3: FUNÇÕES — FOCO ATUAL (GOLD) === -->
+  <g transform="translate(580,200)">
+    <!-- Pulse rings -->
+    <circle r="52" fill="none" stroke="#f7df1e" stroke-width="1" opacity="0.15" class="shimmer"/>
+    <circle r="44" fill="none" stroke="#f7df1e" stroke-width="1.5" opacity="0.25" class="shimmer"/>
+    <!-- Main circle glow -->
+    <circle r="36" fill="#1a1500" stroke="#f7df1e" stroke-width="3" filter="url(#goldGlow)"/>
+    <!-- Inner fill -->
+    <circle r="26" fill="url(#currentGlow)"/>
+    <!-- M07 text -->
+    <text y="7" text-anchor="middle" class="mono" font-size="15" font-weight="900" fill="#0d1117">M07</text>
+    <!-- Badge above -->
+    <rect x="-38" y="-70" width="76" height="22" rx="4" fill="#2d1e00" stroke="#f7df1e" stroke-width="1.5"/>
+    <text y="-55" text-anchor="middle" class="mono" font-size="9" font-weight="900" fill="#f7df1e" letter-spacing="1">⚡ FOCO ATUAL</text>
+    <!-- Labels below -->
+    <text y="56" text-anchor="middle" class="mono" font-size="11" fill="#f7df1e" font-weight="900">FUNÇÕES</text>
+    <text y="76" text-anchor="middle" class="sans" font-size="13" fill="#e6edf3">parâmetros · retorno</text>
+    <text y="94" text-anchor="middle" class="mono" font-size="11" fill="#8b949e">composição · escopo</text>
   </g>
-  <g transform="translate(778 198)">
-    <circle r="25" fill="#172554" stroke="#60a5fa" stroke-width="3"/>
-    <text y="5" text-anchor="middle" class="mono" font-size="12" font-weight="900" fill="#dbeafe">04</text>
-    <text y="52" text-anchor="middle" class="mono" font-size="12" font-weight="800" fill="#93c5fd">M08–M12</text>
-    <text y="75" text-anchor="middle" class="sans" font-size="14" font-weight="700" fill="#e2e8f0">Dados e JS</text>
-    <text y="94" text-anchor="middle" class="sans" font-size="12" fill="#94a3b8">moderno</text>
+
+  <!-- === NODE 4: Dados (LOCKED) === -->
+  <g transform="translate(830,200)">
+    <circle r="30" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+    <circle r="20" fill="#161b22"/>
+    <!-- Lock icon -->
+    <rect x="-7" y="-3" width="14" height="11" rx="2" fill="#30363d"/>
+    <path d="M-5 -3 Q-5 -12 0 -12 Q5 -12 5 -3" fill="none" stroke="#30363d" stroke-width="2.5" stroke-linecap="round"/>
+    <text y="52" text-anchor="middle" class="mono" font-size="10" fill="#484f58" font-weight="700">M08–M12</text>
+    <text y="70" text-anchor="middle" class="sans" font-size="14" font-weight="600" fill="#484f58">Dados &amp; JS</text>
+    <text y="88" text-anchor="middle" class="mono" font-size="11" fill="#484f58">arrays · objetos · map</text>
+    <text y="-44" text-anchor="middle" class="mono" font-size="9" fill="#484f58">🔒 PRÓXIMO</text>
   </g>
-  <g transform="translate(1030 198)">
-    <circle r="29" fill="#071b16" stroke="#22c55e" stroke-width="3"/>
-    <path d="M-10-8h20M-10 0h20M-10 8h20" stroke="#86efac" stroke-width="3" stroke-linecap="round"/>
-    <text y="57" text-anchor="middle" class="mono" font-size="12" font-weight="800" fill="#86efac">NEXT QUEST</text>
-    <text y="80" text-anchor="middle" class="sans" font-size="14" font-weight="700" fill="#e2e8f0">Node.js + APIs</text>
+
+  <!-- === NODE 5: Backend (LOCKED) === -->
+  <g transform="translate(1100,200)">
+    <circle r="30" fill="#0d1117" stroke="#238636" stroke-width="2" stroke-dasharray="6 4"/>
+    <circle r="20" fill="#0d2818"/>
+    <!-- Server icon -->
+    <rect x="-9" y="-8" width="18" height="5" rx="1.5" fill="#238636" opacity="0.6"/>
+    <rect x="-9" y="-1" width="18" height="5" rx="1.5" fill="#238636" opacity="0.6"/>
+    <rect x="-9" y="6" width="18" height="5" rx="1.5" fill="#238636" opacity="0.6"/>
+    <circle cx="5" cy="-5.5" r="1.5" fill="#3fb950" opacity="0.8"/>
+    <text y="52" text-anchor="middle" class="mono" font-size="10" fill="#238636" font-weight="700">M13+</text>
+    <text y="70" text-anchor="middle" class="sans" font-size="14" font-weight="600" fill="#8b949e">Backend</text>
+    <text y="88" text-anchor="middle" class="mono" font-size="11" fill="#484f58">Node.js · APIs · DB</text>
+    <text y="-44" text-anchor="middle" class="mono" font-size="9" fill="#238636">⬡ NEXT QUEST</text>
   </g>
+
+  <!-- Progress bar at bottom -->
+  <rect x="52" y="310" width="1096" height="6" rx="3" fill="#21262d"/>
+  <rect x="52" y="310" width="456" height="6" rx="3" fill="url(#lineCompleted)"/>
+  <text x="52" y="332" class="mono" font-size="10" fill="#8b949e">progresso da trilha:</text>
+  <text x="132" y="332" class="mono" font-size="10" fill="#388bfd" font-weight="700">M01 → M06 concluídos</text>
+  <text x="310" y="332" class="mono" font-size="10" fill="#8b949e">· foco:</text>
+  <text x="346" y="332" class="mono" font-size="10" fill="#f7df1e" font-weight="700">M07 Funções</text>
+  <text x="960" y="332" text-anchor="end" class="mono" font-size="10" fill="#484f58">Expansão Backend →</text>
 </svg>
