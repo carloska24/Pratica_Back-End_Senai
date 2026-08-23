@@ -224,12 +224,9 @@ course/
 
 ---
 
-## 🏗️ Arquitetura Técnica
+## 🧭 Por Dentro do Campus
 
-<details>
-<summary><strong>🔍 Ver stack, diagrama e estrutura de pastas</strong></summary>
-
-<br/>
+Conheça as tecnologias, o fluxo de execução e a organização que sustentam a experiência de aprendizagem do Campus.
 
 ### Stack
 
@@ -249,12 +246,12 @@ course/
 
 <br/>
 
-| Camada | Tecnologias | Responsabilidade |
-|:---|:---|:---|
-| 🎨 Interface | Next.js 15, React 19, TypeScript, Framer Motion | Navegação, animações e composição das telas |
-| 📖 Conteúdo | Currículo em TypeScript | Aulas, exercícios e exemplos guiados |
-| 🧪 Laboratório | Monaco Editor + Web Worker | Execução segura de código JavaScript no browser |
-| 💾 Progresso | `localStorage` com saneamento | Persistência local sem servidor ou autenticação |
+| Camada e tecnologias | Responsabilidade |
+|:---|:---|
+| **🎨 Interface**<br/>Next.js 15 · React 19 · TypeScript · Framer Motion | Navegação, animações e composição das telas |
+| **📖 Conteúdo**<br/>Currículo em TypeScript | Aulas, exercícios e exemplos guiados |
+| **🧪 Laboratório**<br/>Monaco Editor · Web Worker | Execução segura de código JavaScript no browser |
+| **💾 Progresso**<br/>`localStorage` com saneamento | Persistência local sem servidor ou autenticação |
 
 ### Fluxo da Aplicação
 
@@ -273,30 +270,42 @@ flowchart LR
 
 > **Segurança do Lab:** O código do aluno roda **exclusivamente no browser**, em Web Worker isolado com timeout e rede desativada. Nunca entra no processo do Next.js.
 
-### Estrutura de Pastas
+### 🗺️ Mapa do Projeto
+
+| Área do Campus | Responsabilidade |
+|:---|:---|
+| **🚪 Entrada**<br/>`src/app/` | Inicialização do Next.js, layout e estilos globais |
+| **🧩 Experiência**<br/>`src/features/` | Navegação, sala de aula, laboratórios e arena de desafios |
+| **📚 Currículo**<br/>`src/course/` | Fonte de verdade dos módulos e conteúdos pedagógicos |
+| **⚡ Execução**<br/>`src/runner/` | Análise, testes e execução JavaScript em Web Worker |
+| **📈 Progresso**<br/>`src/progress/` | Regras de evolução e persistência local do estudante |
+| **💻 Exercícios**<br/>`course/exercicios-javascript/` | Práticas executáveis organizadas de M01 a M12 |
+| **📐 Documentação**<br/>`docs/` | Arquitetura, produto, UX, automação e recursos visuais |
+| **🤖 Automação**<br/>`.github/workflows/` | CI, auditoria, build e atualização das métricas |
 
 ```
-campus-backend-senai-javascript/
+Pratica_Back-End_Senai/
 ├── src/
-│   ├── app/                → rotas, shell e estilos globais
-│   ├── components/
-│   │   ├── classroom/      → sala de aula e visualização de aulas
-│   │   ├── labs/           → experiências interativas das lições
-│   │   └── practice/       → arena de desafios
-│   ├── content/            → currículo, aulas e exemplos guiados
-│   └── lib/                → persistência e utilitários
+│   ├── app/
+│   ├── course/
+│   ├── features/
+│   │   ├── shell/
+│   │   ├── classroom/
+│   │   │   └── labs/
+│   │   └── practice/
+│   ├── progress/
+│   └── runner/
 ├── course/
-│   └── exercicios-javascript/  → prática organizada por módulo
+│   └── exercicios-javascript/
+│       └── M01 ... M12
 ├── docs/
-│   ├── assets/             → SVGs e imagens do README
-│   ├── ARCHITECTURE.md     → decisões e evolução técnica
-│   ├── PRODUCT.md          → princípios de produto e aprendizagem
-│   └── UX_RESEARCH.md      → pesquisa e decisões de experiência
+│   ├── assets/
+│   └── *.md
+├── .github/
+│   └── workflows/
 ├── package.json
 └── README.md
 ```
-
-</details>
 
 ---
 
