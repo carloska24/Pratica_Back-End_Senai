@@ -1,155 +1,123 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 340" width="1200" height="340" role="img" aria-label="Trilha de aprendizado — Campus Backend">
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="800" viewBox="0 0 720 800" role="img" aria-labelledby="title desc">
+  <title id="title">Trilha de aprendizado Campus Backend</title>
+  <desc id="desc">Roadmap vertical dos módulos de JavaScript Backend. Módulos 1 a 5 concluídos, módulo 6 em revisão e módulo 7, Funções, como foco atual.</desc>
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0d1117"/>
-      <stop offset="100%" style="stop-color:#161b22"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1117"/>
+      <stop offset="1" stop-color="#111a27"/>
     </linearGradient>
-    <linearGradient id="lineCompleted" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#1f6feb"/>
-      <stop offset="100%" style="stop-color:#388bfd"/>
-    </linearGradient>
-    <linearGradient id="linePending" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#30363d"/>
-      <stop offset="100%" style="stop-color:#21262d"/>
-    </linearGradient>
-    <linearGradient id="currentGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#d4a017"/>
-      <stop offset="100%" style="stop-color:#f7df1e"/>
-    </linearGradient>
-    <filter id="goldGlow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="8" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="blueGlow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="5" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="shadow">
-      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.4"/>
-    </filter>
-    <pattern id="dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
-      <circle cx="1" cy="1" r="0.7" fill="#21262d" opacity="0.9"/>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1" fill="#314158" opacity=".34"/>
     </pattern>
-    <style>
-      @keyframes pulse { 0%,100%{opacity:1;r:36} 50%{opacity:0.7;r:40} }
-      @keyframes flow { 0%{stroke-dashoffset:40} 100%{stroke-dashoffset:0} }
-      @keyframes shimmer { 0%,100%{opacity:0.6} 50%{opacity:1} }
-      @keyframes checkPop { 0%{transform:scale(0)} 60%{transform:scale(1.3)} 100%{transform:scale(1)} }
-      .mono { font-family: 'SF Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-      .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; }
-      .pulse-ring { animation: pulse 2.5s ease-in-out infinite; }
-      .flow-line { animation: flow 1.8s linear infinite; }
-      .shimmer { animation: shimmer 2.2s ease-in-out infinite; }
-    </style>
   </defs>
+  <style>
+    .mobile { display: none; }
+    @media (max-width: 480px) {
+      .desktop { display: none; }
+      .mobile { display: inline; }
+    }
+  </style>
 
-  <!-- Background -->
-  <rect width="1200" height="340" fill="url(#bg)"/>
-  <rect width="1200" height="340" fill="url(#dots)" opacity="0.6"/>
+  <rect width="720" height="800" rx="24" fill="url(#bg)"/>
+  <rect width="720" height="800" rx="24" fill="url(#grid)"/>
 
-  <!-- Ambient glows -->
-  <ellipse cx="100" cy="200" rx="120" ry="80" fill="#1f6feb" opacity="0.04"/>
-  <ellipse cx="600" cy="200" rx="140" ry="90" fill="#f7df1e" opacity="0.04"/>
-  <ellipse cx="1100" cy="200" rx="120" ry="80" fill="#388bfd" opacity="0.04"/>
+  <g class="desktop" font-family="Inter,Segoe UI,Arial,sans-serif">
+    <text x="48" y="55" fill="#79c0ff" font-size="12" font-weight="800" letter-spacing="2">TRILHA DE APRENDIZADO</text>
+    <text x="48" y="96" fill="#f0f6fc" font-size="30" font-weight="800">Do fundamento ao Backend.</text>
+    <text x="48" y="126" fill="#b1bac4" font-size="15">Progresso organizado por domínio, prática e próximo objetivo.</text>
 
-  <!-- Header -->
-  <text x="52" y="50" class="mono" font-size="11" font-weight="700" fill="#1f6feb" letter-spacing="2">CAMPAIGN MAP · JAVASCRIPT BACKEND</text>
-  <text x="52" y="82" class="sans" font-size="22" font-weight="700" fill="#e6edf3">Cada módulo transforma conceito em habilidade.</text>
-  <text x="52" y="104" class="sans" font-size="13" fill="#8b949e">O avanço acontece por domínio e prática — não apenas por cliques.</text>
+    <path d="M102 177V739" stroke="#30363d" stroke-width="4" stroke-linecap="round"/>
+    <path d="M102 177V425" stroke="#2f81f7" stroke-width="4" stroke-linecap="round"/>
 
-  <!-- === TRACK LINE === -->
-  <!-- Base line (all) -->
-  <line x1="100" y1="200" x2="1100" y2="200" stroke="#21262d" stroke-width="4" stroke-linecap="round"/>
+    <g transform="translate(102 188)">
+      <circle r="24" fill="#0d2c1a" stroke="#3fb950" stroke-width="3"/>
+      <path d="m-9 0 6 7L11-8" fill="none" stroke="#56d364" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="48" y="-5" fill="#56d364" font-size="12" font-weight="800" letter-spacing="1.3">CONCLUÍDO · M01–M05</text>
+      <text x="48" y="24" fill="#f0f6fc" font-size="22" font-weight="800">Fundamentos</text>
+      <text x="48" y="49" fill="#b1bac4" font-size="15">Variáveis, condicionais, operadores e entrada de dados.</text>
+    </g>
 
-  <!-- Completed segment (animated glow) -->
-  <line x1="100" y1="200" x2="580" y2="200" stroke="url(#lineCompleted)" stroke-width="4" stroke-linecap="round"/>
-  <!-- Animated flow dots on completed -->
-  <line x1="100" y1="200" x2="580" y2="200" stroke="#79c0ff" stroke-width="4" stroke-linecap="round" stroke-dasharray="12 20" opacity="0.5" class="flow-line"/>
+    <g transform="translate(102 304)">
+      <circle r="24" fill="#102a4c" stroke="#2f81f7" stroke-width="3"/>
+      <path d="M-9 0A10 10 0 1 1 0 9" fill="none" stroke="#79c0ff" stroke-width="3" stroke-linecap="round"/>
+      <path d="m-2 4 3 6-7 1" fill="#79c0ff"/>
+      <text x="48" y="-5" fill="#79c0ff" font-size="12" font-weight="800" letter-spacing="1.3">REVISÃO · M06</text>
+      <text x="48" y="24" fill="#f0f6fc" font-size="22" font-weight="800">Controle de fluxo</text>
+      <text x="48" y="49" fill="#b1bac4" font-size="15">Laços de repetição e consolidação da lógica.</text>
+    </g>
 
-  <!-- Pending segment dashes -->
-  <line x1="580" y1="200" x2="1100" y2="200" stroke="#30363d" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 12"/>
+    <g transform="translate(48 386)">
+      <rect width="624" height="142" rx="18" fill="#201c08" stroke="#f2cc60" stroke-width="2"/>
+      <rect x="20" y="20" width="84" height="30" rx="15" fill="#3a3000"/>
+      <text x="38" y="40" fill="#f2cc60" font-size="12" font-weight="800" letter-spacing="1.1">FOCO ATUAL</text>
+      <text x="20" y="86" fill="#f0f6fc" font-size="28" font-weight="800">M07 · Funções</text>
+      <text x="20" y="113" fill="#d4c989" font-size="15">Parâmetros, retorno, escopo e composição.</text>
+      <circle cx="553" cy="71" r="39" fill="#0d1117" stroke="#6e5b00" stroke-width="7"/>
+      <path d="M553 32A39 39 0 1 1 523 96" fill="none" stroke="#f2cc60" stroke-width="7" stroke-linecap="round"/>
+      <text x="553" y="76" text-anchor="middle" fill="#f2cc60" font-size="18" font-weight="800">64%</text>
+    </g>
 
-  <!-- === NODE 1: Fundamentos (DONE) === -->
-  <g transform="translate(100,200)">
-    <!-- Outer ring -->
-    <circle r="30" fill="#0d1117" stroke="#1f6feb" stroke-width="2.5"/>
-    <!-- Icon: checkmark bg -->
-    <circle r="20" fill="#1a2d4a"/>
-    <!-- Check icon -->
-    <path d="M-9 0 L-3 6 L9 -7" stroke="#3fb950" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-    <!-- Labels below -->
-    <text y="52" text-anchor="middle" class="mono" font-size="10" fill="#388bfd" font-weight="700">M01–M02</text>
-    <text y="70" text-anchor="middle" class="sans" font-size="14" font-weight="700" fill="#e6edf3">Fundamentos</text>
-    <text y="88" text-anchor="middle" class="mono" font-size="11" fill="#8b949e">var · if · operadores</text>
-    <!-- Status -->
-    <text y="-44" text-anchor="middle" class="mono" font-size="9" fill="#3fb950" font-weight="700">✓ CONCLUÍDO</text>
+    <g transform="translate(102 600)">
+      <circle r="24" fill="#161b22" stroke="#484f58" stroke-width="3"/>
+      <path d="M-8 1h16M0-7v16" stroke="#8c98a5" stroke-width="3" stroke-linecap="round"/>
+      <text x="48" y="-5" fill="#8c98a5" font-size="12" font-weight="800" letter-spacing="1.3">PRÓXIMO · M08–M12</text>
+      <text x="48" y="24" fill="#f0f6fc" font-size="22" font-weight="800">Dados e JavaScript</text>
+      <text x="48" y="49" fill="#b1bac4" font-size="15">Arrays, objetos, métodos e manipulação de dados.</text>
+    </g>
+
+    <g transform="translate(102 714)">
+      <circle r="24" fill="#0d2c1a" stroke="#238636" stroke-width="3" stroke-dasharray="5 5"/>
+      <path d="M-8-7h16v14H-8zM-3-2h6M-3 3h6" fill="none" stroke="#3fb950" stroke-width="2" stroke-linecap="round"/>
+      <text x="48" y="-5" fill="#3fb950" font-size="12" font-weight="800" letter-spacing="1.3">DESTINO · M13+</text>
+      <text x="48" y="24" fill="#f0f6fc" font-size="22" font-weight="800">Backend</text>
+      <text x="48" y="49" fill="#b1bac4" font-size="15">Node.js, APIs, banco de dados e aplicações completas.</text>
+    </g>
   </g>
 
-  <!-- === NODE 2: Controle (DONE) === -->
-  <g transform="translate(340,200)">
-    <circle r="30" fill="#0d1117" stroke="#1f6feb" stroke-width="2.5"/>
-    <circle r="20" fill="#1a2d4a"/>
-    <path d="M-9 0 L-3 6 L9 -7" stroke="#3fb950" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-    <text y="52" text-anchor="middle" class="mono" font-size="10" fill="#388bfd" font-weight="700">M03–M06</text>
-    <text y="70" text-anchor="middle" class="sans" font-size="14" font-weight="700" fill="#e6edf3">Controle</text>
-    <text y="88" text-anchor="middle" class="mono" font-size="11" fill="#8b949e">while · for · loops</text>
-    <text y="-44" text-anchor="middle" class="mono" font-size="9" fill="#f7df1e" font-weight="700">◐ M06 EM REVISÃO</text>
-  </g>
+  <g class="mobile" font-family="Inter,Segoe UI,Arial,sans-serif">
+    <text x="48" y="62" fill="#79c0ff" font-size="17" font-weight="800" letter-spacing="2">TRILHA DE APRENDIZADO</text>
+    <text x="48" y="112" fill="#f0f6fc" font-size="42" font-weight="800">Rumo ao Backend.</text>
+    <text x="48" y="145" fill="#d0d7de" font-size="20">Uma etapa prática de cada vez.</text>
 
-  <!-- === NODE 3: FUNÇÕES — FOCO ATUAL (GOLD) === -->
-  <g transform="translate(580,200)">
-    <!-- Pulse rings -->
-    <circle r="52" fill="none" stroke="#f7df1e" stroke-width="1" opacity="0.15" class="shimmer"/>
-    <circle r="44" fill="none" stroke="#f7df1e" stroke-width="1.5" opacity="0.25" class="shimmer"/>
-    <!-- Main circle glow -->
-    <circle r="36" fill="#1a1500" stroke="#f7df1e" stroke-width="3" filter="url(#goldGlow)"/>
-    <!-- Inner fill -->
-    <circle r="26" fill="url(#currentGlow)"/>
-    <!-- M07 text -->
-    <text y="7" text-anchor="middle" class="mono" font-size="15" font-weight="900" fill="#0d1117">M07</text>
-    <!-- Badge above -->
-    <rect x="-38" y="-70" width="76" height="22" rx="4" fill="#2d1e00" stroke="#f7df1e" stroke-width="1.5"/>
-    <text y="-55" text-anchor="middle" class="mono" font-size="9" font-weight="900" fill="#f7df1e" letter-spacing="1">⚡ FOCO ATUAL</text>
-    <!-- Labels below -->
-    <text y="56" text-anchor="middle" class="mono" font-size="11" fill="#f7df1e" font-weight="900">FUNÇÕES</text>
-    <text y="76" text-anchor="middle" class="sans" font-size="13" fill="#e6edf3">parâmetros · retorno</text>
-    <text y="94" text-anchor="middle" class="mono" font-size="11" fill="#8b949e">composição · escopo</text>
-  </g>
+    <path d="M91 208V727" stroke="#30363d" stroke-width="5" stroke-linecap="round"/>
+    <path d="M91 208V400" stroke="#2f81f7" stroke-width="5" stroke-linecap="round"/>
 
-  <!-- === NODE 4: Dados (LOCKED) === -->
-  <g transform="translate(830,200)">
-    <circle r="30" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
-    <circle r="20" fill="#161b22"/>
-    <!-- Lock icon -->
-    <rect x="-7" y="-3" width="14" height="11" rx="2" fill="#30363d"/>
-    <path d="M-5 -3 Q-5 -12 0 -12 Q5 -12 5 -3" fill="none" stroke="#30363d" stroke-width="2.5" stroke-linecap="round"/>
-    <text y="52" text-anchor="middle" class="mono" font-size="10" fill="#484f58" font-weight="700">M08–M12</text>
-    <text y="70" text-anchor="middle" class="sans" font-size="14" font-weight="600" fill="#484f58">Dados &amp; JS</text>
-    <text y="88" text-anchor="middle" class="mono" font-size="11" fill="#484f58">arrays · objetos · map</text>
-    <text y="-44" text-anchor="middle" class="mono" font-size="9" fill="#484f58">🔒 PRÓXIMO</text>
-  </g>
+    <g transform="translate(91 220)">
+      <circle r="27" fill="#0d2c1a" stroke="#3fb950" stroke-width="4"/>
+      <path d="m-10 0 7 8L12-9" fill="none" stroke="#56d364" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="51" y="-2" fill="#56d364" font-size="18" font-weight="800">M01–M05 · CONCLUÍDO</text>
+      <text x="51" y="30" fill="#f0f6fc" font-size="28" font-weight="800">Fundamentos</text>
+      <text x="51" y="58" fill="#d0d7de" font-size="20">Lógica e entrada de dados.</text>
+    </g>
 
-  <!-- === NODE 5: Backend (LOCKED) === -->
-  <g transform="translate(1100,200)">
-    <circle r="30" fill="#0d1117" stroke="#238636" stroke-width="2" stroke-dasharray="6 4"/>
-    <circle r="20" fill="#0d2818"/>
-    <!-- Server icon -->
-    <rect x="-9" y="-8" width="18" height="5" rx="1.5" fill="#238636" opacity="0.6"/>
-    <rect x="-9" y="-1" width="18" height="5" rx="1.5" fill="#238636" opacity="0.6"/>
-    <rect x="-9" y="6" width="18" height="5" rx="1.5" fill="#238636" opacity="0.6"/>
-    <circle cx="5" cy="-5.5" r="1.5" fill="#3fb950" opacity="0.8"/>
-    <text y="52" text-anchor="middle" class="mono" font-size="10" fill="#238636" font-weight="700">M13+</text>
-    <text y="70" text-anchor="middle" class="sans" font-size="14" font-weight="600" fill="#8b949e">Backend</text>
-    <text y="88" text-anchor="middle" class="mono" font-size="11" fill="#484f58">Node.js · APIs · DB</text>
-    <text y="-44" text-anchor="middle" class="mono" font-size="9" fill="#238636">⬡ NEXT QUEST</text>
-  </g>
+    <g transform="translate(91 346)">
+      <circle r="27" fill="#102a4c" stroke="#2f81f7" stroke-width="4"/>
+      <path d="M-10 0A11 11 0 1 1 0 10" fill="none" stroke="#79c0ff" stroke-width="4" stroke-linecap="round"/>
+      <path d="m-2 5 3 7-8 1" fill="#79c0ff"/>
+      <text x="51" y="-2" fill="#79c0ff" font-size="18" font-weight="800">M06 · REVISÃO</text>
+      <text x="51" y="30" fill="#f0f6fc" font-size="28" font-weight="800">Controle de fluxo</text>
+      <text x="51" y="58" fill="#d0d7de" font-size="20">Laços de repetição.</text>
+    </g>
 
-  <!-- Progress bar at bottom -->
-  <rect x="52" y="310" width="1096" height="6" rx="3" fill="#21262d"/>
-  <rect x="52" y="310" width="456" height="6" rx="3" fill="url(#lineCompleted)"/>
-  <text x="52" y="332" class="mono" font-size="10" fill="#8b949e">progresso da trilha:</text>
-  <text x="132" y="332" class="mono" font-size="10" fill="#388bfd" font-weight="700">M01 → M05 concluídos</text>
-  <text x="310" y="332" class="mono" font-size="10" fill="#8b949e">· foco:</text>
-  <text x="346" y="332" class="mono" font-size="10" fill="#f7df1e" font-weight="700">M06 revisão · M07 Funções</text>
-  <text x="960" y="332" text-anchor="end" class="mono" font-size="10" fill="#484f58">Expansão Backend →</text>
+    <g transform="translate(48 430)">
+      <rect width="624" height="132" rx="18" fill="#201c08" stroke="#f2cc60" stroke-width="3"/>
+      <text x="22" y="35" fill="#f2cc60" font-size="18" font-weight="800">FOCO ATUAL · 64%</text>
+      <text x="22" y="78" fill="#f0f6fc" font-size="34" font-weight="800">M07 · Funções</text>
+      <text x="22" y="109" fill="#f6e8a6" font-size="21">Parâmetros, retorno e escopo.</text>
+    </g>
+
+    <g transform="translate(91 638)">
+      <circle r="27" fill="#161b22" stroke="#484f58" stroke-width="4"/>
+      <path d="M-9 1h18M0-8v18" stroke="#b1bac4" stroke-width="4" stroke-linecap="round"/>
+      <text x="51" y="-2" fill="#b1bac4" font-size="18" font-weight="800">M08–M12 · PRÓXIMO</text>
+      <text x="51" y="30" fill="#f0f6fc" font-size="28" font-weight="800">Dados e JavaScript</text>
+    </g>
+
+    <g transform="translate(91 738)">
+      <circle r="27" fill="#0d2c1a" stroke="#238636" stroke-width="4" stroke-dasharray="6 6"/>
+      <path d="M-9-8h18V8H-9zM-3-2h6M-3 4h6" fill="none" stroke="#56d364" stroke-width="3" stroke-linecap="round"/>
+      <text x="51" y="-2" fill="#56d364" font-size="18" font-weight="800">M13+ · DESTINO</text>
+      <text x="51" y="30" fill="#f0f6fc" font-size="28" font-weight="800">Backend</text>
+    </g>
+  </g>
 </svg>
