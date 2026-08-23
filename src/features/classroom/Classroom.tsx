@@ -18,11 +18,11 @@ import {
   Sparkles,
   Target,
 } from "lucide-react";
-import { functionExamples } from "@/content/functionExamples";
-import { courseLibrary, type CourseLibraryModule } from "@/content/courseLibrary";
+import { functionExamples } from "@/course/functionExamples";
+import { courseLibrary, type CourseLibraryModule } from "@/course/courseLibrary";
 import LessonDetail from "./LessonDetail";
 import CodeViewer from "./CodeViewer";
-import { readMasteredModules, readUniqueIntegers, readUniqueStrings } from "@/lib/progress";
+import { readMasteredModules, readUniqueIntegers, readUniqueStrings } from "@/progress/storage";
 
 const courseItemIds = new Set(courseLibrary.flatMap(module => module.items.map(item => item.id)));
 const LAST_LESSON_KEY = "campus-last-lesson";

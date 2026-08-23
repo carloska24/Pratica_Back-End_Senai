@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ArrowRight, CheckCircle2, Code2, Lightbulb, LockKeyhole, RotateCcw, Target } from "lucide-react";
-import { readSequentialIntegers } from "@/lib/progress";
+import { readSequentialIntegers } from "@/progress/storage";
 
 const challenges = [
   {

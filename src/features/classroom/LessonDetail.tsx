@@ -10,32 +10,32 @@ import {
   Route,
   Target,
 } from "lucide-react";
-import type { CourseItem, CourseLibraryModule } from "@/content/courseLibrary";
-import { getLessonContent } from "@/content/lessonContent";
-import FunctionFlow from "@/components/labs/FunctionFlow";
+import type { CourseItem, CourseLibraryModule } from "@/course/courseLibrary";
+import { getLessonContent } from "@/course/lessonContent";
+import FunctionFlow from "@/features/classroom/labs/FunctionFlow";
 import CodeViewer from "./CodeViewer";
-import ArrayFlow from "@/components/labs/ArrayFlow";
-import ArrayMutationLab from "@/components/labs/ArrayMutationLab";
-import ArrayLoopLab from "@/components/labs/ArrayLoopLab";
-import ArraySearchLab from "@/components/labs/ArraySearchLab";
-import ObjectExplorer from "@/components/labs/ObjectExplorer";
-import ObjectPropertyLab from "@/components/labs/ObjectPropertyLab";
-import ObjectMethodLab from "@/components/labs/ObjectMethodLab";
-import NestedObjectMap from "@/components/labs/NestedObjectMap";
-import StringWorkshop from "@/components/labs/StringWorkshop";
-import TemplateReceipt from "@/components/labs/TemplateReceipt";
-import MathRoundingLab from "@/components/labs/MathRoundingLab";
-import DateTimeline from "@/components/labs/DateTimeline";
-import CallbackLoopLab from "@/components/labs/CallbackLoopLab";
-import MapTransformationLab from "@/components/labs/MapTransformationLab";
-import FilterGateLab from "@/components/labs/FilterGateLab";
-import ArrayQuestionLab from "@/components/labs/ArrayQuestionLab";
-import ReduceAccumulatorLab from "@/components/labs/ReduceAccumulatorLab";
-import ArrowFunctionBridge from "@/components/labs/ArrowFunctionBridge";
-import DestructuringLab from "@/components/labs/DestructuringLab";
-import SpreadCloneLab from "@/components/labs/SpreadCloneLab";
-import FlexibleParametersLab from "@/components/labs/FlexibleParametersLab";
-import OptionalChainLab from "@/components/labs/OptionalChainLab";
+import ArrayFlow from "@/features/classroom/labs/ArrayFlow";
+import ArrayMutationLab from "@/features/classroom/labs/ArrayMutationLab";
+import ArrayLoopLab from "@/features/classroom/labs/ArrayLoopLab";
+import ArraySearchLab from "@/features/classroom/labs/ArraySearchLab";
+import ObjectExplorer from "@/features/classroom/labs/ObjectExplorer";
+import ObjectPropertyLab from "@/features/classroom/labs/ObjectPropertyLab";
+import ObjectMethodLab from "@/features/classroom/labs/ObjectMethodLab";
+import NestedObjectMap from "@/features/classroom/labs/NestedObjectMap";
+import StringWorkshop from "@/features/classroom/labs/StringWorkshop";
+import TemplateReceipt from "@/features/classroom/labs/TemplateReceipt";
+import MathRoundingLab from "@/features/classroom/labs/MathRoundingLab";
+import DateTimeline from "@/features/classroom/labs/DateTimeline";
+import CallbackLoopLab from "@/features/classroom/labs/CallbackLoopLab";
+import MapTransformationLab from "@/features/classroom/labs/MapTransformationLab";
+import FilterGateLab from "@/features/classroom/labs/FilterGateLab";
+import ArrayQuestionLab from "@/features/classroom/labs/ArrayQuestionLab";
+import ReduceAccumulatorLab from "@/features/classroom/labs/ReduceAccumulatorLab";
+import ArrowFunctionBridge from "@/features/classroom/labs/ArrowFunctionBridge";
+import DestructuringLab from "@/features/classroom/labs/DestructuringLab";
+import SpreadCloneLab from "@/features/classroom/labs/SpreadCloneLab";
+import FlexibleParametersLab from "@/features/classroom/labs/FlexibleParametersLab";
+import OptionalChainLab from "@/features/classroom/labs/OptionalChainLab";
 
 type Props = {
   module: CourseLibraryModule;
