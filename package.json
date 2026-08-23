@@ -2,10 +2,16 @@
   "name": "campus-backend-senai-javascript",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "npm@10.9.3",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "typecheck": "tsc --noEmit --incremental false",
+    "check": "npm run typecheck && npm run build"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",

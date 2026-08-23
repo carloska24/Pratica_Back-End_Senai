@@ -1,0 +1,64 @@
+name: Project metrics
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 9 * * 1"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: project-metrics
+  cancel-in-progress: false
+
+jobs:
+  metrics:
+    name: Update repository metrics
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Generate project overview
+        uses: lowlighter/metrics@65836723097537a54cd8eb90f61839426b4266b6 # v3.34
+        with:
+          token: ${{ secrets.METRICS_TOKEN }}
+          committer_token: ${{ github.token }}
+          committer_branch: main
+          committer_message: "docs: update project overview [skip ci]"
+          output_action: commit
+          output_condition: data-changed
+          filename: docs/assets/metrics/project-overview.svg
+          user: carloska24
+          repo: Pratica_Back-End_Senai
+          template: repository
+          base: repositories, metadata
+          config_timezone: America/Sao_Paulo
+          plugin_languages: yes
+          plugin_languages_limit: 5
+          plugin_languages_threshold: 2%
+          plugin_languages_other: yes
+          plugin_languages_details: percentage
+          plugin_languages_indepth: false
+
+      - name: Generate recent project activity
+        uses: lowlighter/metrics@65836723097537a54cd8eb90f61839426b4266b6 # v3.34
+        with:
+          token: ${{ secrets.METRICS_TOKEN }}
+          committer_token: ${{ github.token }}
+          committer_branch: main
+          committer_message: "docs: update project activity [skip ci]"
+          output_action: commit
+          output_condition: data-changed
+          filename: docs/assets/metrics/project-activity.svg
+          user: carloska24
+          repo: Pratica_Back-End_Senai
+          template: repository
+          base: ""
+          config_timezone: America/Sao_Paulo
+          plugin_activity: yes
+          plugin_activity_limit: 5
+          plugin_activity_days: 30
+          plugin_activity_visibility: public
+          plugin_activity_timestamps: yes
+          plugin_activity_filter: push, issue, pr, review, release, ref/create
