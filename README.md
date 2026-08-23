@@ -1,137 +1,88 @@
 ﻿<div align="center">
 
-<img src="./docs/assets/campus-banner.svg" alt="Campus Backend — JavaScript como base. Backend como destino." width="100%" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/assets/logo.svg">
+  <img alt="Campus Backend" src="./docs/assets/logo.svg" width="520">
+</picture>
 
-</div>
+<br/><br/>
 
-<div align="center">
+[![Next.js](https://img.shields.io/badge/Next.js_15-000?style=flat-square&logo=nextdotjs)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React_19-20232a?style=flat-square&logo=react)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=fff)](https://www.typescriptlang.org/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=000)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![License](https://img.shields.io/badge/License-MIT-238636?style=flat-square)](./LICENSE)
 
-<!-- Stack Principal -->
-![Next.js](https://img.shields.io/badge/Next.js_15-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
-![React](https://img.shields.io/badge/React_19-20232a?style=for-the-badge&logo=react&logoColor=61DAFB)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=111111)
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+Plataforma educacional interativa com sala de aula, laboratório Monaco e arena de desafios.<br/>
+Criada durante a formação em **Backend** na Escola SENAI "Dr. Celso Charuri".
 
-<br/>
-
-<!-- Métricas do Projeto -->
-![Módulos](https://img.shields.io/badge/📚_Módulos-12_concluídos-238636?style=flat-square&labelColor=0d1117)
-![Exercícios](https://img.shields.io/badge/⚡_Exercícios-69_arquivos_.js-388bfd?style=flat-square&labelColor=0d1117)
-![Foco](https://img.shields.io/badge/🎯_Foco_atual-M07_Funções-d4a017?style=flat-square&labelColor=0d1117)
-![Build](https://img.shields.io/badge/Build-passing-238636?style=flat-square&logo=github-actions&labelColor=0d1117)
-
-<br/>
-
-**[🎓 O Campus](#-o-campus-em-ação) · [⚡ Começar](#-início-rápido) · [🗺️ Trilha](#-trilha-de-aprendizado) · [🏗️ Arquitetura](#-arquitetura-técnica) · [👨‍💻 Autor](#-sobre-o-autor)**
+[Começar](#-início-rápido) · [Trilha](#-trilha-de-aprendizado) · [Arquitetura](#-arquitetura) · [Autor](#-sobre-o-autor)
 
 </div>
 
 ---
 
-## 📌 Sobre o Projeto
+## O que é isso?
+
+Não é mais um repositório de exercícios soltos.
+
+O **Campus Backend** é uma plataforma web onde eu estudo JavaScript e pratico lógica com feedback em tempo real — tudo rodando no browser, sem servidor. Construí isso porque queria um lugar que me fizesse **querer estudar todo dia**, não apenas marcar checkbox.
+
+<div align="center">
+<img src="./docs/assets/campus-overview.png" alt="Dashboard do Campus Backend" width="90%"/>
+</div>
+
+<br/>
 
 <table>
 <tr>
-<td width="58%">
-
-O **Campus Backend** não é mais um repositório de exercícios soltos.
-
-É uma **plataforma educacional interativa** — construída com Next.js 15, Monaco Editor e Web Workers — criada durante a formação no curso de **Desenvolvedor Backend** da **Escola SENAI "Dr. Celso Charuri"** por **Carlos Alexandre Duarte Pereira**.
-
-A proposta: transformar a rotina de estudos em algo que você **queira abrir todo dia**.
-
-</td>
-<td width="42%" align="center">
-
-```
-┌──────────────────────────────┐
-│       CAMPUS BACKEND         │
-├──────────────────────────────┤
-│  🖥️  Sala de Aula            │
-│  🧪  Laboratório Monaco      │
-│  ⚔️  Arena de Desafios       │
-│  🏆  Sistema de Progresso    │
-│  📋  Grade Curricular        │
-│  📖  Biblioteca de Revisão   │
-└──────────────────────────────┘
-```
-
-</td>
+<td>🖥️ <strong>Sala de Aula</strong></td>
+<td>Aulas com modelo mental → código comentado → checkpoint</td>
+</tr>
+<tr>
+<td>🧪 <strong>Laboratório</strong></td>
+<td>Monaco Editor + Web Worker isolado — escreva e execute JS no browser</td>
+</tr>
+<tr>
+<td>⚔️ <strong>Arena</strong></td>
+<td>Desafios com validação automática e progresso em tempo real</td>
+</tr>
+<tr>
+<td>📊 <strong>Grade</strong></td>
+<td>Visualize módulos concluídos, em andamento e planejados</td>
+</tr>
+<tr>
+<td>📚 <strong>Biblioteca</strong></td>
+<td>Revisão sem apagar conhecimento conquistado</td>
+</tr>
+<tr>
+<td>🏆 <strong>Conquistas</strong></td>
+<td>Marcos de domínio e habilidades praticadas</td>
 </tr>
 </table>
 
-> [!IMPORTANT]
-> Projeto **pessoal e independente**. Não representa a Escola SENAI "Dr. Celso Charuri" e não substitui suas aulas ou formações oficiais.
-
----
-
-## 🎓 O Campus em Ação
-
-<div align="center">
-<img src="./docs/assets/campus-overview.png" alt="Dashboard do Campus Backend" width="100%" />
-</div>
-
-<br/>
-
-O Campus foi desenhado para que o aluno **sempre saiba** onde está, o que conquistou e qual é o próximo passo:
-
-<div align="center">
-
-| 🧭 Onde Estou? | 🏅 O que já Aprendi? | ⬆️ Qual o Próximo Passo? |
-|:---:|:---:|:---:|
-| Dashboard, grade e módulo atual | Biblioteca, conquistas e desempenho | Aula, laboratório, arena e checkpoint |
-
-</div>
-
-<br/>
-
-### 🔬 Experiências disponíveis
-
-<div align="center">
-
-| Área | Descrição |
-|:---|:---|
-| 🖥️ **Sala de Aula** | Estude a aula atual e reabra conteúdos concluídos sem perder o histórico |
-| 📊 **Grade Curricular** | Visualize módulos concluídos, em andamento, liberados e planejados |
-| 🧪 **Laboratório** | Escreva e execute JavaScript num Monaco Editor com Web Worker local |
-| ⚔️ **Arena de Desafios** | Treine lógica com exercícios e feedback de progresso em tempo real |
-| 📚 **Biblioteca de Revisão** | Marque uma nova rodada de estudo sem apagar o conhecimento conquistado |
-| 🏆 **Conquistas e Desempenho** | Visualize marcos de domínio e habilidades praticadas |
-
-</div>
+> **Nota:** Projeto pessoal e independente. Não representa a Escola SENAI "Dr. Celso Charuri".
 
 ---
 
 ## ⚡ Início Rápido
 
-> Você precisa ter **[Node.js](https://nodejs.org/)**, **npm** e **[Git](https://git-scm.com/)** instalados.
-
 ```bash
-# Clone o repositório
 git clone https://github.com/carloska24/Pratica_Back-End_Senai.git
-
-# Entre na pasta
 cd Pratica_Back-End_Senai
-
-# Instale as dependências
 npm install
-
-# Inicie em modo de desenvolvimento
 npm run dev
 ```
 
-🌐 Acesse **[http://localhost:3000](http://localhost:3000)** — todo progresso é salvo no **localStorage**, sem cadastro.
+Abra **http://localhost:3000** — progresso salvo no `localStorage`, sem cadastro.
 
 <details>
-<summary><strong>📋 Comandos disponíveis</strong></summary>
-<br/>
+<summary>Outros comandos</summary>
 
-| Comando | O que faz |
+| Comando | Descrição |
 |:---|:---|
-| `npm run dev` | Inicia em modo de desenvolvimento com hot-reload |
-| `npm run build` | Valida e gera o build de produção |
-| `npm run start` | Executa localmente o build gerado |
+| `npm run build` | Build de produção |
+| `npm run start` | Executa o build localmente |
 
 </details>
 
@@ -139,161 +90,138 @@ npm run dev
 
 ## 🗺️ Trilha de Aprendizado
 
-O currículo foi estruturado como uma **campanha progressiva** — cada fase entrega uma habilidade real e abre a porta para a próxima.
+O currículo funciona como uma campanha progressiva — cada fase entrega uma habilidade e abre a próxima.
 
-<img src="./docs/assets/learning-roadmap.svg" alt="Mapa de aprendizado — Campus Backend" width="100%" />
+```mermaid
+flowchart LR
+    subgraph done["✅ Concluído"]
+        direction LR
+        M01["M01–M02\nFundamentos"]
+        M03["M03–M06\nControle de Fluxo"]
+    end
 
-<br/>
+    subgraph current["🔥 Foco Atual"]
+        M07["M07\nFunções"]
+    end
 
-### 📋 Currículo Completo
+    subgraph next["🔒 Próximo"]
+        direction LR
+        M08["M08–M12\nDados & JS Moderno"]
+        M13["M13+\nNode.js & APIs"]
+    end
 
-<div align="center">
+    M01 --> M03 --> M07 --> M08 --> M13
 
-| Fase | Módulos | Habilidade Construída | Status |
-|:---:|:---:|:---|:---:|
-| Fundamentos | M01 – M02 | Variáveis, operadores e decisões | ✅ Concluído |
-| Controle de Fluxo | M03 – M06 | `while`, `for`, contadores, acumuladores e laços aninhados | ✅ Concluído |
-| **Foco Atual** | **M07** | **Funções, parâmetros, retorno e composição** | 🔥 Em andamento |
-| Estruturas de Dados | M08 – M12 | Arrays, objetos, strings, datas e JavaScript moderno | 🔒 Próximos |
-| Expansão Backend | M13+ | Assincronismo, Node.js, HTTP, APIs, banco de dados e testes | 🔒 Planejado |
-
-</div>
+    style done fill:#0d2818,stroke:#238636,color:#3fb950
+    style current fill:#2d1e00,stroke:#d4a017,color:#f7df1e
+    style next fill:#161b22,stroke:#30363d,color:#484f58
+    style M07 fill:#2d1e00,stroke:#f7df1e,color:#f7df1e
+```
 
 <details>
-<summary><strong>📖 Ver todos os módulos (M01–M12)</strong></summary>
-<br/>
+<summary><strong>📋 Ver todos os módulos (M01–M12)</strong></summary>
 
-| # | Módulo | Tema | Evidência de Aprendizagem |
-|:---:|:---:|:---|:---|
-| 01 | M01 | Fundamentos JavaScript | Exercícios e desafio de base |
-| 02 | M02 | Estruturas de Decisão | Condições e fluxo de escolha |
-| 03 | M03 | Laços com `while` | Repetição controlada |
-| 04 | M04 | Laços com `for` | Contagem e padrões |
-| 05 | M05 | Repetição Avançada | Contador e acumulador |
-| 06 | M06 | Laços Aninhados | Construção de padrões em duas dimensões |
-| 07 | M07 | **Funções** | Missão funcional com casos de teste |
-| 08 | M08 | Arrays | Busca, índices e mutação |
-| 09 | M09 | Objetos JavaScript | Modelagem de informações |
-| 10 | M10 | Strings, Math e Date | Tratamento de dados |
-| 11 | M11 | Arrays Modernos | `forEach`, `map`, `filter` e `reduce` |
-| 12 | M12 | JavaScript Moderno | Arrow functions, destructuring, spread e REST |
+| # | Módulo | Tema | Status |
+|:---:|:---|:---|:---:|
+| 01 | Fundamentos JavaScript | Variáveis, operadores, tipos | ✅ |
+| 02 | Estruturas de Decisão | `if`, `else`, condições | ✅ |
+| 03 | Laços com `while` | Repetição controlada | ✅ |
+| 04 | Laços com `for` | Contagem e padrões | ✅ |
+| 05 | Repetição Avançada | Contadores e acumuladores | ✅ |
+| 06 | Laços Aninhados | Padrões em 2 dimensões | ✅ |
+| 07 | **Funções** | **Parâmetros, retorno, composição** | **🔥** |
+| 08 | Arrays | Busca, índices, mutação | 🔒 |
+| 09 | Objetos | Modelagem de informações | 🔒 |
+| 10 | Strings, Math, Date | Tratamento de dados | 🔒 |
+| 11 | Arrays Modernos | `map`, `filter`, `reduce` | 🔒 |
+| 12 | JavaScript Moderno | Arrow functions, spread, destructuring | 🔒 |
 
 </details>
 
 ---
 
-## 🧠 Método de Aprendizado
+## 🧠 Como eu estudo
 
-Antes de mostrar sintaxe, cada aula **constrói um modelo mental do problema**:
+Antes de escrever código, cada aula constrói um modelo mental do problema:
 
 ```
 objetivo → pré-requisitos → história do programa → execução passo a passo
          → conceitos → código comentado → leitura mental → checkpoint
 ```
 
-> O método busca ensinar o aluno a **prever o comportamento do código**, **explicar suas decisões** e só então avançar. Sem atalhos. Com intenção.
+A ideia é aprender a **prever o comportamento** antes de executar.
 
 ---
 
-## 📁 Exercícios JavaScript
+## 📁 Exercícios
 
-A pasta [`course/exercicios-javascript/`](./course/exercicios-javascript/) contém **69 arquivos `.js`**, organizados do M01 ao M12 para prática direta no editor de sua preferência — sem precisar rodar a plataforma.
+A pasta [`course/exercicios-javascript/`](./course/exercicios-javascript/) tem **69 arquivos `.js`** organizados do M01 ao M12 — dá pra praticar direto no terminal sem rodar a plataforma.
 
 <details>
-<summary><strong>📂 Ver estrutura de pastas dos exercícios</strong></summary>
-<br/>
+<summary>Ver estrutura</summary>
 
 ```
-course/
-└── exercicios-javascript/
-    ├── M01/   → fundamentos e primeiros desafios
-    ├── M02/   → estruturas de decisão
-    ├── M03/   → laços com while
-    ├── M04/   → laços com for
-    ├── M05/   → repetição avançada
-    ├── M06/   → laços aninhados
-    ├── M07/   → funções
-    ├── M08/   → arrays
-    ├── M09/   → objetos
-    ├── M10/   → strings, math e date
-    ├── M11/   → arrays modernos
-    └── M12/   → javascript moderno
+course/exercicios-javascript/
+├── M01/  → fundamentos
+├── M02/  → decisões
+├── M03/  → while
+├── M04/  → for
+├── M05/  → repetição avançada
+├── M06/  → laços aninhados
+├── M07/  → funções
+├── M08/  → arrays
+├── M09/  → objetos
+├── M10/  → strings, math, date
+├── M11/  → arrays modernos
+└── M12/  → javascript moderno
 ```
 
 </details>
 
 ---
 
-## 🏗️ Arquitetura Técnica
-
-<details>
-<summary><strong>🔍 Ver stack, diagrama e estrutura de pastas</strong></summary>
-
-<br/>
-
-### Stack
-
-<div align="center">
-
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" width="48" alt="Next.js" title="Next.js 15" />
-&nbsp;&nbsp;
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="48" alt="React" title="React 19" />
-&nbsp;&nbsp;
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="48" alt="TypeScript" title="TypeScript 5" />
-&nbsp;&nbsp;
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="48" alt="JavaScript" title="JavaScript ES2024" />
-&nbsp;&nbsp;
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="48" alt="Node.js" title="Node.js" />
-
-</div>
-
-<br/>
-
-| Camada | Tecnologias | Responsabilidade |
-|:---|:---|:---|
-| 🎨 Interface | Next.js 15, React 19, TypeScript, Framer Motion | Navegação, animações e composição das telas |
-| 📖 Conteúdo | Currículo em TypeScript | Aulas, exercícios e exemplos guiados |
-| 🧪 Laboratório | Monaco Editor + Web Worker | Execução segura de código JavaScript no browser |
-| 💾 Progresso | `localStorage` com saneamento | Persistência local sem servidor ou autenticação |
-
-### Fluxo da Aplicação
+## 🏗️ Arquitetura
 
 ```mermaid
 flowchart LR
-    ALUNO(["👨‍🎓 Aluno"]) --> UI["Next.js App Router"]
-    UI --> AULA["🖥️ Sala de Aula"]
-    UI --> LAB["🧪 Laboratório"]
-    UI --> ARENA["⚔️ Arena"]
-    UI --> GRADE["📊 Grade"]
-    AULA --> CONTEUDO[("Currículo em TypeScript")]
-    LAB --> MONACO["Monaco Editor"]
-    MONACO --> WORKER["Web Worker ⚡ Isolado"]
-    UI --> LOCAL[("localStorage 💾")]
+    A["👨‍🎓 Aluno"] --> B["Next.js 15\nApp Router"]
+    B --> C["🖥️ Sala de Aula"]
+    B --> D["🧪 Lab Monaco"]
+    B --> E["⚔️ Arena"]
+    D --> F["Web Worker\n⚡ Isolado"]
+    B --> G[("localStorage 💾")]
 ```
 
-> **Segurança do Lab:** O código do aluno roda **exclusivamente no browser**, em Web Worker isolado com timeout e rede desativada. Nunca entra no processo do Next.js.
+<details>
+<summary><strong>Detalhes técnicos</strong></summary>
+
+| Camada | Stack | Responsabilidade |
+|:---|:---|:---|
+| Interface | Next.js 15, React 19, TypeScript, Framer Motion | Navegação e composição |
+| Conteúdo | Currículo em TypeScript | Aulas, exemplos e exercícios |
+| Laboratório | Monaco Editor + Web Worker | Execução segura no browser |
+| Progresso | `localStorage` saneado | Persistência sem servidor |
+
+**Segurança:** o código do aluno roda **exclusivamente** em Web Worker isolado com timeout. Nunca entra no processo do Next.js.
 
 ### Estrutura de Pastas
 
 ```
-campus-backend-senai-javascript/
 ├── src/
-│   ├── app/                → rotas, shell e estilos globais
+│   ├── app/            → rotas e shell
 │   ├── components/
-│   │   ├── classroom/      → sala de aula e visualização de aulas
-│   │   ├── labs/           → experiências interativas das lições
-│   │   └── practice/       → arena de desafios
-│   ├── content/            → currículo, aulas e exemplos guiados
-│   └── lib/                → persistência e utilitários
+│   │   ├── classroom/  → sala de aula
+│   │   ├── labs/       → laboratório
+│   │   └── practice/   → arena de desafios
+│   ├── content/        → currículo
+│   └── lib/            → persistência e utils
 ├── course/
-│   └── exercicios-javascript/  → prática organizada por módulo
+│   └── exercicios-javascript/
 ├── docs/
-│   ├── assets/             → SVGs e imagens do README
-│   ├── ARCHITECTURE.md     → decisões e evolução técnica
-│   ├── PRODUCT.md          → princípios de produto e aprendizagem
-│   └── UX_RESEARCH.md      → pesquisa e decisões de experiência
-├── package.json
-└── README.md
+│   ├── ARCHITECTURE.md
+│   ├── PRODUCT.md
+│   └── UX_RESEARCH.md
+└── package.json
 ```
 
 </details>
@@ -302,69 +230,64 @@ campus-backend-senai-javascript/
 
 ## 🚧 Roadmap
 
-<div align="center">
-
-| Status | Feature |
-|:---:|:---|
-| ✅ | Conteúdo navegável com aulas e exemplos guiados |
-| ✅ | Laboratório Monaco com Web Worker isolado |
-| ✅ | Arena de desafios com validação e progresso |
-| ✅ | Biblioteca de revisão com histórico de conquistas |
-| ✅ | Persistência local via localStorage saneado |
-| ✅ | Build de produção validado (`npm run build`) |
-| 🔜 | Autenticação e sincronização de progresso na nuvem |
-| 🔜 | Backend real com banco de dados |
-| 🔜 | Runner Node.js isolado para código não confiável |
-| 🔜 | Rotas dedicadas por módulo e aula |
-| 🔜 | Cobertura automatizada: testes unitários e E2E |
-| 🔜 | Publicação do portal para acesso público |
-
-</div>
+- [x] Conteúdo navegável com aulas e exemplos guiados
+- [x] Laboratório Monaco com Web Worker isolado
+- [x] Arena de desafios com validação e progresso
+- [x] Biblioteca de revisão com histórico
+- [x] Persistência local via localStorage
+- [x] Build de produção validado
+- [ ] Autenticação e sync na nuvem
+- [ ] Backend real com banco de dados
+- [ ] Runner Node.js isolado
+- [ ] Testes unitários e E2E
+- [ ] Deploy público
 
 ---
 
 ## 📄 Documentação
 
-| Documento | Conteúdo |
+| Doc | Conteúdo |
 |:---|:---|
-| [`docs/PRODUCT.md`](./docs/PRODUCT.md) | Missão, princípios pedagógicos e visão de produto |
-| [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) | Responsabilidades técnicas, segurança e próximos passos |
-| [`docs/UX_RESEARCH.md`](./docs/UX_RESEARCH.md) | Observações que orientam a experiência de estudo |
+| [`PRODUCT.md`](./docs/PRODUCT.md) | Missão e princípios pedagógicos |
+| [`ARCHITECTURE.md`](./docs/ARCHITECTURE.md) | Decisões técnicas e segurança |
+| [`UX_RESEARCH.md`](./docs/UX_RESEARCH.md) | Pesquisa de experiência de estudo |
 
 ---
 
 ## 🤝 Contribuindo
 
-Sugestões sobre aulas, exercícios, conteúdo ou experiência do portal são bem-vindas.
+Sugestões sobre aulas, exercícios ou experiência são bem-vindas.
 
 ```bash
-# Fork → branch → commit → pull request
 git checkout -b feature/minha-sugestao
 git commit -m "feat: adiciona exercício de closures no M07"
 git push origin feature/minha-sugestao
 ```
 
-Ou abra uma [**issue**](https://github.com/carloska24/Pratica_Back-End_Senai/issues) descrevendo sua ideia.
+Ou abra uma [issue](https://github.com/carloska24/Pratica_Back-End_Senai/issues).
 
 ---
 
 ## 👨‍💻 Sobre o Autor
 
-<img src="./docs/assets/developer-terminal.svg" alt="Carlos Alexandre — Developer Profile" width="100%" />
+```json
+{
+  "name": "Carlos Alexandre Duarte Pereira",
+  "role": "Backend Developer em formação",
+  "school": "SENAI Dr. Celso Charuri",
+  "focus": "JavaScript → Node.js → APIs",
+  "module": "M07 — Funções",
+  "status": "building in public"
+}
+```
 
-<br/>
+Este projeto nasceu no meio da prática. Eu queria estudar com constância, revisar lógica sem me perder e enxergar minha evolução módulo por módulo. Em vez de deixar esse material fechado, organizei um campus para quem também quer construir uma base sólida em JavaScript antes de avançar para Backend.
 
 <div align="center">
 
-> *"Este projeto nasceu no meio da prática. Eu queria estudar com constância, revisar lógica sem me perder e enxergar minha evolução módulo por módulo. Em vez de deixar esse material fechado, organizei um campus para quem também quer construir uma base sólida em JavaScript antes de avançar para Backend."*
->
-> — **Carlos Alexandre Duarte Pereira**
-
-<br/>
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Carlos_Alexandre-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/carlos-duarte-0b4591206)
-[![GitHub](https://img.shields.io/badge/GitHub-carloska24-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/carloska24)
-[![Gmail](https://img.shields.io/badge/Gmail-carloska24%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:carloska24@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Carlos_Alexandre-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/carlos-duarte-0b4591206)
+[![GitHub](https://img.shields.io/badge/GitHub-carloska24-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/carloska24)
+[![Gmail](https://img.shields.io/badge/Gmail-carloska24-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:carloska24@gmail.com)
 
 </div>
 
@@ -372,12 +295,8 @@ Ou abra uma [**issue**](https://github.com/carloska24/Pratica_Back-End_Senai/iss
 
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0d1117,161b22,1f6feb&height=100&section=footer" width="100%" />
-
-**Campus Backend** · Criado com 💙 por [Carlos Alexandre](https://github.com/carloska24)
+**Campus Backend** · por [Carlos Alexandre](https://github.com/carloska24)
 
 *study → build → document → share*
-
-![Visitors](https://visitor-badge.laobi.icu/badge?page_id=carloska24.Pratica_Back-End_Senai&style=flat-square&color=1f6feb)
 
 </div>
