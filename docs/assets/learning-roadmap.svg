@@ -93,7 +93,7 @@
     <text y="52" text-anchor="middle" class="mono" font-size="10" fill="#388bfd" font-weight="700">M03–M06</text>
     <text y="70" text-anchor="middle" class="sans" font-size="14" font-weight="700" fill="#e6edf3">Controle</text>
     <text y="88" text-anchor="middle" class="mono" font-size="11" fill="#8b949e">while · for · loops</text>
-    <text y="-44" text-anchor="middle" class="mono" font-size="9" fill="#3fb950" font-weight="700">✓ CONCLUÍDO</text>
+    <text y="-44" text-anchor="middle" class="mono" font-size="9" fill="#f7df1e" font-weight="700">◐ M06 EM REVISÃO</text>
   </g>
 
   <!-- === NODE 3: FUNÇÕES — FOCO ATUAL (GOLD) === -->
@@ -148,8 +148,8 @@
   <rect x="52" y="310" width="1096" height="6" rx="3" fill="#21262d"/>
   <rect x="52" y="310" width="456" height="6" rx="3" fill="url(#lineCompleted)"/>
   <text x="52" y="332" class="mono" font-size="10" fill="#8b949e">progresso da trilha:</text>
-  <text x="132" y="332" class="mono" font-size="10" fill="#388bfd" font-weight="700">M01 → M06 concluídos</text>
+  <text x="132" y="332" class="mono" font-size="10" fill="#388bfd" font-weight="700">M01 → M05 concluídos</text>
   <text x="310" y="332" class="mono" font-size="10" fill="#8b949e">· foco:</text>
-  <text x="346" y="332" class="mono" font-size="10" fill="#f7df1e" font-weight="700">M07 Funções</text>
+  <text x="346" y="332" class="mono" font-size="10" fill="#f7df1e" font-weight="700">M06 revisão · M07 Funções</text>
   <text x="960" y="332" text-anchor="end" class="mono" font-size="10" fill="#484f58">Expansão Backend →</text>
 </svg>

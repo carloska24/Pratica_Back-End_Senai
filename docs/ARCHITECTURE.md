@@ -7,15 +7,16 @@ O Campus é uma aplicação educacional em Next.js que reúne conteúdo, prátic
 ## Estrutura
 
 ```text
-campus-backend-senai-javascript/
+Pratica_Back-End_Senai/
 ├── src/
 │   ├── app/                  entrada do Next.js e estilos globais
-│   ├── components/
-│   │   ├── classroom/        sala de aula, detalhes e visualização de código
-│   │   ├── labs/             experiências interativas das lições
-│   │   └── practice/         arena de desafios
-│   ├── content/              currículo, biblioteca e conteúdo pedagógico
-│   └── lib/                  persistência local e utilitários
+│   ├── course/               currículo, biblioteca e conteúdo pedagógico
+│   ├── features/
+│   │   ├── classroom/        sala de aula, detalhes e experiências interativas
+│   │   ├── practice/         arena de desafios
+│   │   └── shell/            composição da aplicação e navegação local
+│   ├── progress/             persistência local e regras de progresso
+│   └── runner/               análise, testes e execução em Web Worker
 ├── course/
 │   └── exercicios-javascript/  exercícios executáveis por módulo
 ├── docs/                     arquitetura, produto, pesquisa e assets
@@ -27,9 +28,10 @@ campus-backend-senai-javascript/
 | Área | Responsabilidade | Não deve conter |
 |---|---|---|
 | `src/app/` | Composição das telas e entrada do framework | Conteúdo pedagógico extenso |
-| `src/components/` | Interface e interação do aluno | Regras de persistência ou dados duplicados |
-| `src/content/` | Fonte de verdade do currículo e das aulas | Estado visual dos componentes |
-| `src/lib/` | Serviços e utilitários independentes da interface | Componentes React |
+| `src/features/` | Interface e interação do aluno organizadas por capacidade | Regras de persistência ou dados duplicados |
+| `src/course/` | Fonte de verdade do currículo e das aulas | Estado visual dos componentes |
+| `src/progress/` | Persistência local, saneamento e projeções de progresso | Componentes de interface |
+| `src/runner/` | Contratos, análise e execução local de JavaScript | Componentes React ou persistência acadêmica |
 | `course/` | Arquivos de prática acessíveis fora do portal | Implementação interna da aplicação |
 | `docs/` | Decisões, contexto e imagens de documentação | Código executado pelo produto |
 
@@ -37,15 +39,14 @@ campus-backend-senai-javascript/
 
 ```text
 src/app
-  ├──> src/components
-  ├──> src/content
-  └──> src/lib
+  └──> src/features
 
-src/components
-  ├──> src/content
-  └──> src/lib
+src/features
+  ├──> src/course
+  ├──> src/progress
+  └──> src/runner
 
-src/content e src/lib
+src/course, src/progress e src/runner
   └──> não dependem de componentes React
 ```
 
@@ -53,19 +54,26 @@ O alias `@/` aponta para `src/`, mantendo imports estáveis mesmo quando um dom�
 
 ## Componentes principais
 
-- `src/app/page.tsx`: dashboard, currículo, laboratório, arena e desempenho.
-- `src/components/classroom/Classroom.tsx`: navegação entre aula atual, biblioteca e exemplos.
-- `src/components/classroom/LessonDetail.tsx`: composição pedagógica usada nas aulas e revisões.
-- `src/components/practice/PracticeArena.tsx`: desafios de lógica e progresso da arena.
-- `src/content/course.ts`: módulos, estado da trilha e foco atual.
-- `src/content/courseLibrary.ts`: aulas, exercícios, desafios e códigos de referência.
-- `src/content/lessonContent.ts`: explicações pedagógicas detalhadas.
-- `src/content/functionExamples.ts`: exemplos guiados de funções.
-- `src/lib/progress.ts`: leitura e saneamento do progresso local.
+- `src/app/page.tsx`: adaptador mínimo da rota principal.
+- `src/features/shell/CampusApp.tsx`: dashboard, currículo, laboratório, arena e desempenho.
+- `src/features/classroom/Classroom.tsx`: navegação entre aula atual, biblioteca e exemplos.
+- `src/features/classroom/LessonDetail.tsx`: composição pedagógica usada nas aulas e revisões.
+- `src/features/practice/PracticeArena.tsx`: desafios de lógica e progresso da arena.
+- `src/course/course.ts`: módulos, estado da trilha e foco atual.
+- `src/course/courseLibrary.ts`: aulas, exercícios, desafios e códigos de referência.
+- `src/course/lessonContent.ts`: explicações pedagógicas detalhadas.
+- `src/course/functionExamples.ts`: exemplos guiados de funções.
+- `src/progress/storage.ts`: leitura e saneamento do progresso local.
+- `src/progress/useCampusProgress.ts`: projeção reativa do progresso acadêmico.
+- `src/progress/courseProgress.ts`: evolução visual dos módulos com base no domínio registrado.
+- `src/runner/browserRunner.ts`: ciclo de vida do Web Worker e timeout.
+- `src/runner/missions.ts`: testes executados para as missões M07–M12.
+- `src/runner/missionCatalog.ts`: códigos iniciais e nomes de arquivos das missões.
+- `src/runner/analyzer.ts`: análise estática introdutória do código digitado.
 
 ## Segurança do laboratório
 
-O código do aluno é executado somente em um Web Worker do navegador, com rede desativada e limite de tempo. Ele não entra no processo do Next.js.
+O código do aluno é executado no navegador, separado da interface por um Web Worker, com limite de 1,5 segundo e bloqueio explícito das principais APIs de rede. Ele não entra no processo do Next.js. Esse mecanismo reduz impacto sobre a interface, mas não constitui uma sandbox de segurança completa.
 
 Uma futura execução Backend deverá permanecer em um worker Node.js isolado, com limites explícitos de CPU, memória, tempo e acesso à rede.
 

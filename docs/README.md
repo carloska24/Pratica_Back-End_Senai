@@ -5,6 +5,7 @@ Esta pasta concentra decisões de produto, arquitetura e experiência. O `README
 | Documento | Conteúdo |
 |---|---|
 | [`ARCHITECTURE.md`](./ARCHITECTURE.md) | Limites de pasta, dependências, segurança e evolução técnica |
+| [`AUTOMATION.md`](./AUTOMATION.md) | CI, Project Metrics, secrets, permissões e riscos de dependências |
 | [`PRODUCT.md`](./PRODUCT.md) | Missão, princípios pedagógicos e comportamento esperado |
 | [`UX_RESEARCH.md`](./UX_RESEARCH.md) | Pesquisa e decisões sobre a experiência de aprendizagem |
 | [`assets/`](./assets/) | Imagens locais usadas na apresentação do projeto |

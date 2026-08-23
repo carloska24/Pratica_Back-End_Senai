@@ -16,14 +16,14 @@
 <br/>
 
 <!-- Métricas do Projeto -->
-![Módulos](https://img.shields.io/badge/📚_Módulos-12_concluídos-238636?style=flat-square&labelColor=0d1117)
+![Módulos](https://img.shields.io/badge/📚_Módulos-M01–M05_concluídos-238636?style=flat-square&labelColor=0d1117)
 ![Exercícios](https://img.shields.io/badge/⚡_Exercícios-69_arquivos_.js-388bfd?style=flat-square&labelColor=0d1117)
 ![Foco](https://img.shields.io/badge/🎯_Foco_atual-M07_Funções-d4a017?style=flat-square&labelColor=0d1117)
-![Build](https://img.shields.io/badge/Build-passing-238636?style=flat-square&logo=github-actions&labelColor=0d1117)
+[![CI](https://github.com/carloska24/Pratica_Back-End_Senai/actions/workflows/ci.yml/badge.svg)](https://github.com/carloska24/Pratica_Back-End_Senai/actions/workflows/ci.yml)
 
 <br/>
 
-**[🎓 O Campus](#-o-campus-em-ação) · [⚡ Começar](#-início-rápido) · [🗺️ Trilha](#-trilha-de-aprendizado) · [🏗️ Arquitetura](#-arquitetura-técnica) · [👨‍💻 Autor](#-sobre-o-autor)**
+**[🎓 O Campus](#-o-campus-em-ação) · [⚡ Começar](#-início-rápido) · [🗺️ Trilha](#-trilha-de-aprendizado) · [🏗️ Arquitetura](#-arquitetura-técnica) · [📡 Pulso](#-pulso-do-projeto) · [👨‍💻 Autor](#-sobre-o-autor)**
 
 </div>
 
@@ -121,7 +121,7 @@ npm install
 npm run dev
 ```
 
-🌐 Acesse **[http://localhost:3000](http://localhost:3000)** — todo progresso é salvo no **localStorage**, sem cadastro.
+🌐 Acesse **[http://localhost:3000](http://localhost:3000)** — o progresso acadêmico registrado é salvo no **localStorage**, sem cadastro.
 
 <details>
 <summary><strong>📋 Comandos disponíveis</strong></summary>
@@ -132,6 +132,8 @@ npm run dev
 | `npm run dev` | Inicia em modo de desenvolvimento com hot-reload |
 | `npm run build` | Valida e gera o build de produção |
 | `npm run start` | Executa localmente o build gerado |
+| `npm run typecheck` | Valida os contratos TypeScript sem gerar arquivos |
+| `npm run check` | Executa typecheck e build de produção |
 
 </details>
 
@@ -152,7 +154,8 @@ O currículo foi estruturado como uma **campanha progressiva** — cada fase ent
 | Fase | Módulos | Habilidade Construída | Status |
 |:---:|:---:|:---|:---:|
 | Fundamentos | M01 – M02 | Variáveis, operadores e decisões | ✅ Concluído |
-| Controle de Fluxo | M03 – M06 | `while`, `for`, contadores, acumuladores e laços aninhados | ✅ Concluído |
+| Controle de Fluxo | M03 – M05 | `while`, `for`, contadores e acumuladores | ✅ Concluído |
+| Revisão direcionada | M06 | Laços aninhados e níveis de repetição | 🔄 Em andamento |
 | **Foco Atual** | **M07** | **Funções, parâmetros, retorno e composição** | 🔥 Em andamento |
 | Estruturas de Dados | M08 – M12 | Arrays, objetos, strings, datas e JavaScript moderno | 🔒 Próximos |
 | Expansão Backend | M13+ | Assincronismo, Node.js, HTTP, APIs, banco de dados e testes | 🔒 Planejado |
@@ -241,7 +244,7 @@ course/
 &nbsp;&nbsp;
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="48" alt="TypeScript" title="TypeScript 5" />
 &nbsp;&nbsp;
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="48" alt="JavaScript" title="JavaScript ES2024" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="48" alt="JavaScript" title="JavaScript moderno" />
 &nbsp;&nbsp;
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="48" alt="Node.js" title="Node.js" />
 
@@ -253,7 +256,7 @@ course/
 |:---|:---|:---|
 | 🎨 Interface | Next.js 15, React 19, TypeScript, Framer Motion | Navegação, animações e composição das telas |
 | 📖 Conteúdo | Currículo em TypeScript | Aulas, exercícios e exemplos guiados |
-| 🧪 Laboratório | Monaco Editor + Web Worker | Execução segura de código JavaScript no browser |
+| 🧪 Laboratório | Monaco Editor + Web Worker | Execução local separada da interface, com timeout e bloqueios de rede |
 | 💾 Progresso | `localStorage` com saneamento | Persistência local sem servidor ou autenticação |
 
 ### Fluxo da Aplicação
@@ -271,20 +274,18 @@ flowchart LR
     UI --> LOCAL[("localStorage 💾")]
 ```
 
-> **Segurança do Lab:** O código do aluno roda **exclusivamente no browser**, em Web Worker isolado com timeout e rede desativada. Nunca entra no processo do Next.js.
+> **Limites do Lab:** O código do aluno roda no navegador, separado da interface por um Web Worker, com timeout de 1,5 segundo e bloqueio explícito das principais APIs de rede. Ele não é enviado ao processo do Next.js, mas o Worker não deve ser tratado como uma sandbox de segurança completa.
 
 ### Estrutura de Pastas
 
 ```
-campus-backend-senai-javascript/
+Pratica_Back-End_Senai/
 ├── src/
 │   ├── app/                → rotas, shell e estilos globais
-│   ├── components/
-│   │   ├── classroom/      → sala de aula e visualização de aulas
-│   │   ├── labs/           → experiências interativas das lições
-│   │   └── practice/       → arena de desafios
-│   ├── content/            → currículo, aulas e exemplos guiados
-│   └── lib/                → persistência e utilitários
+│   ├── course/             → currículo, aulas e exemplos guiados
+│   ├── features/           → sala de aula, experiências e arena
+│   ├── progress/           → persistência local e regras de progresso
+│   └── runner/             → análise, missões e execução no Web Worker
 ├── course/
 │   └── exercicios-javascript/  → prática organizada por módulo
 ├── docs/
@@ -300,6 +301,40 @@ campus-backend-senai-javascript/
 
 ---
 
+## 📡 Pulso do Projeto
+
+<div align="center">
+
+### CODE • EVOLUTION • ACTIVITY
+
+O workflow foi configurado para atualizar estes cards semanalmente a partir das informações e da atividade pública deste repositório.
+
+<br/>
+
+<strong>Composição técnica</strong>
+
+<img src="./docs/assets/metrics/project-overview.svg" alt="Composição técnica e linguagens do Campus Backend" width="100%" />
+
+<br/>
+
+<strong>Atividade recente</strong>
+
+<img src="./docs/assets/metrics/project-activity.svg" alt="Atividade pública recente do repositório Campus Backend" width="100%" />
+
+</div>
+
+> As métricas descrevem a composição e os eventos públicos do repositório. Elas não representam qualidade, cobertura de testes, produtividade individual ou conclusão pedagógica.
+
+<details>
+<summary><strong>🔐 Como a atualização automática funciona</strong></summary>
+<br/>
+
+O workflow `Project metrics` pode ser executado manualmente e também roda às segundas-feiras. Ele usa um token de leitura armazenado no secret `METRICS_TOKEN`; a gravação dos SVGs é limitada ao `GITHUB_TOKEN` deste repositório.
+
+</details>
+
+---
+
 ## 🚧 Roadmap
 
 <div align="center">
@@ -307,7 +342,7 @@ campus-backend-senai-javascript/
 | Status | Feature |
 |:---:|:---|
 | ✅ | Conteúdo navegável com aulas e exemplos guiados |
-| ✅ | Laboratório Monaco com Web Worker isolado |
+| ✅ | Laboratório Monaco com execução em Web Worker, timeout e bloqueios de rede |
 | ✅ | Arena de desafios com validação e progresso |
 | ✅ | Biblioteca de revisão com histórico de conquistas |
 | ✅ | Persistência local via localStorage saneado |
@@ -329,6 +364,7 @@ campus-backend-senai-javascript/
 |:---|:---|
 | [`docs/PRODUCT.md`](./docs/PRODUCT.md) | Missão, princípios pedagógicos e visão de produto |
 | [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) | Responsabilidades técnicas, segurança e próximos passos |
+| [`docs/AUTOMATION.md`](./docs/AUTOMATION.md) | CI, Metrics, permissões, secrets e manutenção das dependências |
 | [`docs/UX_RESEARCH.md`](./docs/UX_RESEARCH.md) | Observações que orientam a experiência de estudo |
 
 ---

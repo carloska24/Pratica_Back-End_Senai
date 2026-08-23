@@ -111,14 +111,14 @@
     <!-- Next command -->
     <text x="18" y="290" class="mono" font-size="13" fill="#3fb950">carlos@campus</text>
     <text x="133" y="290" class="mono" font-size="13" fill="#8b949e"> ~ $</text>
-    <text x="162" y="290" class="mono" font-size="13" fill="#e6edf3">git log --oneline -3</text>
+    <text x="162" y="290" class="mono" font-size="13" fill="#e6edf3"># marcos recentes</text>
 
-    <text x="18" y="313" class="mono" font-size="11" fill="#8b949e">028f4ab </text>
-    <text x="66" y="313" class="mono" font-size="11" fill="#e6edf3">docs: README profissional</text>
-    <text x="18" y="329" class="mono" font-size="11" fill="#8b949e">a12cd3f </text>
-    <text x="66" y="329" class="mono" font-size="11" fill="#e6edf3">feat: arena de desafios M07</text>
-    <text x="18" y="345" class="mono" font-size="11" fill="#8b949e">8f3e901 </text>
-    <text x="66" y="345" class="mono" font-size="11" fill="#e6edf3">feat: laboratório Monaco</text>
+    <text x="18" y="313" class="mono" font-size="11" fill="#8b949e">• </text>
+    <text x="66" y="313" class="mono" font-size="11" fill="#e6edf3">fix: corrige SVG do banner</text>
+    <text x="18" y="329" class="mono" font-size="11" fill="#8b949e">• </text>
+    <text x="66" y="329" class="mono" font-size="11" fill="#e6edf3">feat: redesign dos SVGs</text>
+    <text x="18" y="345" class="mono" font-size="11" fill="#8b949e">• </text>
+    <text x="66" y="345" class="mono" font-size="11" fill="#e6edf3">docs: README profissional</text>
 
     <rect x="18" y="355" width="12" height="18" fill="#e6edf3" class="cursor" opacity="0.9"/>
   </g>
@@ -157,7 +157,7 @@
     <g transform="translate(238, 72)">
       <rect width="82" height="18" rx="4" fill="#0d2818"/>
       <circle cx="9" cy="9" r="4" fill="#3fb950" class="pulse"/>
-      <text x="18" y="13" class="mono" font-size="9" font-weight="700" fill="#3fb950">Open Source</text>
+      <text x="18" y="13" class="mono" font-size="9" font-weight="700" fill="#3fb950">Public Repo</text>
     </g>
 
     <!-- Body content -->
@@ -166,7 +166,7 @@
       <!-- About -->
       <text x="0" y="18" class="mono" font-size="10" font-weight="700" fill="#8b949e" letter-spacing="1">SOBRE</text>
       <text x="0" y="38" class="sans" font-size="13" fill="#e6edf3">Construindo um campus de estudos aberto enquanto</text>
-      <text x="0" y="55" class="sans" font-size="13" fill="#e6edf3">me preparo para o curso de Backend do SENAI. Aprendo</text>
+      <text x="0" y="55" class="sans" font-size="13" fill="#e6edf3">avanço na formação Backend do SENAI. Aprendo</text>
       <text x="0" y="72" class="sans" font-size="13" fill="#e6edf3">fazendo, compartilho documentando.</text>
 
       <rect x="0" y="84" width="550" height="1" fill="#21262d"/>
@@ -206,24 +206,23 @@
 
       <!-- Skill 1: JS Fundamentos -->
       <text x="0" y="195" class="mono" font-size="11" fill="#e6edf3">JavaScript Fundamentos</text>
-      <text x="310" y="195" class="mono" font-size="10" fill="#3fb950" font-weight="700">M01–M06 ✓</text>
+      <text x="310" y="195" class="mono" font-size="10" fill="#3fb950" font-weight="700">M01–M05 ✓</text>
       <rect x="0" y="200" width="296" height="6" rx="3" fill="#21262d"/>
-      <rect x="0" y="200" width="236" height="6" rx="3" fill="#1f6feb"/>
-      <text x="240" y="208" class="mono" font-size="9" fill="#388bfd" font-weight="700">80%</text>
+      <rect x="0" y="200" width="296" height="6" rx="3" fill="#1f6feb"/>
+      <text x="300" y="208" class="mono" font-size="9" fill="#388bfd" font-weight="700">100%</text>
 
       <!-- Skill 2: Funções -->
       <text x="0" y="226" class="mono" font-size="11" fill="#e6edf3">Funções &amp; Composição</text>
       <text x="310" y="226" class="mono" font-size="10" fill="#f7df1e" font-weight="700">M07 🔥</text>
       <rect x="0" y="231" width="296" height="6" rx="3" fill="#21262d"/>
-      <rect x="0" y="231" width="100" height="6" rx="3" fill="#ca8a04"/>
-      <text x="104" y="239" class="mono" font-size="9" fill="#f7df1e" font-weight="700">34%</text>
+      <rect x="0" y="231" width="189" height="6" rx="3" fill="#ca8a04"/>
+      <text x="193" y="239" class="mono" font-size="9" fill="#f7df1e" font-weight="700">64%</text>
 
       <!-- Skill 3: Node.js -->
       <text x="0" y="257" class="mono" font-size="11" fill="#484f58">Node.js &amp; APIs</text>
       <text x="310" y="257" class="mono" font-size="10" fill="#484f58">M13+ 🔒</text>
       <rect x="0" y="262" width="296" height="6" rx="3" fill="#21262d"/>
-      <rect x="0" y="262" width="8" height="6" rx="3" fill="#30363d"/>
-      <text x="12" y="270" class="mono" font-size="9" fill="#484f58">3%</text>
+      <text x="4" y="270" class="mono" font-size="9" fill="#484f58">0%</text>
 
       <rect x="0" y="284" width="550" height="1" fill="#21262d"/>
 
