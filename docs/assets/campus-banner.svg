@@ -169,7 +169,7 @@
   </g>
 
   <!-- RIGHT: Stats column -->
-  <g transform="translate(1030,72)">
+  <g transform="translate(1030,40)">
     <!-- Stat card 1 -->
     <rect width="128" height="70" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
     <text x="64" y="24" text-anchor="middle" class="mono" font-size="14" fill="#b1bac4">Módulos</text>
