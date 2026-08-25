@@ -1,7 +1,7 @@
 "use client";
 
-import CampusApp from "@/features/shell/CampusApp";
+import { StudentExperience } from "@/features/onboarding/StudentExperience";
 
 export default function Home() {
-  return <CampusApp />;
+  return <StudentExperience />;
 }
