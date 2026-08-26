@@ -1,8 +1,9 @@
 "use client";
 
-import { FormEvent, ReactNode, useState } from "react";
+import { FormEvent, ReactNode, useEffect, useState } from "react";
 import { ArrowRight, BookOpen, LockKeyhole, UserRound } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
+import { switchStudentWorkspace } from "@/progress/studentWorkspace";
 
 type StudentAccessProps = { children: ReactNode };
 
@@ -14,6 +15,10 @@ export function StudentAccess({ children }: StudentAccessProps) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (session?.user.id) switchStudentWorkspace(session.user.id);
+  }, [session?.user.id]);
 
   if (isPending) {
     return <main className="auth-shell"><section className="panel auth-card"><span className="eyebrow">CAMPUS BACKEND</span><h1>Preparando seu espaço de estudo…</h1><p>Estamos carregando seu progresso.</p></section></main>;

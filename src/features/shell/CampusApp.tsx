@@ -30,7 +30,8 @@ import {
   XCircle,
   RotateCcw,
   LibraryBig,
-  BookMarked
+  BookMarked,
+  LogOut
 } from "lucide-react";
 import { completedModules, plannedModules, currentLesson, CourseModule } from "@/course/course";
 import Classroom from "@/features/classroom/Classroom";
@@ -50,6 +51,7 @@ import { labModules, resolveExecutionMission, resolveMissionValidation, starterC
 import { tutorResponseSchema, type TutorResponse } from "@/tutor/schemas";
 import type { ExecutionTrace } from "@/interpreter/contracts";
 import { createInterpreterWorkerClient, type InterpreterWorkerExecution } from "@/interpreter/workerClient";
+import { authClient } from "@/lib/auth-client";
 
 type View = "dashboard" | "trilha" | "aula" | "laboratorio" | "arena" | "conquistas" | "perfil";
 
@@ -559,6 +561,13 @@ function Performance() {
 export default function CampusApp() {
   const [view, setView] = useState<View>("dashboard");
   const progress = useCampusProgress();
+  const { data: session } = authClient.useSession();
+  const studentName = session?.user.name?.trim() || "Aluno do Campus";
+  const studentInitials = studentName
+    .split(/\s+/)
+    .slice(0, 2)
+    .map(part => part[0]?.toUpperCase())
+    .join("") || "AL";
   const content = useMemo(() => {
     switch (view) {
       case "dashboard": return <Dashboard setView={setView}/>;
@@ -577,10 +586,10 @@ export default function CampusApp() {
         <div className="brand"><div className="brand-mark">JS</div><div><strong>Campus Backend</strong><span>Curso aberto de JavaScript Backend</span></div></div>
         <nav aria-label="Navegação principal">{nav.map(item => { const Icon = item.icon; return <button key={item.id} aria-label={item.label} title={item.label} className={view===item.id?"active":""} onClick={()=>setView(item.id)}><Icon size={19} strokeWidth={1.9}/><span>{item.label}</span>{item.id==="aula"&&<i/>}</button>})}</nav>
         <div className="sidebar-card"><Flame/><div><span>Foco desta etapa</span><strong>{progress.m12Mastered ? "M13 · Módulos ES" : progress.m11Mastered ? "M12 · JavaScript moderno" : progress.m10Mastered ? "M11 · Arrays modernos" : progress.m09Mastered ? "M10 · Strings" : progress.m08Mastered ? "M09 · Objetos" : progress.m07Mastered ? "M08 · Arrays" : "M07 · Funções"}</strong></div></div>
-        <div className="sidebar-footer"><div className="avatar">CP</div><div><strong>Carlos Pereira</strong><span>Fundamentos II</span></div></div>
+        <div className="sidebar-footer"><div className="avatar">{studentInitials}</div><div className="sidebar-account"><strong>{studentName}</strong><span>Aluno do Campus</span></div><button className="sign-out-button" type="button" title="Sair da conta" aria-label="Sair da conta" onClick={() => authClient.signOut()}><LogOut size={16}/></button></div>
       </aside>
       <section className="workspace">
-        <header className="topbar"><div><span className="crumb">FORMAÇÃO / BACKEND JAVASCRIPT</span></div><div className="top-actions"><span className="semester">{progress.m12Mastered ? "M13 · Próxima retomada" : progress.m11Mastered ? "M12 · JavaScript moderno liberado" : progress.m10Mastered ? "M11 · Arrays modernos liberado" : progress.m09Mastered ? "M10 · Strings liberado" : progress.m08Mastered ? "M09 · Objetos liberado" : progress.m07Mastered ? "M08 · Arrays liberado" : "M07 · Funções"}</span><div className="xp-pill"><Sparkles size={15}/> Progresso local</div><div className="avatar small">CP</div></div></header>
+        <header className="topbar"><div><span className="crumb">FORMAÇÃO / BACKEND JAVASCRIPT</span></div><div className="top-actions"><span className="semester">{progress.m12Mastered ? "M13 · Próxima retomada" : progress.m11Mastered ? "M12 · JavaScript moderno liberado" : progress.m10Mastered ? "M11 · Strings liberado" : progress.m09Mastered ? "M10 · Objetos liberado" : progress.m08Mastered ? "M09 · Arrays liberado" : progress.m07Mastered ? "M08 · Arrays liberado" : "M07 · Funções"}</span><div className="xp-pill"><Sparkles size={15}/> Progresso local</div><div className="avatar small">{studentInitials}</div></div></header>
         <div className="content-wrap"><AnimatePresence mode="wait"><motion.div key={view} initial={{opacity:0,y:6}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-4}} transition={{duration:.18}} className="view-root">{content}</motion.div></AnimatePresence></div>
       </section>
     </main>
