@@ -1,7 +1,8 @@
 "use client";
 
 import CampusApp from "@/features/shell/CampusApp";
+import { StudentAccess } from "@/features/auth/StudentAccess";
 
 export default function Home() {
-  return <CampusApp />;
+  return <StudentAccess><CampusApp /></StudentAccess>;
 }
