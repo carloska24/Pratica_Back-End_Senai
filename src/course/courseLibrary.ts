@@ -23,7 +23,7 @@ export const courseLibrary: CourseLibraryModule[] = [
     status: "concluido",
     items: [
       {
-        id: "M01-A01", kind: "aula", title: "Aula01 · Variáveis, let, const e tipos",
+        id: "M01-A01", kind: "aula", title: "Aula 01 · Variáveis, let, const e tipos",
         summary: "As primeiras caixinhas do JavaScript: como criar, nomear e guardar informações sem depender dos tipos explícitos do Java.",
         concepts: ["let", "const", "string", "number", "boolean", "typeof", "console.log"]
       },

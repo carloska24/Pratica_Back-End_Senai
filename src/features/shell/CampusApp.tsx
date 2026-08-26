@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Editor from "@monaco-editor/react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -35,28 +35,21 @@ import {
 import { completedModules, plannedModules, currentLesson, CourseModule } from "@/course/course";
 import Classroom from "@/features/classroom/Classroom";
 import PracticeArena from "@/features/practice/PracticeArena";
+import { LabModulePicker } from "@/features/lab/LabModulePicker";
+import { ExecutionWorkbench } from "@/features/lab/ExecutionWorkbench";
+import { TeachingBoard } from "@/features/lab/TeachingBoard";
+import { buildTutorRequest } from "@/features/lab/tutorPayload";
 import { courseLibrary } from "@/course/courseLibrary";
 import { useCampusProgress, type CampusProgress } from "@/progress/useCampusProgress";
 import { getCourseModuleView } from "@/progress/courseProgress";
 import { readMasteredModules } from "@/progress/storage";
-import { evaluateJavaScript } from "@/runner/analyzer";
-import { runJavaScriptLocally } from "@/runner/browserRunner";
-import type { ExecutionResult, MissionId } from "@/runner/contracts";
-import {
-  arrayMissionCode,
-  arrayMissionFile,
-  dataMissionCode,
-  dataMissionFile,
-  functionMissionCode,
-  functionMissionFile,
-  modernArrayMissionCode,
-  modernArrayMissionFile,
-  modernJavaScriptMissionCode,
-  modernJavaScriptMissionFile,
-  objectMissionCode,
-  objectMissionFile,
-  starterCode,
-} from "@/runner/missionCatalog";
+import { analyzeJavaScript } from "@/runner/analyzer";
+import { MAX_LOCAL_CODE_BYTES, runJavaScriptLocally } from "@/runner/browserRunner";
+import type { ExecutionResult, LabModuleId, MissionId, TeachingAnalysis } from "@/runner/contracts";
+import { labModules, resolveExecutionMission, resolveMissionValidation, starterCode } from "@/runner/missionCatalog";
+import { tutorResponseSchema, type TutorResponse } from "@/tutor/schemas";
+import type { ExecutionTrace } from "@/interpreter/contracts";
+import { createInterpreterWorkerClient, type InterpreterWorkerExecution } from "@/interpreter/workerClient";
 
 type View = "dashboard" | "trilha" | "aula" | "laboratorio" | "arena" | "conquistas" | "perfil";
 
@@ -261,91 +254,278 @@ function Lab() {
   const progress = useCampusProgress();
   const [code, setCode] = useState(starterCode);
   const [fileName, setFileName] = useState("ExercicioAtual.js");
-  const [analysis, setAnalysis] = useState<ReturnType<typeof evaluateJavaScript> | null>(null);
+  const [selectedModuleId, setSelectedModuleId] = useState<LabModuleId>("M07");
+  const [loadedMissionId, setLoadedMissionId] = useState<MissionId | null>(null);
+  const [analysis, setAnalysis] = useState<TeachingAnalysis | null>(null);
+  const [analyzedCode, setAnalyzedCode] = useState<string | null>(null);
   const [execution, setExecution] = useState<ExecutionResult | null>(null);
+  const [executionContext, setExecutionContext] = useState<{ kind: "free" } | { kind: "mission"; module: MissionId } | null>(null);
   const [running, setRunning] = useState(false);
+  const [tutor, setTutor] = useState<TutorResponse | null>(null);
+  const [tutorLoading, setTutorLoading] = useState(false);
+  const [tutorError, setTutorError] = useState<string | null>(null);
+  const [pedagogicalTrace, setPedagogicalTrace] = useState<ExecutionTrace | null>(null);
+  const [preparingTrace, setPreparingTrace] = useState(false);
+  const [traceError, setTraceError] = useState<string | null>(null);
+  const [workbenchOpen, setWorkbenchOpen] = useState(false);
+  const interpreterClient = useMemo(() => createInterpreterWorkerClient(), []);
+  const activeInterpretation = useRef<InterpreterWorkerExecution | null>(null);
+  const prepareButtonRef = useRef<HTMLButtonElement>(null);
+  const executionSequence = useRef(0);
+  const tutorAbort = useRef<AbortController | null>(null);
+  useEffect(() => () => {
+    activeInterpretation.current?.cancel();
+    tutorAbort.current?.abort();
+    interpreterClient.dispose();
+  }, [interpreterClient]);
+  const mastered = useMemo<MissionId[]>(() => {
+    const values: Array<[MissionId, boolean]> = [
+      ["M07", progress.m07Mastered],
+      ["M08", progress.m08Mastered],
+      ["M09", progress.m09Mastered],
+      ["M10", progress.m10Mastered],
+      ["M11", progress.m11Mastered],
+      ["M12", progress.m12Mastered],
+    ];
+    return values.filter(([, complete]) => complete).map(([moduleId]) => moduleId);
+  }, [progress.m07Mastered, progress.m08Mastered, progress.m09Mastered, progress.m10Mastered, progress.m11Mastered, progress.m12Mastered]);
+  const selectedModule = labModules.find(module => module.id === selectedModuleId) ?? labModules[6];
+  const executionMissionId = resolveExecutionMission(selectedModuleId, mastered);
+  const currentMission = selectedModule.kind === "mission" && executionMissionId
+    ? { module: executionMissionId, expectedTests: selectedModule.mission.expectedTests }
+    : null;
+  const validationMissionId = resolveMissionValidation(selectedModuleId, loadedMissionId);
+  const supportsInvestigation = Number(selectedModuleId.slice(1)) <= 7;
+
   const handleFile = async (file?: File) => {
     if (!file) return;
-    setCode(await file.text());
-    setFileName(file.name);
-    setAnalysis(null);
-    setExecution(null);
-  };
-  const loadMission = (missionCode: string, missionFile: string) => {
-    setCode(missionCode);
-    setFileName(missionFile);
-    setAnalysis(null);
-    setExecution(null);
-  };
-  const currentMission = fileName === functionMissionFile
-    ? { module: "M07" as MissionId, expectedTests: 4 }
-    : fileName === arrayMissionFile
-      ? { module: "M08" as MissionId, expectedTests: 6 }
-      : fileName === objectMissionFile
-        ? { module: "M09" as MissionId, expectedTests: 6 }
-        : fileName === dataMissionFile
-          ? { module: "M10" as MissionId, expectedTests: 6 }
-          : fileName === modernArrayMissionFile
-            ? { module: "M11" as MissionId, expectedTests: 8 }
-            : fileName === modernJavaScriptMissionFile
-              ? { module: "M12" as MissionId, expectedTests: 8 }
-              : null;
-  const executeCode = async () => {
-    setRunning(true);
-    setExecution(null);
-    const result = await runJavaScriptLocally(code, currentMission?.module ?? null);
-    setExecution(result);
-    if (currentMission) {
-      const passed = result.tests.length === currentMission.expectedTests && result.tests.every(test => test.ok);
-      try {
-        const savedAttempts = JSON.parse(localStorage.getItem("campus-lab-attempts") ?? "[]");
-        const attempts = Array.isArray(savedAttempts) ? savedAttempts : [];
-        attempts.push({ module: currentMission.module, fileName, passed, passedTests: result.tests.filter(test => test.ok).length, totalTests: result.tests.length, createdAt: new Date().toISOString() });
-        localStorage.setItem("campus-lab-attempts", JSON.stringify(attempts.slice(-50)));
-
-        if (passed) {
-          const mastered = readMasteredModules();
-          if (!mastered.includes(currentMission.module)) localStorage.setItem("campus-module-mastery", JSON.stringify([...mastered, currentMission.module]));
-        }
-        window.dispatchEvent(new Event("campus-progress-changed"));
-      } catch {}
+    if (file.size > MAX_LOCAL_CODE_BYTES) {
+      setTraceError(`O arquivo excede o limite local de ${MAX_LOCAL_CODE_BYTES} bytes.`);
+      return;
     }
     setRunning(false);
+    setCode(await file.text());
+    setFileName(file.name);
+    setLoadedMissionId(null);
+    setAnalysis(null);
+    setAnalyzedCode(null);
+    setExecution(null);
+    setExecutionContext(null);
+    executionSequence.current += 1;
+    setTutor(null);
+    setTutorError(null);
+    tutorAbort.current?.abort();
+    tutorAbort.current = null;
+    setTutorLoading(false);
+    activeInterpretation.current?.cancel();
+    activeInterpretation.current = null;
+    setPreparingTrace(false);
+    setPedagogicalTrace(null);
+    setTraceError(null);
+    setWorkbenchOpen(false);
   };
-  const missionPassed = Boolean(currentMission && execution?.tests.length === currentMission.expectedTests && execution.tests.every(test => test.ok));
+
+  const selectModule = (moduleId: LabModuleId) => {
+    setRunning(false);
+    setSelectedModuleId(moduleId);
+    setLoadedMissionId(null);
+    setAnalysis(null);
+    setAnalyzedCode(null);
+    setExecution(null);
+    setExecutionContext(null);
+    executionSequence.current += 1;
+    setTutor(null);
+    setTutorError(null);
+    tutorAbort.current?.abort();
+    tutorAbort.current = null;
+    setTutorLoading(false);
+    activeInterpretation.current?.cancel();
+    activeInterpretation.current = null;
+    setPreparingTrace(false);
+    setPedagogicalTrace(null);
+    setTraceError(null);
+    setWorkbenchOpen(false);
+  };
+
+  const loadSelectedMission = () => {
+    if (selectedModule.kind !== "mission" || !currentMission) return;
+    setRunning(false);
+    setCode(selectedModule.mission.code);
+    setFileName(selectedModule.mission.fileName);
+    setLoadedMissionId(currentMission.module);
+    setAnalysis(null);
+    setAnalyzedCode(null);
+    setExecution(null);
+    setExecutionContext(null);
+    executionSequence.current += 1;
+    setTutor(null);
+    setTutorError(null);
+    tutorAbort.current?.abort();
+    tutorAbort.current = null;
+    setTutorLoading(false);
+    activeInterpretation.current?.cancel();
+    activeInterpretation.current = null;
+    setPreparingTrace(false);
+    setPedagogicalTrace(null);
+    setTraceError(null);
+    setWorkbenchOpen(false);
+  };
+
+  const analyzeCode = async () => {
+    const nextAnalysis = analyzeJavaScript(code, selectedModuleId);
+    setAnalysis(nextAnalysis);
+    setAnalyzedCode(code);
+    setTutor(null);
+    setTutorError(null);
+    setTraceError(null);
+
+    if (!supportsInvestigation) {
+      setPedagogicalTrace(null);
+      return;
+    }
+
+    activeInterpretation.current?.cancel();
+    setPreparingTrace(true);
+    const execution = interpreterClient.run(code);
+    activeInterpretation.current = execution;
+    try {
+      const trace = await execution.result;
+      if (activeInterpretation.current?.requestId !== execution.requestId) return;
+      setPedagogicalTrace(trace);
+      setWorkbenchOpen(true);
+    } catch (error) {
+      if (activeInterpretation.current?.requestId !== execution.requestId) return;
+      setTraceError(error instanceof Error ? error.message : "Não foi possível preparar a execução passo a passo.");
+    } finally {
+      if (activeInterpretation.current?.requestId === execution.requestId) {
+        activeInterpretation.current = null;
+        setPreparingTrace(false);
+      }
+    }
+  };
+
+  const requestTutor = async () => {
+    if (!analysis || analyzedCode !== code) {
+      setTutorError("Atualize a análise local antes de pedir uma explicação ao Tutor.");
+      return;
+    }
+    if (code.length > 12_000) {
+      setTutorError("O Tutor aceita códigos de até 12.000 caracteres. A análise local continua disponível.");
+      return;
+    }
+
+    tutorAbort.current?.abort();
+    const controller = new AbortController();
+    tutorAbort.current = controller;
+    setTutorLoading(true);
+    setTutorError(null);
+    try {
+      const response = await fetch("/api/tutor", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
+        body: JSON.stringify(buildTutorRequest(analysis, code, execution)),
+      });
+      const body: unknown = await response.json();
+      if (!response.ok) throw new Error("O Tutor não conseguiu validar esta solicitação.");
+      const parsed = tutorResponseSchema.safeParse(body);
+      if (!parsed.success) throw new Error("O Tutor devolveu uma resposta fora do formato seguro.");
+      if (!controller.signal.aborted) setTutor(parsed.data);
+    } catch (error) {
+      if (!controller.signal.aborted) setTutorError(error instanceof Error ? error.message : "Não foi possível abrir o Tutor agora.");
+    } finally {
+      if (tutorAbort.current === controller) {
+        tutorAbort.current = null;
+        setTutorLoading(false);
+      }
+    }
+  };
+
+  const executeCode = async (missionId: MissionId | null) => {
+    const sequence = ++executionSequence.current;
+    setRunning(true);
+    setExecution(null);
+    setExecutionContext(missionId ? { kind: "mission", module: missionId } : { kind: "free" });
+    try {
+      const result = await runJavaScriptLocally(code, missionId);
+      if (executionSequence.current !== sequence) return;
+      setExecution(result);
+      if (missionId && currentMission?.module === missionId) {
+        const passed = result.tests.length === currentMission.expectedTests && result.tests.every(test => test.ok);
+        try {
+          const savedAttempts = JSON.parse(localStorage.getItem("campus-lab-attempts") ?? "[]");
+          const attempts = Array.isArray(savedAttempts) ? savedAttempts : [];
+          attempts.push({ module: missionId, fileName, passed, passedTests: result.tests.filter(test => test.ok).length, totalTests: currentMission.expectedTests, createdAt: new Date().toISOString() });
+          localStorage.setItem("campus-lab-attempts", JSON.stringify(attempts.slice(-50)));
+
+          if (passed) {
+            const mastered = readMasteredModules();
+            if (!mastered.includes(missionId)) localStorage.setItem("campus-module-mastery", JSON.stringify([...mastered, missionId]));
+          }
+          window.dispatchEvent(new Event("campus-progress-changed"));
+        } catch {}
+      }
+    } catch {
+      if (executionSequence.current === sequence) {
+        setExecution({ logs: [], tests: [], error: "Não foi possível concluir a execução local." });
+      }
+    } finally {
+      if (executionSequence.current === sequence) setRunning(false);
+    }
+  };
+  const missionPassed = Boolean(
+    currentMission
+    && executionContext?.kind === "mission"
+    && executionContext.module === currentMission.module
+    && execution?.tests.length === currentMission.expectedTests
+    && execution.tests.every(test => test.ok),
+  );
+  const nextModule = currentMission && currentMission.module !== "M12"
+    ? `M${String(Number(currentMission.module.slice(1)) + 1).padStart(2, "0")}`
+    : "M13";
+
+  if (workbenchOpen && pedagogicalTrace) {
+    return <ExecutionWorkbench trace={pedagogicalTrace} code={code} moduleId={selectedModuleId} onExit={() => {
+      setWorkbenchOpen(false);
+      window.setTimeout(() => prepareButtonRef.current?.focus(), 0);
+    }}/>;
+  }
+
   return (
     <div className="lab-layout">
       <section className="panel editor-panel">
         <div className="editor-toolbar"><div><span className="dot red"/><span className="dot amber"/><span className="dot green"/><b title={fileName}>{fileName}</b></div><label className="btn btn-soft"><Upload size={16}/> Carregar .js<input hidden type="file" accept=".js,.mjs,.txt" onChange={e => handleFile(e.target.files?.[0])}/></label></div>
-        <div className="editor-wrap"><Editor height="100%" defaultLanguage="javascript" value={code} onChange={v => setCode(v ?? "")} theme="vs-dark" options={{ minimap: { enabled: false }, fontSize: 16, lineHeight: 25, roundedSelection: false, padding: { top: 18 }, wordWrap: "on" }}/></div>
+        <div className="editor-wrap"><Editor height="100%" defaultLanguage="javascript" value={code} onChange={v => { setRunning(false); setCode(v ?? ""); setExecution(null); setExecutionContext(null); setPedagogicalTrace(null); setTraceError(null); executionSequence.current += 1; tutorAbort.current?.abort(); tutorAbort.current = null; setTutorLoading(false); activeInterpretation.current?.cancel(); activeInterpretation.current = null; setPreparingTrace(false); }} theme="vs-dark" options={{ accessibilitySupport: "on", ariaLabel: "Editor JavaScript do laboratório", minimap: { enabled: false }, fontSize: 16, lineHeight: 25, roundedSelection: false, padding: { top: 18 }, wordWrap: "on" }}/></div>
       </section>
       <aside className="panel review-panel">
-        <div className="section-heading"><div><span className="eyebrow">LABORATÓRIO JAVASCRIPT</span><h2>Revisão estrutural</h2></div><ShieldCheck/></div>
-        <p className="review-intro">Analise a estrutura ou execute o código localmente em um Worker isolado do navegador. Cada missão final possui casos de teste próprios e limite automático de tempo.</p>
-        <div className="mission-picker" aria-label="Missões finais disponíveis">
-          <button className={`btn mission-loader ${fileName === functionMissionFile ? "active" : ""}`} onClick={() => loadMission(functionMissionCode, functionMissionFile)}><Target size={16}/><span><b>M07 · Funções</b><small>4 casos de teste</small></span></button>
-          <button className={`btn mission-loader ${fileName === arrayMissionFile ? "active" : ""}`} disabled={!progress.m07Mastered} onClick={() => loadMission(arrayMissionCode, arrayMissionFile)}>{progress.m07Mastered ? <Target size={16}/> : <LockKeyhole size={16}/>}<span><b>M08 · Arrays</b><small>{progress.m07Mastered ? "6 casos de teste" : "conclua M07"}</small></span></button>
-          <button className={`btn mission-loader ${fileName === objectMissionFile ? "active" : ""}`} disabled={!progress.m08Mastered} onClick={() => loadMission(objectMissionCode, objectMissionFile)}>{progress.m08Mastered ? <Target size={16}/> : <LockKeyhole size={16}/>}<span><b>M09 · Objetos</b><small>{progress.m08Mastered ? "6 casos de teste" : "conclua M08"}</small></span></button>
-          <button className={`btn mission-loader ${fileName === dataMissionFile ? "active" : ""}`} disabled={!progress.m09Mastered} onClick={() => loadMission(dataMissionCode, dataMissionFile)}>{progress.m09Mastered ? <Target size={16}/> : <LockKeyhole size={16}/>}<span><b>M10 · Dados</b><small>{progress.m09Mastered ? "6 casos de teste" : "conclua M09"}</small></span></button>
-          <button className={`btn mission-loader ${fileName === modernArrayMissionFile ? "active" : ""}`} disabled={!progress.m10Mastered} onClick={() => loadMission(modernArrayMissionCode, modernArrayMissionFile)}>{progress.m10Mastered ? <Target size={16}/> : <LockKeyhole size={16}/>}<span><b>M11 · Arrays modernos</b><small>{progress.m10Mastered ? "8 casos de teste" : "conclua M10"}</small></span></button>
-          <button className={`btn mission-loader ${fileName === modernJavaScriptMissionFile ? "active" : ""}`} disabled={!progress.m11Mastered} onClick={() => loadMission(modernJavaScriptMissionCode, modernJavaScriptMissionFile)}>{progress.m11Mastered ? <Target size={16}/> : <LockKeyhole size={16}/>}<span><b>M12 · JavaScript moderno</b><small>{progress.m11Mastered ? "8 casos de teste" : "conclua M11"}</small></span></button>
+        <div className="section-heading"><div><span className="eyebrow">LABORATÓRIO JAVASCRIPT</span><h2>Contexto do estudo</h2></div><ShieldCheck/></div>
+        <p className="review-intro">Escolha o módulo antes de analisar ou executar. O arquivo carregado permanece no contexto selecionado; o nome do arquivo nunca decide a suíte de testes.</p>
+        <LabModulePicker selectedModuleId={selectedModuleId} mastered={mastered} onSelect={selectModule}/>
+        <div className="selected-lab-context">
+          <div><span>CONTEXTO ATIVO</span><strong>{selectedModule.id} · {selectedModule.title}</strong></div>
+          <p>{selectedModule.concepts.join(" · ")}</p>
+          {selectedModule.kind === "mission" && currentMission && <button className="btn btn-soft" type="button" onClick={loadSelectedMission}><Target size={16}/>{validationMissionId ? `Recarregar missão ${selectedModule.id}` : `Carregar missão ${selectedModule.id}`}</button>}
+          {validationMissionId && <span className="mission-loaded"><CheckCircle2 size={14}/>Missão {validationMissionId} carregada e pronta para validação</span>}
         </div>
-        <div className="lab-action-grid"><button className="btn btn-primary" onClick={() => setAnalysis(evaluateJavaScript(code))}><ShieldCheck size={16}/> Analisar estrutura</button><button className="btn btn-run" disabled={running} onClick={executeCode}><Play size={16}/> {running ? "Executando..." : "Executar código"}</button></div>
+        <div className="lab-action-grid">
+          <button ref={prepareButtonRef} className="btn btn-primary" disabled={preparingTrace} onClick={analyzeCode}><BrainCircuit size={16}/> {preparingTrace ? "Preparando investigação..." : supportsInvestigation ? "Investigar meu código" : "Analisar estrutura"}</button>
+          <button className="btn btn-run" disabled={running} onClick={() => executeCode(null)}><Play size={16}/> {running && executionContext?.kind === "free" ? "Executando..." : "Executar normalmente"}</button>
+          {validationMissionId && <button className="btn btn-validate" disabled={running} onClick={() => executeCode(validationMissionId)}><Target size={16}/> {running && executionContext?.kind === "mission" ? "Validando..." : `Validar missão ${validationMissionId}`}</button>}
+        </div>
+        <div className="lab-action-help"><span><b>Investigar:</b> abre a Bancada passo a passo.</span><span><b>Executar:</b> mostra somente o console.</span>{validationMissionId && <span><b>Validar:</b> aplica os testes oficiais da missão.</span>}</div>
+        {traceError && <div className="execution-error" role="alert"><XCircle size={16}/><span>{traceError}</span></div>}
         {execution && <div className="execution-result">
-          <div className="execution-heading"><span className="eyebrow">EXECUÇÃO LOCAL</span><strong>{execution.timedOut ? "Tempo excedido" : execution.error ? "Execução com erro" : execution.tests.length ? `${execution.tests.filter(test => test.ok).length}/${execution.tests.length} testes passaram` : "Código executado"}</strong></div>
+          <div className="execution-heading"><span className="eyebrow">{executionContext?.kind === "mission" ? `VALIDAÇÃO ${executionContext.module}` : "EXECUÇÃO LIVRE"}</span><strong>{execution.timedOut ? "Tempo excedido" : execution.error ? "Execução com erro" : executionContext?.kind === "mission" && currentMission ? `${execution.tests.filter(test => test.ok).length}/${currentMission.expectedTests} critérios atendidos` : "Código executado"}</strong></div>
           {execution.error && <div className="execution-error"><XCircle size={16}/><span>{execution.error}</span></div>}
           {execution.tests.length > 0 && <div className="execution-tests">{execution.tests.map(test => <div key={test.name} className={test.ok ? "pass" : "fail"}>{test.ok ? <CheckCircle2/> : <XCircle/>}<span><b>{test.name}</b><small>Esperado: {test.expected} · Recebido: {test.received}</small></span></div>)}</div>}
           <div className="console-output"><span>CONSOLE</span>{execution.logs.length ? execution.logs.map((line, index) => <code key={`${line}-${index}`}>{line}</code>) : <code>Nenhuma saída com console.log.</code>}</div>
         </div>}
-        {missionPassed && currentMission && <div className="mastery-earned"><CheckCircle2 size={20}/><div><span>DOMÍNIO {currentMission.module} COMPROVADO</span><strong>{currentMission.module === "M07" ? "Funções concluídas. O módulo M08 · Arrays foi liberado na Sala de Aula." : currentMission.module === "M08" ? "Arrays concluídos. Você está pronto para iniciar M09 · Objetos JavaScript." : currentMission.module === "M09" ? "Objetos concluídos. A próxima etapa da formação é M10 · Strings, Math e Date." : currentMission.module === "M10" ? "Strings, Math e Date concluídos. A próxima etapa é M11 · Arrays modernos." : currentMission.module === "M11" ? "Arrays modernos concluídos. A próxima etapa é M12 · JavaScript moderno." : "JavaScript moderno concluído. O próximo ponto de retomada é M13 · Módulos e organização."}</strong></div></div>}
+        {missionPassed && currentMission && <div className="mastery-earned"><CheckCircle2 size={20}/><div><span>DOMÍNIO {currentMission.module} COMPROVADO</span><strong>{currentMission.module === "M12" ? "JavaScript moderno concluído. O próximo ponto de retomada é M13 · Módulos e organização." : `${selectedModule.title} concluído. O módulo ${nextModule} foi liberado.`}</strong></div></div>}
         <AnimatePresence mode="wait">
-          {analysis ? <motion.div key="result" initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} exit={{opacity:0}} className="analysis-result">
-            <div className="score-box"><span>Score estrutural</span><strong>{analysis.score}</strong><small>/ 100</small></div>
-            <div className="analysis-checks">{analysis.checks.map(c => <div key={c.label} className={c.ok ? "pass" : "fail"}>{c.ok ? <CheckCircle2/> : <XCircle/>}<span>{c.label}</span></div>)}</div>
-            <div className="review-note"><BrainCircuit/><p><b>Próxima camada:</b> runner Node.js isolado, casos de teste, captura de console, comparação de resultado e feedback pedagógico por missão.</p></div>
-          </motion.div> : execution ? null : <div className="empty-review"><FileCode2/><strong>Seu feedback aparecerá aqui</strong><span>Carregue um ExercicioXX.js ou use o exemplo atual.</span></div>}
+          {analysis ? <motion.div key="result" initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} exit={{opacity:0}} className="analysis-ready"><BrainCircuit/><div><strong>{pedagogicalTrace && !traceError ? "Investigação disponível" : "Análise estrutural concluída"}</strong><span>{analysis.flow.length} etapas estruturais · {analysis.variables.length} variáveis · {analysis.functions.length} funções</span></div></motion.div> : execution ? null : <div className="empty-review"><FileCode2/><strong>Escolha como trabalhar com o código</strong><span>Investigue o fluxo, execute livremente ou carregue a missão para validar o domínio.</span></div>}
         </AnimatePresence>
       </aside>
+      {analysis && Number(selectedModuleId.slice(1)) > 7 && <TeachingBoard analysis={analysis} fileName={fileName} stale={analyzedCode !== code} onRequestTutor={requestTutor} tutor={tutor} tutorLoading={tutorLoading} tutorError={tutorError}/>}
     </div>
   );
 }
