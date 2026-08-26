@@ -1,4 +1,4 @@
-import { boolean, integer, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { boolean, integer, pgTable, text, timestamp, uniqueIndex } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -54,5 +54,10 @@ export const studentProgress = pgTable("student_progress", {
   lessonId: text("lesson_id"),
   status: text("status").notNull().default("available"),
   percentage: integer("percentage").notNull().default(0),
+  explanationDone: boolean("explanation_done").notNull().default(false),
+  boardDone: boolean("board_done").notNull().default(false),
+  checkpointDone: boolean("checkpoint_done").notNull().default(false),
+  exerciseDone: boolean("exercise_done").notNull().default(false),
+  completedAt: timestamp("completed_at"),
   updatedAt: timestamp("updated_at").notNull(),
-});
+}, table => [uniqueIndex("student_progress_user_lesson_unique").on(table.userId, table.lessonId)]);

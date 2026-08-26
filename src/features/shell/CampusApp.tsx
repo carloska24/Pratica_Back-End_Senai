@@ -47,11 +47,14 @@ import { readMasteredModules } from "@/progress/storage";
 import { analyzeJavaScript } from "@/runner/analyzer";
 import { MAX_LOCAL_CODE_BYTES, runJavaScriptLocally } from "@/runner/browserRunner";
 import type { ExecutionResult, LabModuleId, MissionId, TeachingAnalysis } from "@/runner/contracts";
-import { labModules, resolveExecutionMission, resolveMissionValidation, starterCode } from "@/runner/missionCatalog";
+import { labModules, resolveExecutionMission, resolveMissionValidation } from "@/runner/missionCatalog";
 import { tutorResponseSchema, type TutorResponse } from "@/tutor/schemas";
 import type { ExecutionTrace } from "@/interpreter/contracts";
 import { createInterpreterWorkerClient, type InterpreterWorkerExecution } from "@/interpreter/workerClient";
 import { authClient } from "@/lib/auth-client";
+import { useStudentProgress } from "@/progress/useStudentProgress";
+import { availableLabModuleIds, findLesson, modulePercentage } from "@/progress/catalog";
+import { getStudentModuleView } from "@/progress/studentCourseView";
 
 type View = "dashboard" | "trilha" | "aula" | "laboratorio" | "arena" | "conquistas" | "perfil";
 
@@ -88,46 +91,19 @@ function Dashboard({ setView }: { setView: (v: View) => void }) {
   const total = modules.length;
   const totalItems = courseLibrary.reduce((sum, module) => sum + module.items.length, 0);
   const progress = useCampusProgress();
-  const moduleViews = modules.map(module => getCourseModuleView(module, progress));
+  const studentJourney = useStudentProgress();
+  const moduleViews = modules.map(module => getStudentModuleView(module, studentJourney.records));
   const verifiedFinished = moduleViews.filter(module => module.status === "concluido").length;
-  const courseProgress = Math.round(moduleViews.reduce((sum, module) => sum + module.progress, 0) / total);
-  const activeLesson = progress.m12Mastered ? {
-    module: "M13 · Módulos e organização",
-    lesson: "Cada arquivo com uma responsabilidade",
-    checkpoint: "Sintaxe moderna consolidada: a próxima etapa separará funções e contratos entre arquivos JavaScript.",
-    next: "Retomar futuramente pelo M13: import, export e ES Modules",
-    index: "13.01",
-  } : progress.m11Mastered ? {
-    module: "M12 · JavaScript moderno",
-    lesson: "A mesma função, uma escrita mais curta",
-    checkpoint: "Callbacks dominados com function: agora a sintaxe moderna poderá encurtar o código sem esconder seu significado.",
-    next: "Iniciar M12 comparando função tradicional e arrow function",
-    index: "12.01",
-  } : progress.m10Mastered ? {
-    module: "M11 · Arrays modernos",
-    lesson: "Percorrer com intenção",
-    checkpoint: "Dados primitivos preparados: agora cada método de array expressará uma intenção específica sobre coleções.",
-    next: "Iniciar M11 comparando for clássico e forEach",
-    index: "11.01",
-  } : progress.m09Mastered ? {
-    module: "M10 · Strings, Math e Date",
-    lesson: "Texto também é dado de negócio",
-    checkpoint: "Objetos dominados: agora vamos transformar, calcular e formatar seus valores com precisão.",
-    next: "Iniciar o M10 pela anatomia e transformação de strings",
-    index: "10.01",
-  } : progress.m08Mastered ? {
-    module: "M09 · Objetos JavaScript",
-    lesson: "Uma entidade com várias características",
-    checkpoint: "Objeto reúne propriedades nomeadas; cada propriedade associa uma chave a um valor.",
-    next: "Abrir a Aula01 e explorar produto.codigo, produto.nome e produto.preco",
-    index: "09.01",
-  } : progress.m07Mastered ? {
-    module: "M08 · Arrays",
-    lesson: "Uma lista dentro de uma caixinha",
-    checkpoint: "Índice é o endereço do elemento; o primeiro índice é 0 e o último é length - 1.",
-    next: "Abrir a Aula01 de Arrays na biblioteca do curso",
-    index: "08.01",
-  } : { ...currentLesson, index: "07.07" };
+  const courseProgress = studentJourney.percentage;
+  const currentCatalogLesson = findLesson(studentJourney.currentLessonId);
+  const activeLesson = currentCatalogLesson ? {
+    module: `${currentCatalogLesson.moduleId} · ${currentCatalogLesson.moduleTitle}`,
+    lesson: currentCatalogLesson.lessonTitle,
+    checkpoint: currentCatalogLesson.summary,
+    next: "Concluir explicação, lousa, checkpoint e prática para avançar.",
+    index: `${String(Number(currentCatalogLesson.moduleId.slice(1))).padStart(2, "0")}.${String(currentCatalogLesson.lessonIndex + 1).padStart(2, "0")}`,
+  } : { ...currentLesson, index: "01.01" };
+  const milestoneModules = moduleViews.slice(0, 3);
 
   return (
     <div className="view-grid dashboard-view">
@@ -144,7 +120,7 @@ function Dashboard({ setView }: { setView: (v: View) => void }) {
           </div>
         </div>
         <div className="hero-actions">
-          <button className="btn btn-primary" onClick={() => setView("aula")}><Play size={17}/> {progress.m12Mastered ? "Revisar M12" : "Continuar aula"}</button>
+          <button className="btn btn-primary" onClick={() => setView("aula")}><Play size={17}/> Continuar aula</button>
           <button className="btn btn-ghost-dark" onClick={() => setView("trilha")}><Compass size={17}/> Ver grade completa</button>
         </div>
       </section>
@@ -159,12 +135,12 @@ function Dashboard({ setView }: { setView: (v: View) => void }) {
       <section className="current-card panel">
         <div className="section-heading">
           <div><span className="eyebrow">AGORA</span><h2>{activeLesson.module}</h2></div>
-          <span className="badge-live">{progress.m12Mastered ? <BookMarked size={13}/> : <CircleDot size={13}/>} {progress.m12Mastered ? "Próxima retomada" : "Aula ativa"}</span>
+          <span className="badge-live"><CircleDot size={13}/> Aula ativa</span>
         </div>
         <div className="lesson-row">
           <div className="lesson-index">{activeLesson.index}</div>
           <div className="lesson-main"><strong>{activeLesson.lesson}</strong><p>{activeLesson.checkpoint}</p></div>
-          <button className="icon-btn" aria-label={progress.m12Mastered ? "Ver M13 na grade curricular" : "Abrir aula atual"} title={progress.m12Mastered ? "Ver M13 na grade curricular" : "Abrir aula atual"} onClick={() => setView(progress.m12Mastered ? "trilha" : "aula")}><ChevronRight/></button>
+          <button className="icon-btn" aria-label="Abrir aula atual" title="Abrir aula atual" onClick={() => setView("aula")}><ChevronRight/></button>
         </div>
         <div className="checkpoint"><BrainCircuit size={18}/><span><b>Próximo checkpoint:</b> {activeLesson.next}</span></div>
       </section>
@@ -172,9 +148,7 @@ function Dashboard({ setView }: { setView: (v: View) => void }) {
       <section className="milestones panel">
         <div className="section-heading"><div><span className="eyebrow">MARCOS</span><h2>O que já virou conhecimento</h2></div></div>
         <div className="milestone-list">
-          <div className="milestone-item"><div className="milestone-icon"><CheckCircle2/></div><div><strong>Switch deixou de ser barreira</strong><p>Casos, ordem e decisão consolidados com exemplos práticos.</p></div></div>
-          <div className="milestone-item"><div className="milestone-icon"><CheckCircle2/></div><div><strong>O “clique das caixinhas”</strong><p>Contador, quantidade e soma passaram a ter responsabilidades diferentes.</p></div></div>
-          <div className="milestone-item"><div className="milestone-icon"><CheckCircle2/></div><div><strong>Blocos {`{}`} como ações</strong><p>Você passou a ler as chaves como “o que acontece aqui dentro”.</p></div></div>
+          {milestoneModules.map(module => <div className="milestone-item" key={module.id}><div className="milestone-icon">{module.progress === 100 ? <CheckCircle2/> : <LockKeyhole/>}</div><div><strong>{module.id} · {module.title}</strong><p>{module.progress === 100 ? "Conhecimento concluído e disponível para revisão." : module.status === "andamento" ? "Marco em construção nesta etapa." : "Será liberado após a etapa anterior."}</p></div></div>)}
         </div>
       </section>
 
@@ -191,14 +165,7 @@ function Dashboard({ setView }: { setView: (v: View) => void }) {
       <section className="learning-map panel">
         <div className="section-heading"><div><span className="eyebrow">MAPA DA FORMAÇÃO</span><h2>Onde você está e o que vem depois</h2></div><button className="btn btn-soft" onClick={() => setView("trilha")}>Abrir grade completa <ChevronRight size={16}/></button></div>
         <div className="learning-map-track">
-          <article className="map-stage done"><span>M01–M02</span><strong>Fundamentos + decisões</strong><p>Variáveis, operadores, if/else e switch.</p><CheckCircle2/></article>
-          <article className="map-stage done"><span>M03–M05</span><strong>Repetição + lógica</strong><p>while, for, contador e acumulador.</p><CheckCircle2/></article>
-          <article className={`map-stage ${progress.m07Mastered ? "done" : "current"}`}><span>M06–M07</span><strong>Estrutura + funções</strong><p>{progress.m07Mastered ? "Funções comprovadas em quatro casos de teste." : "Laços aninhados e funções JavaScript em consolidação."}</p>{progress.m07Mastered ? <CheckCircle2/> : <CircleDot/>}</article>
-          <article className={`map-stage ${progress.m08Mastered ? "done" : progress.m07Mastered ? "current" : "future"}`}><span>M08</span><strong>Arrays</strong><p>{progress.m08Mastered ? "Índices, percurso, mutação e busca comprovados." : progress.m07Mastered ? "Estruturas de dados em estudo e prática." : "Arrays entram depois que funções estiverem sólidas."}</p>{progress.m08Mastered ? <CheckCircle2/> : progress.m07Mastered ? <CircleDot/> : <LockKeyhole/>}</article>
-          <article className={`map-stage ${progress.m09Mastered ? "done" : progress.m08Mastered ? "current" : "future"}`}><span>M09</span><strong>Objetos</strong><p>{progress.m09Mastered ? "Propriedades, métodos e estruturas aninhadas comprovados." : progress.m08Mastered ? "Entidades e pedidos em estudo e prática." : "Objetos entram depois do domínio de Arrays."}</p>{progress.m09Mastered ? <CheckCircle2/> : progress.m08Mastered ? <CircleDot/> : <LockKeyhole/>}</article>
-          <article className={`map-stage ${progress.m10Mastered ? "done" : progress.m09Mastered ? "current" : "future"}`}><span>M10</span><strong>Dados primitivos</strong><p>{progress.m10Mastered ? "Textos, números e datas transformados com regras previsíveis." : progress.m09Mastered ? "Strings, Math e Date em estudo e prática." : "Esta etapa entra depois do domínio de Objetos."}</p>{progress.m10Mastered ? <CheckCircle2/> : progress.m09Mastered ? <CircleDot/> : <LockKeyhole/>}</article>
-          <article className={`map-stage ${progress.m11Mastered ? "done" : progress.m10Mastered ? "current" : "future"}`}><span>M11</span><strong>Arrays modernos</strong><p>{progress.m11Mastered ? "Seleção, transformação, busca e redução comprovadas." : progress.m10Mastered ? "Callbacks e métodos declarativos em estudo." : "Esta etapa entra depois do domínio de dados primitivos."}</p>{progress.m11Mastered ? <CheckCircle2/> : progress.m10Mastered ? <CircleDot/> : <LockKeyhole/>}</article>
-          <article className={`map-stage ${progress.m12Mastered ? "done" : progress.m11Mastered ? "current" : "future"}`}><span>M12</span><strong>JavaScript moderno</strong><p>{progress.m12Mastered ? "Sintaxe moderna aplicada com clareza e segurança." : progress.m11Mastered ? "Arrow, destructuring, spread, rest e acesso seguro em estudo." : "Esta etapa entra depois do domínio de Arrays modernos."}</p>{progress.m12Mastered ? <CheckCircle2/> : progress.m11Mastered ? <CircleDot/> : <LockKeyhole/>}</article>
+          {moduleViews.slice(0, 7).map(module => <article className={`map-stage ${module.progress === 100 ? "done" : module.status === "andamento" ? "current" : "future"}`} key={module.id}><span>{module.id}</span><strong>{module.title}</strong><p>{module.progress === 100 ? "Etapa concluída e salva na conta." : module.status === "andamento" ? "Etapa atual da jornada." : "Bloqueado até concluir a etapa anterior."}</p>{module.progress === 100 ? <CheckCircle2/> : module.status === "andamento" ? <CircleDot/> : <LockKeyhole/>}</article>)}
         </div>
       </section>
 
@@ -216,20 +183,15 @@ function Dashboard({ setView }: { setView: (v: View) => void }) {
 
 function Curriculum() {
   const all = [...completedModules, ...plannedModules];
-  const [selected, setSelected] = useState<CourseModule>(completedModules[6]);
-  const progress = useCampusProgress();
-  useEffect(() => {
-    if (!progress.m12Mastered) return;
-    const nextModule = all.find(module => module.id === "M13");
-    if (nextModule) setSelected(nextModule);
-  }, [progress.m12Mastered]);
-  const selectedView = getCourseModuleView(selected, progress);
+  const [selected, setSelected] = useState<CourseModule>(completedModules[0]);
+  const studentJourney = useStudentProgress();
+  const selectedView = getStudentModuleView(selected, studentJourney.records);
   return (
     <div className="curriculum-layout">
       <section className="panel curriculum-list">
         <div className="section-heading"><div><span className="eyebrow">GRADE CURRICULAR</span><h2>Formação Backend JavaScript</h2></div><span className="credit-tag">22 módulos</span></div>
         <div className="module-scroll">
-          {all.map(m => { const view = getCourseModuleView(m, progress); return (
+          {all.map(m => { const view = getStudentModuleView(m, studentJourney.records); return (
             <button key={m.id} className={`module-row ${selected.id === m.id ? "selected" : ""}`} onClick={() => setSelected(m)}>
               <div className="module-code">{view.id}</div>
               <div className="module-copy"><strong>{view.title}</strong><span>{view.topics.slice(0, 3).join(" · ")}</span></div>
@@ -254,9 +216,10 @@ function Curriculum() {
 
 function Lab() {
   const progress = useCampusProgress();
-  const [code, setCode] = useState(starterCode);
-  const [fileName, setFileName] = useState("ExercicioAtual.js");
-  const [selectedModuleId, setSelectedModuleId] = useState<LabModuleId>("M07");
+  const studentJourney = useStudentProgress();
+  const [code, setCode] = useState("");
+  const [fileName, setFileName] = useState("NovoArquivo.js");
+  const [selectedModuleId, setSelectedModuleId] = useState<LabModuleId>("M01");
   const [loadedMissionId, setLoadedMissionId] = useState<MissionId | null>(null);
   const [analysis, setAnalysis] = useState<TeachingAnalysis | null>(null);
   const [analyzedCode, setAnalyzedCode] = useState<string | null>(null);
@@ -275,22 +238,22 @@ function Lab() {
   const prepareButtonRef = useRef<HTMLButtonElement>(null);
   const executionSequence = useRef(0);
   const tutorAbort = useRef<AbortController | null>(null);
+  const studentContextSynced = useRef(false);
   useEffect(() => () => {
     activeInterpretation.current?.cancel();
     tutorAbort.current?.abort();
     interpreterClient.dispose();
   }, [interpreterClient]);
-  const mastered = useMemo<MissionId[]>(() => {
-    const values: Array<[MissionId, boolean]> = [
-      ["M07", progress.m07Mastered],
-      ["M08", progress.m08Mastered],
-      ["M09", progress.m09Mastered],
-      ["M10", progress.m10Mastered],
-      ["M11", progress.m11Mastered],
-      ["M12", progress.m12Mastered],
-    ];
-    return values.filter(([, complete]) => complete).map(([moduleId]) => moduleId);
-  }, [progress.m07Mastered, progress.m08Mastered, progress.m09Mastered, progress.m10Mastered, progress.m11Mastered, progress.m12Mastered]);
+  const availableModules = useMemo(() => availableLabModuleIds(studentJourney.records), [studentJourney.records]);
+  const mastered = useMemo<MissionId[]>(() =>
+    (["M07", "M08", "M09", "M10", "M11", "M12"] as MissionId[])
+      .filter(moduleId => modulePercentage(moduleId, studentJourney.records) === 100),
+  [studentJourney.records]);
+  useEffect(() => {
+    if (studentJourney.loading || studentContextSynced.current) return;
+    setSelectedModuleId(availableModules.at(-1) ?? "M01");
+    studentContextSynced.current = true;
+  }, [availableModules, studentJourney.loading]);
   const selectedModule = labModules.find(module => module.id === selectedModuleId) ?? labModules[6];
   const executionMissionId = resolveExecutionMission(selectedModuleId, mastered);
   const currentMission = selectedModule.kind === "mission" && executionMissionId
@@ -502,7 +465,7 @@ function Lab() {
       <aside className="panel review-panel">
         <div className="section-heading"><div><span className="eyebrow">LABORATÓRIO JAVASCRIPT</span><h2>Contexto do estudo</h2></div><ShieldCheck/></div>
         <p className="review-intro">Escolha o módulo antes de analisar ou executar. O arquivo carregado permanece no contexto selecionado; o nome do arquivo nunca decide a suíte de testes.</p>
-        <LabModulePicker selectedModuleId={selectedModuleId} mastered={mastered} onSelect={selectModule}/>
+        <LabModulePicker selectedModuleId={selectedModuleId} availableModuleIds={availableModules} onSelect={selectModule}/>
         <div className="selected-lab-context">
           <div><span>CONTEXTO ATIVO</span><strong>{selectedModule.id} · {selectedModule.title}</strong></div>
           <p>{selectedModule.concepts.join(" · ")}</p>
@@ -533,35 +496,35 @@ function Lab() {
 }
 
 function Achievements() {
-  const progress = useCampusProgress();
+  const studentJourney = useStudentProgress();
+  const completed = (moduleId: string) => getStudentModuleView([...completedModules, ...plannedModules].find(module => module.id === moduleId)!, studentJourney.records).progress === 100;
   const badges: { title: string; description: string; icon: React.ComponentType<{ size?: number }>; earned: boolean }[] = [
-    { title: "Base lógica", description: "Decisões, laços e responsabilidades das variáveis consolidados.", icon: BrainCircuit, earned: true },
-    { title: "Caixinhas", description: "Contador, quantidade e soma separados mentalmente.", icon: LibraryBig, earned: true },
-    { title: "Funções I", description: "Parâmetros, composição e retorno comprovados em 4/4 testes.", icon: Code2, earned: progress.m07Mastered },
-    { title: "Coleções", description: "Índices, percurso, busca e mutação comprovados em 6/6 testes.", icon: BookMarked, earned: progress.m08Mastered },
-    { title: "Modelo de domínio", description: "Objetos e estruturas aninhadas comprovados em 6/6 testes.", icon: Target, earned: progress.m09Mastered },
-    { title: "Dado confiável", description: "Strings, números e datas tratados com previsibilidade.", icon: ShieldCheck, earned: progress.m10Mastered },
-    { title: "Coleções modernas", description: "filter, map, find, every e reduce comprovados em 8/8 testes.", icon: Sparkles, earned: progress.m11Mastered },
-    { title: "Sintaxe moderna", description: "Arrow, destructuring, spread, rest e acesso seguro comprovados.", icon: Award, earned: progress.m12Mastered },
-    { title: "Arena completa", description: "Os seis desafios de leitura de funções foram resolvidos.", icon: Trophy, earned: progress.challenges === 6 },
-    { title: "Revisor constante", description: "Doze itens do acervo foram revisitados nesta rodada.", icon: RotateCcw, earned: progress.reviews >= 12 },
+    { title: "Primeiros passos", description: "Fundamentos, variáveis e tipos concluídos no M01.", icon: BrainCircuit, earned: completed("M01") },
+    { title: "Decisões conscientes", description: "Estruturas de decisão concluídas no M02.", icon: LibraryBig, earned: completed("M02") },
+    { title: "Funções I", description: "Parâmetros, composição e retorno concluídos no M07.", icon: Code2, earned: completed("M07") },
+    { title: "Coleções", description: "Índices, percurso, busca e mutação concluídos no M08.", icon: BookMarked, earned: completed("M08") },
+    { title: "Modelo de domínio", description: "Objetos e estruturas aninhadas concluídos no M09.", icon: Target, earned: completed("M09") },
+    { title: "Dado confiável", description: "Strings, números e datas concluídos no M10.", icon: ShieldCheck, earned: completed("M10") },
+    { title: "Coleções modernas", description: "Métodos declarativos concluídos no M11.", icon: Sparkles, earned: completed("M11") },
+    { title: "Sintaxe moderna", description: "Recursos modernos do JavaScript concluídos no M12.", icon: Award, earned: completed("M12") },
   ];
   const earned = badges.filter(badge => badge.earned).length;
   return <div className="achievements-view"><section className="panel achievement-hero"><div><span className="eyebrow">CONQUISTAS · {earned}/{badges.length}</span><h1>Marcos que registram compreensão, não só presença.</h1></div><div className="trophy-mark"><Trophy/></div></section><section className="badge-grid">{badges.map(badge => { const Icon = badge.icon; return <article className={`panel badge-card ${badge.earned ? "" : "muted-card"}`} key={badge.title}><div className="badge-emoji"><Icon size={28}/></div><h3>{badge.title}</h3><p>{badge.description}</p><span>{badge.earned ? "Conquistado" : "Bloqueado"}</span></article>; })}</section></div>;
 }
 
 function Performance() {
-  const progress = useCampusProgress();
-  const skills = [
-    ["Estruturas de decisão", 92], ["Laços de repetição", 88], ["Contador e acumulador", 94], ["Leitura de execução", 86], ["Laços aninhados", 72], ["Funções", progress.m07Mastered ? 100 : 64], ["Arrays", progress.m08Mastered ? 100 : progress.m07Mastered ? 72 : 0], ["Objetos", progress.m09Mastered ? 100 : progress.m08Mastered ? 72 : 0], ["Strings, Math e Date", progress.m10Mastered ? 100 : progress.m09Mastered ? 72 : 0], ["Arrays modernos", progress.m11Mastered ? 100 : progress.m10Mastered ? 72 : 0], ["JavaScript moderno", progress.m12Mastered ? 100 : progress.m11Mastered ? 72 : 0]
-  ] as const;
-  return <div className="performance-layout"><section className="panel performance-main"><div className="section-heading"><div><span className="eyebrow">DESEMPENHO</span><h2>Mapa de domínio</h2></div><Radar/></div><div className="skill-bars">{skills.map(([s,v])=><div className="skill" key={s}><div><span>{s}</span><b>{v}%</b></div><div className="bar"><i style={{width:`${v}%`}}/></div></div>)}</div></section><aside className="panel focus-panel"><span className="eyebrow">FOCO ATUAL</span><h2>Profundidade antes de velocidade.</h2><p>O padrão de aprendizagem que mais funcionou foi: visualizar a lógica, entender as “caixinhas”, acompanhar a execução e só então escrever JavaScript.</p><div className="focus-note"><BrainCircuit/><span>{progress.m12Mastered ? "JavaScript moderno comprovado em oito testes. Pausa registrada; próxima retomada no M13." : progress.m11Mastered ? "Arrays modernos comprovados em oito testes. Prioridade: concluir JavaScript moderno." : progress.m10Mastered ? "Dados primitivos comprovados. Prioridade: concluir a missão final de Arrays modernos." : progress.m09Mastered ? "Objetos comprovados. Prioridade: concluir a missão final de Strings, Math e Date." : progress.m08Mastered ? "Arrays comprovados. Prioridade: concluir a missão final de Objetos." : progress.m07Mastered ? "Funções comprovadas. Prioridade: concluir a missão final de Arrays." : "Prioridade: passar nos quatro testes da missão final de Funções."}</span></div></aside></div>;
+  const studentJourney = useStudentProgress();
+  const skills = courseLibrary.map(module => [module.title, modulePercentage(module.id, studentJourney.records)] as const);
+  const current = findLesson(studentJourney.currentLessonId);
+  return <div className="performance-layout"><section className="panel performance-main"><div className="section-heading"><div><span className="eyebrow">DESEMPENHO</span><h2>Mapa de domínio</h2></div><Radar/></div><div className="skill-bars">{skills.map(([s,v])=><div className="skill" key={s}><div><span>{s}</span><b>{v}%</b></div><div className="bar"><i style={{width:`${v}%`}}/></div></div>)}</div></section><aside className="panel focus-panel"><span className="eyebrow">FOCO ATUAL</span><h2>Profundidade antes de velocidade.</h2><p>Seu mapa cresce somente com aulas concluídas e salvas na sua conta.</p><div className="focus-note"><BrainCircuit/><span>{current ? `Prioridade: concluir ${current.moduleId} · ${current.lessonTitle}.` : "Comece pelo M01 · Aula 01."}</span></div></aside></div>;
 }
 
 export default function CampusApp() {
   const [view, setView] = useState<View>("dashboard");
-  const progress = useCampusProgress();
   const { data: session } = authClient.useSession();
+  const studentJourney = useStudentProgress();
+  const currentStudentLesson = findLesson(studentJourney.currentLessonId);
+  const currentStudentModule = currentStudentLesson ? `${currentStudentLesson.moduleId} · ${currentStudentLesson.moduleTitle}` : "M01 · Fundamentos";
   const studentName = session?.user.name?.trim() || "Aluno do Campus";
   const studentInitials = studentName
     .split(/\s+/)
@@ -585,11 +548,11 @@ export default function CampusApp() {
       <aside className="sidebar">
         <div className="brand"><div className="brand-mark">JS</div><div><strong>Campus Backend</strong><span>Curso aberto de JavaScript Backend</span></div></div>
         <nav aria-label="Navegação principal">{nav.map(item => { const Icon = item.icon; return <button key={item.id} aria-label={item.label} title={item.label} className={view===item.id?"active":""} onClick={()=>setView(item.id)}><Icon size={19} strokeWidth={1.9}/><span>{item.label}</span>{item.id==="aula"&&<i/>}</button>})}</nav>
-        <div className="sidebar-card"><Flame/><div><span>Foco desta etapa</span><strong>{progress.m12Mastered ? "M13 · Módulos ES" : progress.m11Mastered ? "M12 · JavaScript moderno" : progress.m10Mastered ? "M11 · Arrays modernos" : progress.m09Mastered ? "M10 · Strings" : progress.m08Mastered ? "M09 · Objetos" : progress.m07Mastered ? "M08 · Arrays" : "M07 · Funções"}</strong></div></div>
+        <div className="sidebar-card"><Flame/><div><span>Foco desta etapa</span><strong>{currentStudentModule}</strong></div></div>
         <div className="sidebar-footer"><div className="avatar">{studentInitials}</div><div className="sidebar-account"><strong>{studentName}</strong><span>Aluno do Campus</span></div><button className="sign-out-button" type="button" title="Sair da conta" aria-label="Sair da conta" onClick={() => authClient.signOut()}><LogOut size={16}/></button></div>
       </aside>
       <section className="workspace">
-        <header className="topbar"><div><span className="crumb">FORMAÇÃO / BACKEND JAVASCRIPT</span></div><div className="top-actions"><span className="semester">{progress.m12Mastered ? "M13 · Próxima retomada" : progress.m11Mastered ? "M12 · JavaScript moderno liberado" : progress.m10Mastered ? "M11 · Strings liberado" : progress.m09Mastered ? "M10 · Objetos liberado" : progress.m08Mastered ? "M09 · Arrays liberado" : progress.m07Mastered ? "M08 · Arrays liberado" : "M07 · Funções"}</span><div className="xp-pill"><Sparkles size={15}/> Progresso local</div><div className="avatar small">{studentInitials}</div></div></header>
+        <header className="topbar"><div><span className="crumb">FORMAÇÃO / BACKEND JAVASCRIPT</span></div><div className="top-actions"><span className="semester">{currentStudentModule}</span><div className="xp-pill"><Sparkles size={15}/> Progresso salvo</div><div className="avatar small">{studentInitials}</div></div></header>
         <div className="content-wrap"><AnimatePresence mode="wait"><motion.div key={view} initial={{opacity:0,y:6}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-4}} transition={{duration:.18}} className="view-root">{content}</motion.div></AnimatePresence></div>
       </section>
     </main>
