@@ -1,3 +1,5 @@
+import type { LabModuleDefinition, LabModuleId, MissionId } from "@/runner/contracts";
+
 export const starterCode = `// Aula atual · Funções JavaScript
 // Objetivo: receber uma idade e devolver uma resposta booleana.
 
@@ -163,3 +165,40 @@ function criarResumoUsuario({ nome = "Visitante", endereco } = {}) {
 
 const produto = { codigo: "P01", nome: "Teclado", estoque: 8 };
 console.log(criarEtiqueta(produto));`;
+
+export const labModules = [
+  { id: "M01", kind: "review", title: "Fundamentos JavaScript", concepts: ["let", "const", "tipos", "operadores", "console.log"] },
+  { id: "M02", kind: "review", title: "Estruturas de decisão", concepts: ["if", "else", "switch", "comparações", "operadores lógicos"] },
+  { id: "M03", kind: "review", title: "Laços com while", concepts: ["while", "contador", "acumulador", "condição de parada"] },
+  { id: "M04", kind: "review", title: "Laços com for", concepts: ["for", "inicialização", "condição", "incremento"] },
+  { id: "M05", kind: "review", title: "Repetição avançada", concepts: ["ocorrências", "múltiplos", "soma condicional", "responsabilidade das variáveis"] },
+  { id: "M06", kind: "review", title: "Laços aninhados", concepts: ["laços aninhados", "linha", "coluna", "ordem de execução"] },
+  { id: "M07", kind: "mission", title: "Funções", concepts: ["function", "parâmetros", "argumentos", "return", "escopo"], mission: { fileName: functionMissionFile, code: functionMissionCode, expectedTests: 4 } },
+  { id: "M08", kind: "mission", title: "Arrays", concepts: ["índices", "length", "push", "percurso", "busca"], mission: { fileName: arrayMissionFile, code: arrayMissionCode, expectedTests: 6 } },
+  { id: "M09", kind: "mission", title: "Objetos JavaScript", concepts: ["propriedades", "métodos", "objetos aninhados", "chave e valor"], mission: { fileName: objectMissionFile, code: objectMissionCode, expectedTests: 6 } },
+  { id: "M10", kind: "mission", title: "Strings, Math e Date", concepts: ["strings", "Math", "Date", "formatação"], mission: { fileName: dataMissionFile, code: dataMissionCode, expectedTests: 6 } },
+  { id: "M11", kind: "mission", title: "Arrays modernos", concepts: ["map", "filter", "find", "every", "reduce"], mission: { fileName: modernArrayMissionFile, code: modernArrayMissionCode, expectedTests: 8 } },
+  { id: "M12", kind: "mission", title: "JavaScript moderno", concepts: ["arrow functions", "destructuring", "spread", "rest", "optional chaining"], mission: { fileName: modernJavaScriptMissionFile, code: modernJavaScriptMissionCode, expectedTests: 8 } },
+] as const satisfies readonly LabModuleDefinition[];
+
+const missionSequence: readonly MissionId[] = ["M07", "M08", "M09", "M10", "M11", "M12"];
+
+export function isLabModuleAvailable(moduleId: LabModuleId, mastered: readonly MissionId[]) {
+  const missionIndex = missionSequence.indexOf(moduleId as MissionId);
+  if (missionIndex <= 0) return true;
+
+  return mastered.includes(missionSequence[missionIndex - 1]);
+}
+
+export function resolveExecutionMission(moduleId: LabModuleId, mastered: readonly MissionId[]): MissionId | null {
+  if (!missionSequence.includes(moduleId as MissionId)) return null;
+  return isLabModuleAvailable(moduleId, mastered) ? moduleId as MissionId : null;
+}
+
+export function resolveMissionValidation(
+  moduleId: LabModuleId,
+  loadedMissionId: MissionId | null,
+): MissionId | null {
+  if (!missionSequence.includes(moduleId as MissionId)) return null;
+  return loadedMissionId === moduleId ? loadedMissionId : null;
+}

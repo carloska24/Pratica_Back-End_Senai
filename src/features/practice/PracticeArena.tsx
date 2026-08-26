@@ -112,7 +112,7 @@ export default function PracticeArena() {
   return (
     <div className="arena-practice panel">
       <header className="arena-practice-header">
-        <div><span className="eyebrow">ARENA DE FUNÇÕES</span><h1>Leia, preveja, responda, explique.</h1><p>Cada etapa libera a seguinte. O acerto vale quando você consegue justificar o caminho do programa.</p></div>
+        <div><span className="eyebrow">ARENA DE FUNÇÕES</span><h1>Leia, preveja, responda, explique.</h1><p>Cada etapa libera a seguinte. Depois da resposta, compare seu raciocínio com a justificativa exibida.</p></div>
         <div className="arena-progress"><strong>{solved.length}/{challenges.length}</strong><span>resolvidos</span><button className="icon-btn" type="button" title="Reiniciar desafios" aria-label="Reiniciar desafios" onClick={reset}><RotateCcw size={17}/></button></div>
       </header>
 
