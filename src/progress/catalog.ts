@@ -44,10 +44,35 @@ export function firstPendingLesson(records: LessonProgressRecord[]) {
 }
 
 export function modulePercentage(moduleId: string, records: LessonProgressRecord[]) {
-  const lessons = lessonSequence.filter(lesson => lesson.moduleId === moduleId);
+  const lessons = getModuleLessons(moduleId);
   if (!lessons.length) return 0;
   const completed = new Set(records.filter(record => record.completed).map(record => record.lessonId));
   return Math.round(lessons.filter(lesson => completed.has(lesson.lessonId)).length / lessons.length * 100);
+}
+
+export function getModuleLessons(moduleId: string) {
+  return lessonSequence.filter(lesson => lesson.moduleId === moduleId);
+}
+
+export function isModuleCompletionUnlocked(moduleId: string, records: LessonProgressRecord[]) {
+  const moduleIndex = courseLibrary.findIndex(module => module.id === moduleId);
+  if (moduleIndex < 0) return false;
+  if (moduleIndex === 0) return true;
+  return modulePercentage(courseLibrary[moduleIndex - 1].id, records) === 100;
+}
+
+export function createCompletedModuleRecords(moduleId: string, records: LessonProgressRecord[]): LessonProgressRecord[] {
+  const existingByLesson = new Map(records.map(record => [record.lessonId, record]));
+  return getModuleLessons(moduleId).map(lesson => ({
+    ...existingByLesson.get(lesson.lessonId),
+    moduleId,
+    lessonId: lesson.lessonId,
+    explanationDone: true,
+    boardDone: true,
+    checkpointDone: true,
+    exerciseDone: true,
+    completed: true,
+  }));
 }
 
 export function availableLabModuleIds(records: LessonProgressRecord[]): LabModuleId[] {
