@@ -4,8 +4,10 @@ import { db } from "@/lib/db";
 import { studentProgress } from "@/lib/db/schema";
 import {
   createSummary,
+  createCompletedModuleRecords,
   findLesson,
   isLessonUnlocked,
+  isModuleCompletionUnlocked,
   type LessonProgressRecord,
   type LessonStep,
 } from "@/progress/catalog";
@@ -48,8 +50,56 @@ export async function PATCH(request: Request) {
   const user = await getAuthenticatedUser(request);
   if (!user) return Response.json({ message: "Não autenticado." }, { status: 401 });
   if (!db) return Response.json({ message: "Banco de dados indisponível." }, { status: 503 });
+  const database = db;
 
-  const payload = await request.json().catch(() => null) as { lessonId?: string; step?: LessonStep } | null;
+  const payload = await request.json().catch(() => null) as { lessonId?: string; step?: LessonStep; moduleId?: string; action?: string } | null;
+  if (payload?.action === "complete-module") {
+    const moduleId = payload.moduleId?.trim();
+    if (!moduleId) {
+      return Response.json({ message: "Módulo inválido." }, { status: 400 });
+    }
+
+    const records = await readUserProgress(user.id);
+    if (!isModuleCompletionUnlocked(moduleId, records)) {
+      return Response.json({ message: "Conclua o módulo anterior antes de liberar esta etapa." }, { status: 409 });
+    }
+
+    const now = new Date();
+    const completedRecords = createCompletedModuleRecords(moduleId, records);
+    if (!completedRecords.length) {
+      return Response.json({ message: "Este módulo não possui aulas para concluir." }, { status: 400 });
+    }
+
+    await Promise.all(completedRecords.map(record => database.insert(studentProgress).values({
+      id: crypto.randomUUID(),
+      userId: user.id,
+      moduleId: record.moduleId,
+      lessonId: record.lessonId,
+      status: "completed",
+      percentage: 100,
+      explanationDone: true,
+      boardDone: true,
+      checkpointDone: true,
+      exerciseDone: true,
+      completedAt: now,
+      updatedAt: now,
+    }).onConflictDoUpdate({
+      target: [studentProgress.userId, studentProgress.lessonId],
+      set: {
+        status: "completed",
+        percentage: 100,
+        explanationDone: true,
+        boardDone: true,
+        checkpointDone: true,
+        exerciseDone: true,
+        completedAt: now,
+        updatedAt: now,
+      },
+    })));
+
+    return Response.json(createSummary(await readUserProgress(user.id)));
+  }
+
   const lesson = payload?.lessonId ? findLesson(payload.lessonId) : undefined;
   const allowedSteps: LessonStep[] = ["explanation", "board", "checkpoint", "exercise", "complete"];
   if (!lesson || !payload?.step || !allowedSteps.includes(payload.step)) {

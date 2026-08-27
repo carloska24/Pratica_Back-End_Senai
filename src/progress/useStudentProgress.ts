@@ -54,5 +54,26 @@ export function useStudentProgress() {
     }
   }, []);
 
-  return { ...summary, loading, saving, error, refresh, markStep };
+  const completeModule = useCallback(async (moduleId: string) => {
+    setSaving(true);
+    try {
+      const response = await fetch("/api/progress", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "complete-module", moduleId }),
+      });
+      const body = await response.json() as StudentProgressSummary | { message?: string };
+      if (!response.ok) throw new Error("message" in body && body.message ? body.message : "Não foi possível concluir o módulo.");
+      setSummary(body as StudentProgressSummary);
+      setError("");
+      return true;
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : "Não foi possível concluir o módulo.");
+      return false;
+    } finally {
+      setSaving(false);
+    }
+  }, []);
+
+  return { ...summary, loading, saving, error, refresh, markStep, completeModule };
 }

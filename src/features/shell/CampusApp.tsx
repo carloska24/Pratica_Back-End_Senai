@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Editor from "@monaco-editor/react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -57,6 +57,13 @@ import { availableLabModuleIds, findLesson, modulePercentage } from "@/progress/
 import { getStudentModuleView } from "@/progress/studentCourseView";
 
 type View = "dashboard" | "trilha" | "aula" | "laboratorio" | "arena" | "conquistas" | "perfil";
+type LabLaunch = {
+  id: string;
+  code: string;
+  fileName: string;
+  moduleId: LabModuleId;
+  title: string;
+};
 
 const nav: { id: View; label: string; icon: React.ComponentType<{ size?: number; strokeWidth?: number }> }[] = [
   { id: "dashboard", label: "Visão geral", icon: LayoutDashboard },
@@ -214,7 +221,7 @@ function Curriculum() {
 }
 
 
-function Lab() {
+function Lab({ launch, onLaunchHandled }: { launch: LabLaunch | null; onLaunchHandled: () => void }) {
   const progress = useCampusProgress();
   const studentJourney = useStudentProgress();
   const [code, setCode] = useState("");
@@ -239,6 +246,7 @@ function Lab() {
   const executionSequence = useRef(0);
   const tutorAbort = useRef<AbortController | null>(null);
   const studentContextSynced = useRef(false);
+  const handledLaunchId = useRef<string | null>(null);
   useEffect(() => () => {
     activeInterpretation.current?.cancel();
     tutorAbort.current?.abort();
@@ -254,6 +262,47 @@ function Lab() {
     setSelectedModuleId(availableModules.at(-1) ?? "M01");
     studentContextSynced.current = true;
   }, [availableModules, studentJourney.loading]);
+  useEffect(() => {
+    if (!launch || handledLaunchId.current === launch.id) return;
+    handledLaunchId.current = launch.id;
+    studentContextSynced.current = true;
+    activeInterpretation.current?.cancel();
+    activeInterpretation.current = null;
+    executionSequence.current += 1;
+    setCode(launch.code);
+    setFileName(launch.fileName);
+    setSelectedModuleId(launch.moduleId);
+    setLoadedMissionId(null);
+    setExecution(null);
+    setExecutionContext(null);
+    setTutor(null);
+    setTutorError(null);
+    tutorAbort.current?.abort();
+    tutorAbort.current = null;
+    setTutorLoading(false);
+    setTraceError(null);
+    setWorkbenchOpen(false);
+    const nextAnalysis = analyzeJavaScript(launch.code, launch.moduleId);
+    setAnalysis(nextAnalysis);
+    setAnalyzedCode(launch.code);
+    setPreparingTrace(true);
+    const investigation = interpreterClient.run(launch.code);
+    activeInterpretation.current = investigation;
+    onLaunchHandled();
+    void investigation.result.then(trace => {
+      if (activeInterpretation.current?.requestId !== investigation.requestId) return;
+      setPedagogicalTrace(trace);
+      setWorkbenchOpen(true);
+    }).catch(error => {
+      if (activeInterpretation.current?.requestId !== investigation.requestId) return;
+      setTraceError(error instanceof Error ? error.message : "Não foi possível preparar a execução passo a passo.");
+    }).finally(() => {
+      if (activeInterpretation.current?.requestId === investigation.requestId) {
+        activeInterpretation.current = null;
+        setPreparingTrace(false);
+      }
+    });
+  }, [interpreterClient, launch, onLaunchHandled]);
   const selectedModule = labModules.find(module => module.id === selectedModuleId) ?? labModules[6];
   const executionMissionId = resolveExecutionMission(selectedModuleId, mastered);
   const currentMission = selectedModule.kind === "mission" && executionMissionId
@@ -521,6 +570,7 @@ function Performance() {
 
 export default function CampusApp() {
   const [view, setView] = useState<View>("dashboard");
+  const [labLaunch, setLabLaunch] = useState<LabLaunch | null>(null);
   const { data: session } = authClient.useSession();
   const studentJourney = useStudentProgress();
   const currentStudentLesson = findLesson(studentJourney.currentLessonId);
@@ -531,17 +581,21 @@ export default function CampusApp() {
     .slice(0, 2)
     .map(part => part[0]?.toUpperCase())
     .join("") || "AL";
+  const openExampleWorkbench = useCallback((example: Omit<LabLaunch, "id">) => {
+    setLabLaunch({ ...example, id: crypto.randomUUID() });
+    setView("laboratorio");
+  }, []);
   const content = useMemo(() => {
     switch (view) {
       case "dashboard": return <Dashboard setView={setView}/>;
       case "trilha": return <Curriculum/>;
-      case "aula": return <Classroom/>;
-      case "laboratorio": return <Lab/>;
+      case "aula": return <Classroom onOpenWorkbench={openExampleWorkbench}/>;
+      case "laboratorio": return <Lab launch={labLaunch} onLaunchHandled={() => setLabLaunch(null)}/>;
       case "arena": return <PracticeArena/>;
       case "conquistas": return <Achievements/>;
       case "perfil": return <Performance/>;
     }
-  }, [view]);
+  }, [labLaunch, openExampleWorkbench, view]);
 
   return (
     <main className="app-shell">

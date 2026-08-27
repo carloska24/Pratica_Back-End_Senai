@@ -29,7 +29,11 @@ import { isLessonUnlocked, modulePercentage } from "@/progress/catalog";
 const courseItemIds = new Set(courseLibrary.flatMap(module => module.items.map(item => item.id)));
 const LAST_LESSON_KEY = "campus-last-lesson";
 
-export default function Classroom() {
+type ClassroomProps = {
+  onOpenWorkbench?: (example: { code: string; fileName: string; moduleId: "M07"; title: string }) => void;
+};
+
+export default function Classroom({ onOpenWorkbench }: ClassroomProps) {
   const [mode, setMode] = useState<"aula" | "exemplos" | "biblioteca">("aula");
   const [exampleIndex, setExampleIndex] = useState(0);
   const [studied, setStudied] = useState<number[]>([]);
@@ -44,6 +48,7 @@ export default function Classroom() {
   const [m10Mastered, setM10Mastered] = useState(false);
   const [m11Mastered, setM11Mastered] = useState(false);
   const [m12Mastered, setM12Mastered] = useState(false);
+  const [completionConfirmationOpen, setCompletionConfirmationOpen] = useState(false);
   const studentJourney = useStudentProgress();
 
   useEffect(() => {
@@ -155,10 +160,15 @@ export default function Classroom() {
   const selectedModule = courseLibrary[moduleIndex];
   const selectedItem = selectedModule.items[Math.min(itemIndex, selectedModule.items.length - 1)];
   const moduleDone = selectedModule.items.filter(item => libraryStudied.includes(item.id)).length;
+  const selectedModuleComplete = modulePercentage(selectedModule.id, studentJourney.records) === 100;
+  const canCompleteSelectedModule = isModuleUnlocked(moduleIndex) && !selectedModuleComplete;
+  const nextModule = courseLibrary[moduleIndex + 1];
   const activeLessonModule = courseLibrary[activeLessonModuleIndex] ?? courseLibrary[0];
   const activeLessonItem = activeLessonModule.items[activeLessonItemIndex] ?? activeLessonModule.items[0];
   const isModuleMastered = (moduleId: string) => moduleId === "M07" ? m07Mastered : moduleId === "M08" ? m08Mastered : moduleId === "M09" ? m09Mastered : moduleId === "M10" ? m10Mastered : moduleId === "M11" ? m11Mastered : moduleId === "M12" ? m12Mastered : false;
-  const isModuleUnlocked = (index: number) => index === 0 || modulePercentage(courseLibrary[index - 1].id, studentJourney.records) === 100;
+  function isModuleUnlocked(index: number) {
+    return index === 0 || modulePercentage(courseLibrary[index - 1].id, studentJourney.records) === 100;
+  }
 
   const chooseModule = (index: number) => {
     if (!isModuleUnlocked(index)) return;
@@ -191,6 +201,11 @@ export default function Classroom() {
     const openedItemIndex = preferredItemIdx ?? defaultLessonIndex;
     setActiveLesson(moduleIdx, openedItemIndex);
     setMode("aula");
+  };
+
+  const completeSelectedModule = async () => {
+    const saved = await studentJourney.completeModule(selectedModule.id);
+    if (saved) setCompletionConfirmationOpen(false);
   };
 
   const moduleStatusLabel = (module: CourseLibraryModule) => {
@@ -241,8 +256,18 @@ export default function Classroom() {
 
           <div className="library-toolbar">
             <div><span className="eyebrow">{selectedModule.id} · {moduleStatusLabel(selectedModule)}</span><h2>{selectedModule.title}</h2><p>{selectedModule.items.length} itens catalogados · {moduleDone} revisados nesta rodada.</p></div>
-            <div className="library-toolbar-actions"><button className="btn btn-primary" onClick={() => openSelectedAsLesson(moduleIndex, selectedItem.kind === "aula" ? itemIndex : undefined)}><BookOpenCheck size={16}/> {isModuleMastered(selectedModule.id) ? "Revisar aula-chave" : selectedModule.status === "disponivel" ? "Abrir primeira aula" : "Aula atual do módulo"}</button><button className="btn btn-soft" onClick={() => resetModule(selectedModule.id)}><RotateCcw size={16}/> Reestudar módulo</button></div>
+            <div className="library-toolbar-actions">
+              {canCompleteSelectedModule && <button className="btn btn-primary" onClick={() => setCompletionConfirmationOpen(true)}><CheckCircle2 size={16}/> {nextModule ? `Concluir ${selectedModule.id} e liberar ${nextModule.id}` : `Concluir ${selectedModule.id}`}</button>}
+              <button className="btn btn-soft" onClick={() => openSelectedAsLesson(moduleIndex, selectedItem.kind === "aula" ? itemIndex : undefined)}><BookOpenCheck size={16}/> {isModuleMastered(selectedModule.id) ? "Revisar aula-chave" : selectedModule.status === "disponivel" ? "Abrir primeira aula" : "Aula atual do módulo"}</button>
+              <button className="btn btn-soft" onClick={() => resetModule(selectedModule.id)}><RotateCcw size={16}/> Reestudar módulo</button>
+            </div>
           </div>
+
+          {completionConfirmationOpen && <section className="module-completion-confirmation" role="dialog" aria-labelledby="module-completion-title" aria-modal="true">
+            <div><span className="eyebrow">CONFIRMAÇÃO DE JORNADA</span><h3 id="module-completion-title">Concluir {selectedModule.id} · {selectedModule.title}?</h3><p>Você confirma que estudou este módulo. {nextModule ? `${nextModule.id} · ${nextModule.title} será liberado na sua conta.` : "O módulo será registrado como concluído na sua conta."}</p></div>
+            <div className="module-completion-actions"><button className="btn btn-soft" disabled={studentJourney.saving} onClick={() => setCompletionConfirmationOpen(false)}>Cancelar</button><button className="btn btn-primary" disabled={studentJourney.saving} onClick={completeSelectedModule}><CheckCircle2 size={16}/>{studentJourney.saving ? "Salvando…" : "Confirmar conclusão"}</button></div>
+            {studentJourney.error && <p className="lesson-progress-error" role="alert">{studentJourney.error}</p>}
+          </section>}
 
           <div className="library-course-navigator">
             {selectedModule.items.map((item, i) => <button key={item.id} className={`${i === itemIndex ? "active" : ""} ${libraryStudied.includes(item.id) ? "done" : ""}`} onClick={() => chooseLibraryItem(i)}>
@@ -307,7 +332,10 @@ export default function Classroom() {
 
           <div className="example-checkpoint"><Target/><div><span>CHECKPOINT MENTAL</span><strong>{example.checkpoint}</strong></div></div>
 
-          <div className="example-focus-actions"><button className={`btn ${studied.includes(example.id) ? "btn-soft" : "btn-primary"}`} onClick={() => toggleStudied(example.id)}>{studied.includes(example.id) ? <><RotateCcw size={16}/> Marcar para reestudar</> : <><Award size={16}/> Marcar como estudado</>}</button></div>
+          <div className="example-focus-actions">
+            <button className={`btn ${studied.includes(example.id) ? "btn-soft" : "btn-primary"}`} onClick={() => toggleStudied(example.id)}>{studied.includes(example.id) ? <><RotateCcw size={16}/> Marcar para reestudar</> : <><Award size={16}/> Marcar como estudado</>}</button>
+            {example.code && onOpenWorkbench && <button className="btn btn-soft" onClick={() => onOpenWorkbench({ code: example.code!, fileName: `Exemplo${String(example.id).padStart(2, "0")}.js`, moduleId: "M07", title: `Exemplo ${String(example.id).padStart(2, "0")} · ${example.title}` })}><BrainCircuit size={16}/> Investigar na Bancada</button>}
+          </div>
           <div className="example-footer-nav"><button className="btn btn-soft" disabled={exampleIndex === 0} onClick={() => setExampleIndex(i => Math.max(0, i-1))}>← Anterior</button><span>{exampleIndex + 1} de {functionExamples.length}</span><button className="btn btn-primary" disabled={exampleIndex === functionExamples.length - 1} onClick={() => setExampleIndex(i => Math.min(functionExamples.length-1, i+1))}>Próximo →</button></div>
         </>}
       </section>
