@@ -24,7 +24,7 @@
   inline-size: 100%;
   max-inline-size: 100%;
   min-inline-size: 0;
-  overflow: clip;
+  overflow: visible;
 }
 
 .header {
@@ -104,6 +104,14 @@
   color: #dbe2ee;
   font-size: 0.75rem;
   gap: 5px;
+}
+
+.stickyNavigation {
+  background: var(--paper-raised);
+  box-shadow: 0 8px 18px rgba(13, 25, 48, 0.1);
+  inset-block-start: 0;
+  position: sticky;
+  z-index: 20;
 }
 
 .localBadge {
@@ -798,6 +806,10 @@
 @media (max-width: 720px) {
   .workbench {
     border-radius: 0;
+  }
+
+  .stickyNavigation {
+    inset-block-start: 64px;
   }
 
   .header {

@@ -250,64 +250,66 @@ export function ExecutionWorkbench({ trace, code, moduleId, onExit }: ExecutionW
         </div>
       </header>
 
-      <div className={styles.controlsRegion} aria-label="Controles da execução">
-        <div className={styles.stepHeading}>
-          <span>PASSO ATUAL</span>
-          <strong>{String(snapshotIndex + 1).padStart(2, "0")} / {String(snapshots.length).padStart(2, "0")}</strong>
+      <div className={styles.stickyNavigation} aria-label="Navegação persistente da execução">
+        <div className={styles.controlsRegion} aria-label="Controles da execução">
+          <div className={styles.stepHeading}>
+            <span>PASSO ATUAL</span>
+            <strong>{String(snapshotIndex + 1).padStart(2, "0")} / {String(snapshots.length).padStart(2, "0")}</strong>
+          </div>
+          <div className={styles.controls}>
+            <button type="button" onClick={() => jumpTo(0)} disabled={!hasPrevious} aria-label="Reiniciar execução">
+              <RotateCcw aria-hidden="true" /><span>Reiniciar</span>
+            </button>
+            <button type="button" onClick={() => jumpTo(snapshotIndex - 1)} disabled={!hasPrevious} aria-label="Passo anterior">
+              <ArrowLeft aria-hidden="true" /><span>Anterior</span>
+            </button>
+            <button
+              className={styles.playButton}
+              type="button"
+              onClick={() => setPlaying(current => !current)}
+              disabled={!hasNext && !playing}
+              aria-label={playing ? "Pausar execução" : "Reproduzir execução"}
+              aria-pressed={playing}
+            >
+              {playing ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
+              <span>{playing ? "Pausar" : "Reproduzir"}</span>
+            </button>
+            <button className={styles.nextButton} type="button" onClick={() => jumpTo(snapshotIndex + 1)} disabled={!hasNext} aria-label="Próximo passo">
+              <span>Próximo</span><ArrowRight aria-hidden="true" />
+            </button>
+            <label className={styles.speedControl}>
+              <Gauge aria-hidden="true" />
+              <span className={styles.srOnly}>Velocidade da reprodução</span>
+              <select value={speed} onChange={event => setSpeed(event.target.value as PlaybackSpeed)} aria-label="Velocidade da reprodução">
+                <option value="0.5">0,5×</option>
+                <option value="1">1×</option>
+                <option value="2">2×</option>
+              </select>
+            </label>
+          </div>
+          <p className={styles.srOnly} role="status" aria-live={playing ? "off" : "polite"} aria-atomic="true">{statusText}</p>
         </div>
-        <div className={styles.controls}>
-          <button type="button" onClick={() => jumpTo(0)} disabled={!hasPrevious} aria-label="Reiniciar execução">
-            <RotateCcw aria-hidden="true" /><span>Reiniciar</span>
-          </button>
-          <button type="button" onClick={() => jumpTo(snapshotIndex - 1)} disabled={!hasPrevious} aria-label="Passo anterior">
-            <ArrowLeft aria-hidden="true" /><span>Anterior</span>
-          </button>
-          <button
-            className={styles.playButton}
-            type="button"
-            onClick={() => setPlaying(current => !current)}
-            disabled={!hasNext && !playing}
-            aria-label={playing ? "Pausar execução" : "Reproduzir execução"}
-            aria-pressed={playing}
-          >
-            {playing ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
-            <span>{playing ? "Pausar" : "Reproduzir"}</span>
-          </button>
-          <button className={styles.nextButton} type="button" onClick={() => jumpTo(snapshotIndex + 1)} disabled={!hasNext} aria-label="Próximo passo">
-            <span>Próximo</span><ArrowRight aria-hidden="true" />
-          </button>
-          <label className={styles.speedControl}>
-            <Gauge aria-hidden="true" />
-            <span className={styles.srOnly}>Velocidade da reprodução</span>
-            <select value={speed} onChange={event => setSpeed(event.target.value as PlaybackSpeed)} aria-label="Velocidade da reprodução">
-              <option value="0.5">0,5×</option>
-              <option value="1">1×</option>
-              <option value="2">2×</option>
-            </select>
-          </label>
-        </div>
-        <p className={styles.srOnly} role="status" aria-live={playing ? "off" : "polite"} aria-atomic="true">{statusText}</p>
-      </div>
 
-      <nav className={styles.timeline} aria-label="Timeline da execução">
-        <ol ref={timelineRef}>
-          {snapshots.map((item, index) => (
-            <li key={`${item.step}-${item.operation}-${index}`}>
-              <button
-                type="button"
-                onClick={() => jumpTo(index)}
-                className={index === snapshotIndex ? styles.timelineActive : undefined}
-                aria-current={index === snapshotIndex ? "step" : undefined}
-                aria-label={`Passo ${index + 1}: ${operationLabels[item.operation]}`}
-                tabIndex={index === snapshotIndex ? 0 : -1}
-              >
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <small>{operationLabels[item.operation]}</small>
-              </button>
-            </li>
-          ))}
-        </ol>
-      </nav>
+        <nav className={styles.timeline} aria-label="Timeline da execução">
+          <ol ref={timelineRef}>
+            {snapshots.map((item, index) => (
+              <li key={`${item.step}-${item.operation}-${index}`}>
+                <button
+                  type="button"
+                  onClick={() => jumpTo(index)}
+                  className={index === snapshotIndex ? styles.timelineActive : undefined}
+                  aria-current={index === snapshotIndex ? "step" : undefined}
+                  aria-label={`Passo ${index + 1}: ${operationLabels[item.operation]}`}
+                  tabIndex={index === snapshotIndex ? 0 : -1}
+                >
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <small>{operationLabels[item.operation]}</small>
+                </button>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      </div>
 
       <section className={styles.nowStrip} aria-labelledby="professor-now-title">
         <div className={styles.nowMarker} aria-hidden="true">{String(snapshot.step).padStart(2, "0")}</div>
