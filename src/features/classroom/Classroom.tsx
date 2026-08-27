@@ -23,6 +23,8 @@ import { courseLibrary, type CourseLibraryModule } from "@/course/courseLibrary"
 import LessonDetail from "./LessonDetail";
 import CodeViewer from "./CodeViewer";
 import { readMasteredModules, readUniqueIntegers, readUniqueStrings } from "@/progress/storage";
+import { useStudentProgress } from "@/progress/useStudentProgress";
+import { isLessonUnlocked, modulePercentage } from "@/progress/catalog";
 
 const courseItemIds = new Set(courseLibrary.flatMap(module => module.items.map(item => item.id)));
 const LAST_LESSON_KEY = "campus-last-lesson";
@@ -32,16 +34,17 @@ export default function Classroom() {
   const [exampleIndex, setExampleIndex] = useState(0);
   const [studied, setStudied] = useState<number[]>([]);
   const [libraryStudied, setLibraryStudied] = useState<string[]>([]);
-  const [moduleIndex, setModuleIndex] = useState(6);
-  const [itemIndex, setItemIndex] = useState(6);
-  const [activeLessonModuleIndex, setActiveLessonModuleIndex] = useState(6);
-  const [activeLessonItemIndex, setActiveLessonItemIndex] = useState(6);
+  const [moduleIndex, setModuleIndex] = useState(0);
+  const [itemIndex, setItemIndex] = useState(0);
+  const [activeLessonModuleIndex, setActiveLessonModuleIndex] = useState(0);
+  const [activeLessonItemIndex, setActiveLessonItemIndex] = useState(0);
   const [m07Mastered, setM07Mastered] = useState(false);
   const [m08Mastered, setM08Mastered] = useState(false);
   const [m09Mastered, setM09Mastered] = useState(false);
   const [m10Mastered, setM10Mastered] = useState(false);
   const [m11Mastered, setM11Mastered] = useState(false);
   const [m12Mastered, setM12Mastered] = useState(false);
+  const studentJourney = useStudentProgress();
 
   useEffect(() => {
     try {
@@ -65,9 +68,9 @@ export default function Classroom() {
       setM10Mastered(hasM10);
       setM11Mastered(hasM11);
       setM12Mastered(hasM12);
-      const recommendedModule = hasM11 || hasM12 ? 11 : hasM10 ? 10 : hasM09 ? 9 : hasM08 ? 8 : hasM07 ? 7 : 6;
+      const recommendedModule = hasM11 || hasM12 ? 11 : hasM10 ? 10 : hasM09 ? 9 : hasM08 ? 8 : hasM07 ? 7 : 0;
       let lessonModule = recommendedModule;
-      let lessonItem = recommendedModule === 6 ? 6 : 0;
+      let lessonItem = 0;
       try {
         const lastLesson = JSON.parse(localStorage.getItem(LAST_LESSON_KEY) ?? "null");
         const savedModuleIndex = courseLibrary.findIndex(module => module.id === lastLesson?.moduleId);
@@ -102,6 +105,18 @@ export default function Classroom() {
       window.removeEventListener("storage", refreshMastery);
     };
   }, []);
+
+  useEffect(() => {
+    if (studentJourney.loading) return;
+    const nextModuleIndex = courseLibrary.findIndex(module => module.items.some(item => item.id === studentJourney.currentLessonId));
+    if (nextModuleIndex < 0) return;
+    const nextItemIndex = courseLibrary[nextModuleIndex].items.findIndex(item => item.id === studentJourney.currentLessonId);
+    if (nextItemIndex < 0) return;
+    setModuleIndex(nextModuleIndex);
+    setItemIndex(nextItemIndex);
+    setActiveLessonModuleIndex(nextModuleIndex);
+    setActiveLessonItemIndex(nextItemIndex);
+  }, [studentJourney.currentLessonId, studentJourney.loading]);
 
   const publishProgressChange = () => {
     window.dispatchEvent(new Event("campus-progress-changed"));
@@ -140,16 +155,13 @@ export default function Classroom() {
   const selectedModule = courseLibrary[moduleIndex];
   const selectedItem = selectedModule.items[Math.min(itemIndex, selectedModule.items.length - 1)];
   const moduleDone = selectedModule.items.filter(item => libraryStudied.includes(item.id)).length;
-  const activeLessonModule = courseLibrary[activeLessonModuleIndex] ?? courseLibrary[6];
+  const activeLessonModule = courseLibrary[activeLessonModuleIndex] ?? courseLibrary[0];
   const activeLessonItem = activeLessonModule.items[activeLessonItemIndex] ?? activeLessonModule.items[0];
   const isModuleMastered = (moduleId: string) => moduleId === "M07" ? m07Mastered : moduleId === "M08" ? m08Mastered : moduleId === "M09" ? m09Mastered : moduleId === "M10" ? m10Mastered : moduleId === "M11" ? m11Mastered : moduleId === "M12" ? m12Mastered : false;
+  const isModuleUnlocked = (index: number) => index === 0 || modulePercentage(courseLibrary[index - 1].id, studentJourney.records) === 100;
 
   const chooseModule = (index: number) => {
-    if (courseLibrary[index].id === "M08" && !m07Mastered) return;
-    if (courseLibrary[index].id === "M09" && !m08Mastered) return;
-    if (courseLibrary[index].id === "M10" && !m09Mastered) return;
-    if (courseLibrary[index].id === "M11" && !m10Mastered) return;
-    if (courseLibrary[index].id === "M12" && !m11Mastered) return;
+    if (!isModuleUnlocked(index)) return;
     setModuleIndex(index);
     setItemIndex(0);
   };
@@ -157,6 +169,7 @@ export default function Classroom() {
   const setActiveLesson = (moduleIdx: number, itemIdx: number) => {
     const module = courseLibrary[moduleIdx];
     const item = module.items[itemIdx];
+    if (item.kind === "aula" && !isLessonUnlocked(item.id, studentJourney.records)) return;
     setActiveLessonModuleIndex(moduleIdx);
     setActiveLessonItemIndex(itemIdx);
     localStorage.setItem(LAST_LESSON_KEY, JSON.stringify({ moduleId: module.id, itemId: item.id }));
@@ -171,13 +184,10 @@ export default function Classroom() {
 
   const openSelectedAsLesson = (moduleIdx = moduleIndex, preferredItemIdx?: number) => {
     const module = courseLibrary[moduleIdx];
-    if (module.id === "M08" && !m07Mastered) return;
-    if (module.id === "M09" && !m08Mastered) return;
-    if (module.id === "M10" && !m09Mastered) return;
-    if (module.id === "M11" && !m10Mastered) return;
-    if (module.id === "M12" && !m11Mastered) return;
+    if (!isModuleUnlocked(moduleIdx)) return;
     const lessonIndexes = module.items.map((item, index) => item.kind === "aula" ? index : -1).filter(index => index >= 0);
-    const defaultLessonIndex = module.status === "disponivel" ? (lessonIndexes[0] ?? 0) : (lessonIndexes.at(-1) ?? 0);
+    const currentLessonIndex = module.items.findIndex(item => item.id === studentJourney.currentLessonId);
+    const defaultLessonIndex = currentLessonIndex >= 0 ? currentLessonIndex : (lessonIndexes[0] ?? 0);
     const openedItemIndex = preferredItemIdx ?? defaultLessonIndex;
     setActiveLesson(moduleIdx, openedItemIndex);
     setMode("aula");
@@ -210,7 +220,7 @@ export default function Classroom() {
         </div>
 
         {mode === "aula" ? <>
-          <LessonDetail module={activeLessonModule} item={activeLessonItem} context={activeLessonItem.id === "M07-A07" && !m07Mastered ? "current" : (activeLessonModule.id === "M08" && m08Mastered) || (activeLessonModule.id === "M09" && m09Mastered) || (activeLessonModule.id === "M10" && m10Mastered) || (activeLessonModule.id === "M11" && m11Mastered) || (activeLessonModule.id === "M12" && m12Mastered) ? "review" : activeLessonModule.status === "disponivel" ? "next" : "review"} lessonNumber={activeLessonItem.id === "M07-A07" ? "Aula 07" : activeLessonItem.id} />
+          <LessonDetail module={activeLessonModule} item={activeLessonItem} context="current" lessonNumber={activeLessonItem.title.split("·")[0]?.trim() || activeLessonItem.id} progress={studentJourney.records.find(record => record.lessonId === activeLessonItem.id)} savingProgress={studentJourney.saving} progressError={studentJourney.error} onMarkStep={step => studentJourney.markStep(activeLessonItem.id, step)} />
         </> : mode === "biblioteca" ? <>
           <div className="library-header">
             <div><span className="eyebrow">ACERVO DO CURSO · REVISÃO LIVRE</span><h1>Seu histórico de estudo continua acessível.</h1><p>Abra qualquer módulo, reveja a explicação, consulte o código comentado em JavaScript e marque uma nova rodada de revisão sem apagar seu progresso.</p></div>
@@ -220,10 +230,10 @@ export default function Classroom() {
           <div className="library-module-tabs">
             {courseLibrary.map((module, i) => {
               const done = module.items.filter(item => libraryStudied.includes(item.id)).length;
-              const locked = (module.id === "M08" && !m07Mastered) || (module.id === "M09" && !m08Mastered) || (module.id === "M10" && !m09Mastered) || (module.id === "M11" && !m10Mastered) || (module.id === "M12" && !m11Mastered);
-              const mastered = isModuleMastered(module.id);
-              const available = module.status === "disponivel" && !mastered;
-              const prerequisite = module.id === "M08" ? "M07" : module.id === "M09" ? "M08" : module.id === "M10" ? "M09" : module.id === "M11" ? "M10" : "M11";
+              const locked = !isModuleUnlocked(i);
+              const mastered = modulePercentage(module.id, studentJourney.records) === 100;
+              const available = !locked && !mastered;
+              const prerequisite = i > 0 ? courseLibrary[i - 1].id : "início";
               const score = module.id === "M07" ? "4/4" : module.id === "M08" || module.id === "M09" || module.id === "M10" ? "6/6" : "8/8";
               return <button key={module.id} disabled={locked} className={`${i === moduleIndex ? "active" : ""} ${available ? "available" : ""} ${locked ? "locked" : ""}`} onClick={() => chooseModule(i)}><span>{module.id}</span><strong>{module.title}</strong><small>{locked ? `Conclua a missão ${prerequisite}` : mastered ? `Domínio comprovado · ${score}` : `${available ? "Próximo · " : ""}${done}/${module.items.length} revisados`}</small>{locked && <LockKeyhole size={16}/>}</button>;
             })}

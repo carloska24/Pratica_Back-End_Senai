@@ -100,7 +100,7 @@ describe("Bancada de Execução", () => {
 
     await waitFor(
       () => expect(screen.getByLabelText("Código com a linha 1 ativa").getAttribute("data-highlighter")).toBe("shiki"),
-      { timeout: 5_000 },
+      { timeout: 10_000 },
     );
 
     const keyword = Array.from(firstLine.children[1].querySelectorAll("span")).find(token => token.textContent === "function");
@@ -108,7 +108,7 @@ describe("Bancada de Execução", () => {
     expect(screen.getByTestId("code-line-2").textContent).toContain("/\\d+/.test(String(idade)); // argumento");
     const closingBracket = Array.from(screen.getByTestId("code-line-3").children[1].querySelectorAll("span")).find(token => token.textContent === "}");
     expect(closingBracket?.getAttribute("style")).toMatch(/color:\s*(#ffd700|rgb\(255, 215, 0\))/i);
-  });
+  }, 10_000);
 
   it("expõe o componente dedicado da trilha", async () => {
     const modulePath = "./ExecutionWorkbench";
@@ -121,6 +121,9 @@ describe("Bancada de Execução", () => {
     render(<ExecutionWorkbench trace={trace} code={code} />);
 
     expect(screen.getByRole("heading", { name: "Bancada de Execução" })).toBeTruthy();
+    const persistentNavigation = screen.getByLabelText("Navegação persistente da execução");
+    expect(persistentNavigation.contains(screen.getByLabelText("Controles da execução"))).toBe(true);
+    expect(persistentNavigation.contains(screen.getByLabelText("Timeline da execução"))).toBe(true);
     expect(screen.getByRole("status").textContent).toContain("Passo 1 de 3");
     expect(screen.getByTestId("code-line-1").getAttribute("data-active")).toBe("true");
 

@@ -9,6 +9,7 @@ import {
   Lightbulb,
   Route,
   Target,
+  ArrowRight,
 } from "lucide-react";
 import type { CourseItem, CourseLibraryModule } from "@/course/courseLibrary";
 import { getLessonContent } from "@/course/lessonContent";
@@ -36,15 +37,20 @@ import DestructuringLab from "@/features/classroom/labs/DestructuringLab";
 import SpreadCloneLab from "@/features/classroom/labs/SpreadCloneLab";
 import FlexibleParametersLab from "@/features/classroom/labs/FlexibleParametersLab";
 import OptionalChainLab from "@/features/classroom/labs/OptionalChainLab";
+import type { LessonProgressRecord, LessonStep } from "@/progress/catalog";
 
 type Props = {
   module: CourseLibraryModule;
   item: CourseItem;
   context?: "current" | "review" | "next";
   lessonNumber?: string;
+  progress?: LessonProgressRecord;
+  savingProgress?: boolean;
+  progressError?: string;
+  onMarkStep?: (step: LessonStep) => Promise<boolean>;
 };
 
-export default function LessonDetail({ module, item, context = "review", lessonNumber }: Props) {
+export default function LessonDetail({ module, item, context = "review", lessonNumber, progress, savingProgress = false, progressError, onMarkStep }: Props) {
   const detail = getLessonContent(module, item);
   const isCurrent = context === "current";
   const contextLabel = isCurrent ? "AULA ATUAL" : context === "next" ? "PRÓXIMO MÓDULO" : "REVISÃO GUIADA";
@@ -132,6 +138,28 @@ export default function LessonDetail({ module, item, context = "review", lessonN
         <article className="lesson-note good"><Lightbulb/><div><strong>Como ler mentalmente</strong><p>{detail.mental}</p></div></article>
         <article className="lesson-note warning"><AlertTriangle/><div><strong>Não confunda</strong><p>{detail.warning}</p></div></article>
       </div>
+
+      {item.kind === "aula" && onMarkStep && <section className="lesson-completion panel">
+        <div className="lesson-completion-heading">
+          <div><span className="eyebrow">PROGRESSÃO DA AULA</span><h2>Conclua tudo antes de avançar</h2><p>Cada confirmação é salva na sua conta.</p></div>
+          <strong>{[progress?.explanationDone, progress?.boardDone, progress?.checkpointDone, progress?.exerciseDone].filter(Boolean).length}/4</strong>
+        </div>
+        <div className="lesson-requirements">
+          {([
+            ["explanation", "Explicação estudada", "Li o passo a passo e consigo contar a ideia com minhas palavras."],
+            ["board", "Lousa acompanhada", "Acompanhei a história, o código e o fluxo apresentado nesta aula."],
+            ["checkpoint", "Checkpoint respondido", "Conferi mentalmente entradas, processamento e saída."],
+            ["exercise", "Prática realizada", "Refiz o exemplo ou exercício proposto antes de seguir."],
+          ] as const).map(([step, title, description]) => {
+            const done = progress?.[`${step}Done` as keyof LessonProgressRecord] === true;
+            return <button key={step} type="button" className={done ? "done" : ""} disabled={done || savingProgress} onClick={() => onMarkStep(step)}><CheckCircle2/><span><strong>{title}</strong><small>{description}</small></span></button>;
+          })}
+        </div>
+        {progressError && <p className="lesson-progress-error" role="alert">{progressError}</p>}
+        <button className="btn btn-primary lesson-complete-button" type="button" disabled={savingProgress || !progress?.explanationDone || !progress.boardDone || !progress.checkpointDone || !progress.exerciseDone || progress.completed} onClick={() => onMarkStep("complete")}>
+          {progress?.completed ? "Aula concluída" : savingProgress ? "Salvando…" : "Concluir aula e avançar"}<ArrowRight size={17}/>
+        </button>
+      </section>}
     </div>
   );
 }
